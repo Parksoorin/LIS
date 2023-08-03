@@ -9,11 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	hello
+	hello asdasdasdasdasdasdasdasdasd
 	<input type="button" value="text" id="test"/>
 </body>
+
 <script>
-$("#test").click(function(){
+/* $("#test").click(function(){
 	console.log("jqueryTest");
 	$.ajax({
 		url: "/ajaxTest.do",
@@ -32,6 +33,7 @@ $("#test").click(function(){
 			console.log(res);
 		}
 	})
-})
+}) */
 </script>
+
 </html>
