@@ -12,7 +12,7 @@
 </style>
 </head>
 <body>
-	hello asdasdasdasdasdasdasdasdasd
+	hello
 	<input type="button" value="text" id="test"/>
 </body>
 
