@@ -25,17 +25,21 @@ public class exController {
 	@Resource(name = "exService")
 	private exService exService;
 	
+	@RequestMapping(value = "/loginA.do")
+	public String startPage(Model model) throws Exception {
+		return ".login/loginA";
+	}
 	@RequestMapping(value = "/oneGrid.do")
 	public String oneGrid(Model model) throws Exception {
-		return "main/oneGrid";
+		return ".main/oneGrid";
 	}
 	@RequestMapping(value = "/twoGrid.do")
 	public String twoGrid(Model model) throws Exception {
-		return "main/twoGrid";
+		return ".main/twoGrid";
 	}
 	@RequestMapping(value = "/threeGrid.do")
 	public String threeGrid(Model model) throws Exception {
-		return "main/threeGrid";
+		return ".main/threeGrid";
 	}
 	@RequestMapping(value = "/exGrid.do", method = RequestMethod.POST)
 	@ResponseBody

@@ -5,6 +5,9 @@
  
 <tiles-definitions>
 	<!-- main layout -->
+	<definition name="login" template="/WEB-INF/tiles/login.jsp">
+		<put-attribute name="content" value="/WEB-INF/tiles/loginContent.jsp" />
+	</definition>
 	<definition name="main" template="/WEB-INF/tiles/main.jsp">
 		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
 		<put-attribute name="top" value="/WEB-INF/tiles/top.jsp" />
@@ -13,12 +16,14 @@
 	</definition>
 	
 	<!-- 타일 적용 부분  -->
-	<definition name="*" extends="main">
-		<put-attribute name="content" value="/WEB-INF/jsp/{1}.jsp" />
+	<definition name=".login/*" extends="login">
+		<put-attribute name="content" value="/WEB-INF/jsp/login/{1}.jsp" />
 	</definition>
-	<definition name="*/*" extends="main">
-		<put-attribute name="content" value="/WEB-INF/jsp/{1}/{2}.jsp" />
+	<definition name=".main/*" extends="main">
+		<put-attribute name="content" value="/WEB-INF/jsp/main/{1}.jsp" />
 	</definition>
-	
-   
+	<definition name=".main/*/*" extends="main">
+		<put-attribute name="content" value="/WEB-INF/jsp/main/{1}/{2}.jsp" />
+	</definition>
+
 </tiles-definitions>
