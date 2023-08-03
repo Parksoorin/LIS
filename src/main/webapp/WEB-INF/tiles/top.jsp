@@ -14,10 +14,10 @@
 	<div class="header__flex">
 		<header class="header__menu">
 			<div style="font-size: 20pt;">
-				<a href="" class="header__logo-link">LIS</a>
+				<a href="" class="header__logo-link">HWIF</a>
 			</div>
 			<ul class="oneDepth__menu-items">
-				<li class="oneDepth__menu-item">그리드 예제
+				<li class="oneDepth__menu-item">예제
 					<ul class="twoDepth__menu-items">
 						<li class="twoDepth__menu-item"><a href="/oneGrid.do"
 							class="bookmark__item-link"><img
@@ -30,7 +30,7 @@
 								src="/images/icons/icon_li.png" alt="li" /> 그리드 3</a></li>
 					</ul>
 				</li>
-				<li class="oneDepth__menu-item">LIS 연습페이지
+				<li class="oneDepth__menu-item">연습페이지
 					<ul class="twoDepth__menu-items">
 					</ul>
 				</li>
