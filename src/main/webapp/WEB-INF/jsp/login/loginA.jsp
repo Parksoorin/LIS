@@ -7,6 +7,9 @@
 <script type="text/javascript" src="<c:url value='/js/jquery-3.5.1.min.js' />"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+
+</style>
 </head>
 <body>
 	hello asdasdasdasdasdasdasdasdasd
