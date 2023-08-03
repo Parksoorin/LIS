@@ -41,6 +41,15 @@ public class exController {
 	public String threeGrid(Model model) throws Exception {
 		return ".main/threeGrid";
 	}
+	
+	@RequestMapping(value = "/tttt.do")
+	public String test(Model model) throws Exception {
+		
+		exService.selectTest();
+		
+		return "";
+	}
+	
 	@RequestMapping(value = "/exGrid.do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject exGrid(String type, HttpSession session, HttpServletRequest request,
