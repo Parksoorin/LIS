@@ -29,6 +29,10 @@ public class exController {
 	public String startPage(Model model) throws Exception {
 		return ".login/loginA";
 	}
+	@RequestMapping(value = "/loginC.do")
+	public String loginCPage(Model model) throws Exception {
+		return ".login/loginC";
+	}
 	@RequestMapping(value = "/loginD.do")
 	public String loginDPage(Model model) throws Exception {
 		return ".login/loginD";
