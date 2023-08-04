@@ -1,19 +1,22 @@
 const signupModal= document.querySelector(".signup-modal");
 const container = document.querySelector(".container");
-
+const curtain = document.getElementById("curtain");
 container.addEventListener('click', modal);
 
 function modal(){
-    if(!signupModal.hasClass("isModal")) return;
+    if(!signupModal.classList.contains("isModal")) return;
     closeModal();
 }
 
-function openModal(){
+function openModal(event){
     signupModal.classList.toggle('isModal');
+	event.stopImmediatePropagation();
+    curtain.classList.add('dark-curtain');
 }
 
 function closeModal(){
     signupModal.classList.remove('isModal');
+    curtain.classList.remove('dark-curtain');
 }
 
 function signup(){
@@ -28,3 +31,4 @@ function signup(){
 function login(){
     console.log("로그인 버튼 누름 - POST 요청");
 }
+
