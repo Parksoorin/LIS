@@ -30,13 +30,13 @@
         <div>비밀번호 찾기</div>
       </div>
       <div id="loginButton">
-        <button class="btn-icon-l btn-p" onclick="handleOpen()">
+        <button class="btn-icon-l btn-p" >
           로그인
         </button>
       </div>
-      <div id="loginGoOut">
-        <button class="btn-icon-l btn-dk">
-          나가기
+      <div id="userJoin">
+        <button class="btn-icon-l btn-dk" onclick="handleOpen()">
+          회원가입
         </button>
       </div>
       </div>
@@ -50,36 +50,26 @@
       
       <div class="divAll">
         <div class="divUp">
-          <h2 class="modal-modal-title">사용자 정보</h2>
+          <h2 class="modal-modal-title">회원가입</h2>
           <div class="divUpOne">
-            <div class="divUpOneUserId">사용자 ID</div>
-            <input type="text" class="filled-basic" value="1001" disabled >
-            <input type="text" class="filled-basic" value="홍길동" disabled >
+            <div class="divUpOneUserId">아이디</div>
+            <input type="text" class="filled-basic" value="ID">
           </div>
           <div class="divUpTwo">
-            <div class="divUpTwoEquipment">장비 코드</div>
-            <input type="text" class="outlined-basic" value="S01">
+            <div class="divUpTwoPassword">비밀번호</div>
+            <input type="text" class="outlined-basic" value="비밀번호">
           </div>
           <div class="divUpThree">
-            <div class="divUpThreePort">포트 번호</div>
-            <input type="number" class="outlined-number" value="809">
+            <div class="divUpThreePassCheck">비밀번호 확인</div>
+            <input type="text" class="outlined-basic" value="비밀번호 확인">
           </div>
-          <div class="divUpCheck">
-            <div>
-              <input type="checkbox" aria-label="Checkbox demo" />
-              시작 시 자동실행
-            </div>
-            <div>
-              <input type="checkbox" aria-label="Checkbox demo" />
-              시작 시 창 크기 최대화
-            </div>
-          </div>
+          
           <div class="divUpButton">
             <div class="divUpButtonSave">
-              <button class="divUpButtonSave1">저장</button>
+              <button class="divUpButtonSave1">회원가입</button>
             </div>
             <div class="divUpButtonClose">
-  				<button class="divUpButtonClose1" onclick="handleClose()">닫기</button>
+  				<button class="divUpButtonClose1" onclick="handleClose()">나가기</button>
 			</div>
           </div>
         </div>
