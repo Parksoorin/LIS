@@ -27,7 +27,7 @@
         <div>
           <input type="checkbox" aria-label="Checkbox demo" /> 아이디 저장
         </div>
-        <div>비밀번호 찾기</div>
+        <div><a href="http://naver.com">비밀번호 찾기</a></div>
       </div>
       <div id="loginButton">
         <button class="btn-icon-l btn-p" >
