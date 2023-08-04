@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 <link rel="stylesheet" type="text/css" href="/css/loginD.css" />
 </head>
 <body>
@@ -38,7 +38,7 @@
       <div class="modal-container" id="modal-container">
         <div class="modal-box">
           <div class="modal-content">
-          	<h1>회원 가입</h1>
+          	<h1 class="modal-title">회원 가입</h1>
             <ul class="modal-info">
               <li>
                 <label for="userId">아이디</label>

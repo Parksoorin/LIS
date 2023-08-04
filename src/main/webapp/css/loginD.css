@@ -13,33 +13,38 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 375px;
-  padding: 0px 50px;
+  justify-content: flex-start;
+  width: 500px;
+  padding: 130px 50px;
   background-color: #eee;
-  border: 1px solid #ccc;
-  gap: 40px;
+  border: 0;
+  border-right: 1px solid #ccc;
+}
+
+.form-title {
+  margin-bottom: 40px;
+}
+
+
+.info-container {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .input-container {
-  margin-bottom: 10px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
 .input-box {
-  padding: 5px 10px;
-  height: 36px;
-  font-size: 18px;
-  border: 1px solid #dadada;
-}
-
-.info-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  margin-bottom: 10px;
+  padding: 15px 20px;
+  font-size: 16px;
+  border: 0;
+  border-radius: 5px;
 }
 
 .link-container {
@@ -73,38 +78,50 @@ input[type="checkbox"] ~ label {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 10px;
 }
 
 .btn {
   width: 100%;
+  margin-bottom: 10px;
   padding: 14px;
   height: 52px;
   font-size: 18px;
   font-weight: bold;
   color: white;
   border: 0;
-  border-radius: 5px;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  cursor: pointer;
 }
 
 .btn-p {
-  background-color: #218ecb;
+  background-color: #43ace7;
 }
 
 .btn-p:hover {
-  background-color: #58abdb;
+  background-color: #1198e4;
+}
+
+.btn-p:active {
+  background-color: #0d84c9;
 }
 
 .btn-dk {
-  background-color: #606477;
+  background-color: #a5a5a5;
 }
 
 .btn-dk:hover {
-  background-color: #505050;
+  background-color: #888;
+}
+
+.btn-dk:active {
+  background-color: #666;
 }
 
 .main-img {
-  width: calc(100% - 375px);
+  width: calc(100% - 500px);
   object-fit: cover;
 }
 
@@ -130,15 +147,17 @@ input[type="checkbox"] ~ label {
 .modal-content {
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  padding: 50px;
-  border: 1px solid #ccc;
+  padding: 50px 100px;
+}
+
+.modal-title {
+  margin-bottom: 40px;
 }
 
 .modal-info {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  margin-bottom: 60px;
 }
 
 .modal-info > li {
@@ -146,46 +165,37 @@ input[type="checkbox"] ~ label {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  gap: 20px;
-}
-
-.user-id-inputBox {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
 }
 
 .modal-info > li > label {
-  width: 110px;
+  margin-right: 50px;
+  width: 120px;
   color: #22477e;
-  font-size: 16px;
-  font-style: normal;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 18px;
 }
 
 .modal-inputBox {
-  padding: 5px 10px;
-  width: 160px;
-  height: 24px;
-  border: 1px solid #dadada;
-  border-radius: 4px;
-}
-
-.modal-check-box {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  margin-bottom: 15px;
+  padding: 15px 20px;
+  width: 300px;
+  font-size: 16px;
+  border: 0;
+  border-radius: 5px;
 }
 
 .modal-btn-container {
   display: flex;
-  gap: 20px;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .modal-container .btn {
-  height: auto;
   padding: 10px;
+}
+
+.modal-container .btn-p {
+  margin-right: 20px;
 }
 
 .ip-box {
@@ -199,7 +209,7 @@ input[type="checkbox"] ~ label {
 
 .ip-address {
   text-align: end;
-  font-size: 13px;
+  font-size: 16px;
   color: #fff;
 }
 
