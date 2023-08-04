@@ -117,6 +117,8 @@ justify-content: center;
   gap: 20px;
 
   width: 100%;
+  
+  margin-top: 30px;
 }
 
 .divUpOneUserId {
@@ -124,8 +126,6 @@ justify-content: center;
 }
 
 .divUpTwo {
-  
-
   display: flex;
   align-items: center;
   gap: 20px;
@@ -133,7 +133,7 @@ justify-content: center;
   
 }
 
-.divUpTwoEquipment {
+.divUpTwoPassword {
   color : blue;
 
   
@@ -147,21 +147,11 @@ justify-content: center;
   gap: 20px;
 }
 
-.divUpThreePort {
+.divUpThreePassCheck {
   color: blue;
 }
 
-.divUpCheck {
- 
 
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
 
 .divUpButton {
   
@@ -173,6 +163,7 @@ justify-content: center;
 
   width: 80%;
   
+  margin-top: 40px;
 }
 
 .divUpButtonSave {
