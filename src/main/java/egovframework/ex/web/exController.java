@@ -29,6 +29,10 @@ public class exController {
 	public String startPage(Model model) throws Exception {
 		return ".login/loginA";
 	}
+	@RequestMapping(value = "/loginD.do")
+	public String loginDPage(Model model) throws Exception {
+		return ".login/loginD";
+	}
 	@RequestMapping(value = "/oneGrid.do")
 	public String oneGrid(Model model) throws Exception {
 		return ".main/oneGrid";
