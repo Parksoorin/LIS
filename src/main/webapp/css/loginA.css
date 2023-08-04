@@ -19,13 +19,14 @@
   justify-content: center;
   
 
-  gap: 10px;
+  
   background: #EEE;
   
   width:350px;
 }
 
 .loginbox {
+	
 	 background: #EEE;
 	 flex-direction: column;
      
@@ -39,7 +40,7 @@
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url('../public/img/e28cb2824ec038ff3e533d228697896e.jpg');
+  background-image: url('../images/loginimg/loginimg1.png');
 }
 
 
@@ -116,49 +117,49 @@ justify-content: center;
   padding: 50px;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+
 }
 
 .divUpOne {
   display: flex;
   justify-content: center;
-  gap: 100px;
+  
 
   width: 100%;
 
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .divUpOneUserId {
   color : blue;
+
+  margin-right: 60px;
 }
 
 .divUpTwo {
-  
-
   display: flex;
   align-items: center;
-  gap: 84px;
-
+ 
+  margin-bottom: 10px;
   
 }
 
 .divUpTwoPassword {
   color : blue;
 
-  
+  margin-right: 45px;
 }
 
 .divUpThree {
   display: flex;
   align-items: center;
-
-  gap: 47px;
-
 }
 
 .divUpThreePassCheck {
   color: blue;
+
+  margin-right: 10px;
 }
 
 
@@ -167,7 +168,7 @@ justify-content: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  
 
   width: 90%;
   
@@ -179,10 +180,12 @@ justify-content: center;
   
   /* width: 100px; */
   border: nane;
+
+  margin: 10px;
 }
 
 .divUpButtonSave1 {
-  width: 100%;
+  width: 95%;
   background-color: #218ECB;
   color: white;
   
@@ -192,11 +195,13 @@ justify-content: center;
 
 .divUpButtonClose {
   width: 50%;
+
+  margin: 10px;
 }
 
 .divUpButtonClose1 {
   background-color: gray !important;
-  width: 100%;
+  width: 95%;
   
   color: white;
   
