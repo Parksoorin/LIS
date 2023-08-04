@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+
+    <style>
+                * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure, 
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        a {color: #000; text-decoration: none; outline: none}
+
+        a:hover, a:active {text-decoration: none; font-weight: 700;}
+
+        .margin-bottom-lg {
+            margin-bottom: 40px;
+        }
+        .padding-left-md{
+            padding-left: 20px;
+        }
+        .container{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .login-container{
+            position: relative;
+            z-index: 10000;
+            width: 475px;
+            background: #EEE;
+            /* border: 1px solid #000; */
+        }
+
+        .login-container .login-box {
+            position: absolute;
+            /* border: 1px solid #000; */
+            width: 300px;
+            height: 500px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .login-text{
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+        .id{
+            margin-bottom: 20px;
+        }
+
+        .password{
+            margin-bottom: 20px;
+        }
+
+
+
+        .id input, .password input{
+            width: 100%;
+            height: 46px;
+            border-radius: 4px;
+            border: 1px solid #DADADA;
+            background: #fff;
+        }
+
+
+
+        img{
+            width: calc(100% - 475px) ;
+            height: 100%;
+            object-fit: cover;
+            /* border: 1px solid #000; */
+        }
+
+
+        .save-find-box{
+            display: flex;
+            margin-bottom: 40px;
+            justify-content: space-between;
+        }
+
+
+        .login-button {
+            border-style: none;
+            margin-bottom: 20px;
+        }
+        .login-button button{
+            width: 98%;
+            height: 52px;
+            border-radius: 4px;
+            background: #218ECB;
+            color: #fff;
+            font-weight: 700;
+        }
+        .exit-button button{
+            width: 98%;
+            height: 52px;
+            border-radius: 4px;
+            background: #606477;
+            color: #fff;
+            font-weight: 700;
+            border-style: none;
+        }
+        .modal-info{
+            color: #22577E;
+            font-weight: 700;
+        }
+        .signup-modal{
+            position: absolute;
+            z-index: -1;
+            width: 600px;
+            height: 500px;
+            background-color: #f1f1f1;
+            border: 1px solid #CCC;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .isModal{
+            z-index: 10000;
+        }
+        .signup-container{
+            margin-top: 100px;
+            margin-left: 100px;
+        }
+
+        .signup-container .signup-title{
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 50px;
+        }
+
+        .signup-input {
+            width: 60%;
+            border-radius: 4px;
+            border: 1px solid #DADADA;
+            background: #F2F2F2;
+            gap: 10px;
+            height: 34px;
+        }
+        .signup-container div{
+            margin-bottom: 20px;
+        }
+
+        
+        .signup-grid span{
+            display: inline-block;
+            width: 25%;
+        }
+
+        .modal-button{
+            color: #fff;
+            width: 220px;
+            height: 34px;
+            border-radius: 10px;
+            border-style: none;
+            font-weight: 700;
+        }
+        .primary{
+            background-color: #218ECB;
+        }
+        .gray{
+            background-color: #606477;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-text">로그인</div>
+                <div>
+                    <div class="id">
+                        <input class="padding-left-md " type="text" name="id" placeholder="ID" >
+                    </div>
+                    <div class="password " name="password">
+                        <input class="padding-left-md margin-bottom-lg" type="password" name="password" placeholder="PW" >
+                    </div>
+                    <div class="save-find-box">
+                        <div class="save">
+                            <input type="checkbox">
+                            <a href="#">아이디 저장</a>
+                        </div>
+                        <div class="find">
+                            <a href="#">비밀번호 찾기</a>
+                        </div>
+                    </div>
+                    <div class="login-button">
+                        <button onclick="login()">로그인</button>
+                    </div>
+                    <div class="exit-button">
+                        <button onclick="openModal()">회원가입</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- <div class="login-image-container"> -->
+            <img src="/images/loginimg/loginimg1.png" alt="로그인 백그라운드 이미지"/>
+        <!-- </div> -->
+    </div>
+    <div class="signup-modal">
+        <div class="signup-container">
+            <div class="signup-title">회원가입</div>
+            <div class="signup-grid">
+                <span class="modal-info">아이디 </span> 
+                <input class="signup-input padding-left-md" id="signup-id" type="text" name="signupId" placeholder="아이디를 입력해주세요.">
+            </div>
+            <div class="signup-grid">
+                <span class="modal-info">비밀번호 </span> 
+                <input class="signup-input padding-left-md" type="password" name="password" placeholder="비밀번호를 입력해주세요.">
+            </div>
+            <div class="signup-grid ">
+                <span class="modal-info">비밀번호 확인 </span> 
+                <input class="signup-input padding-left-md margin-bottom-lg" type="password-check" name="rePassword" placeholder="비밀번호를 다시 입력해주세요.">
+            </div>
+            <input class="modal-button primary" type="button" value="가입" onclick="signup()">
+            <input class="modal-button gray" type="button" value="닫기" onclick="closeModal()">
+        </div>
+    </div>
+
+
+    <script>
+
+        const signupModal= document.querySelector(".signup-modal");
+        const container = document.querySelector(".container");
+    
+        container.addEventListener('click', modal);
+
+        function modal(){
+            if(!signupModal.hasClass("isModal")) return;
+            closeModal();
+        }
+
+        function openModal(){
+            signupModal.classList.toggle('isModal');
+        }
+
+        function closeModal(){
+            signupModal.classList.remove('isModal');
+        }
+
+        function signup(){
+            const signupId = document.getElementById('signup-id').value;
+            console.log(`아이디 : ${signupId}`);
+
+            console.log("회원가입 버튼 누름 - POST 요청");
+            closeModal();
+            // fetch('')
+        }
+
+        function login(){
+            console.log("로그인 버튼 누름 - POST 요청");
+        }
+
+    
+    </script>
+
+</body>
+</html>
