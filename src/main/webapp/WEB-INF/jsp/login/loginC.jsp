@@ -18,17 +18,15 @@
                 <div class='text'>로그인</div>
                 <div class="idpw">
                     <input type="text" name="userid" class="outlined-basic" placeholder="ID">
-                    <input type="text" name="passwd" class="outlined-basic" placeholder="PW">
+                    <input type="password" name="passwd" class="outlined-basic" placeholder="PW">
                     <div class="checkbox">
                         <div><input type="checkbox"> 아이디 저장</div>
-                        <div>비밀번호 찾기</div>
+                        <div><a href="#" class="pwlink">비밀번호 찾기</a></div>
                     </div>
                 </div>
                 <div class="btnbox">
-                    <div class="loginbtn"><input type="submit" value="로그인" class="btnA"></div>
-                    <div class="logoutbtn">
-                    	<button class="btnB" onclick="handleOpen()">회원가입</button>
-                    </div>
+                    <button class="btnA">로그인</button>
+                    <button class="btnB" onclick="handleOpen()">회원가입</button>
                 </div>
             </div>
         </div>
@@ -42,9 +40,9 @@
     	<div class="box">
     		<div class='modalbox'>
     			<div id='numbox'>
-    				<div>아이디<input type="text" name="userid" class="outlined-basic" placeholder=""></div>
-    				<div>비밀번호<input type="text" name="userid" class="outlined-basic" placeholder=""></div>
-    				<div>비밀번호 확인<input type="text" name="userid" class="outlined-basic" placeholder=""></div>
+    				<div class="text_line">아이디<input type="text" name="user" class="outlined-modal-id" placeholder=""></div>
+    				<div class="text_line">비밀번호<input type="password" name="user" class="outlined-modal-pw" placeholder=""></div>
+    				<div class="text_line">비밀번호 확인<input type="password" name="user" class="outlined-modal-pw2" placeholder=""></div>
     			</div>
     			<div id='btnCD'>
     				<button class="btnC">회원가입</button>
@@ -61,8 +59,5 @@
     <script src="/js/loginC.js"></script>
 </body>
 
-<script>
-
-</script>
-
+<script></script>
 </html>
