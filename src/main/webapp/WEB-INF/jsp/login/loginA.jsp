@@ -57,11 +57,11 @@
           </div>
           <div class="divUpTwo">
             <div class="divUpTwoPassword">비밀번호</div>
-            <input type="text" class="outlined-basic" value="비밀번호">
+            <input type="text" class="filled-basic" value="비밀번호">
           </div>
           <div class="divUpThree">
             <div class="divUpThreePassCheck">비밀번호 확인</div>
-            <input type="text" class="outlined-basic" value="비밀번호 확인">
+            <input type="text" class="filled-basic" value="비밀번호 확인">
           </div>
           
           <div class="divUpButton">
