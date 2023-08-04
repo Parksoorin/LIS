@@ -27,7 +27,7 @@
         <div>
           <input type="checkbox" aria-label="Checkbox demo" /> 아이디 저장
         </div>
-        <div>비밀번호 찾기</div>
+        <div><a href="http://naver.com">비밀번호 찾기</a></div>
       </div>
       <div id="loginButton">
         <button class="btn-icon-l btn-p" >
@@ -57,11 +57,11 @@
           </div>
           <div class="divUpTwo">
             <div class="divUpTwoPassword">비밀번호</div>
-            <input type="text" class="outlined-basic" value="비밀번호">
+            <input type="text" class="filled-basic" value="비밀번호">
           </div>
           <div class="divUpThree">
             <div class="divUpThreePassCheck">비밀번호 확인</div>
-            <input type="text" class="outlined-basic" value="비밀번호 확인">
+            <input type="text" class="filled-basic" value="비밀번호 확인">
           </div>
           
           <div class="divUpButton">
