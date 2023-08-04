@@ -32,12 +32,13 @@
       <button class="btn btn-p">로그인</button>
 
       <button id="signup-btn" class="btn btn-dk" onclick="handleOpen()">
-        회원가입
+        회원 가입
       </button>
       
       <div class="modal-container" id="modal-container">
         <div class="modal-box">
           <div class="modal-content">
+          	<h1>회원 가입</h1>
             <ul class="modal-info">
               <li>
                 <label for="userId">아이디</label>
@@ -58,7 +59,7 @@
             </ul>
 
             <div class="modal-btn-container">
-              <button class="btn btn-p">저장</button>
+              <button class="btn btn-p">회원 가입</button>
               <button id="close-btn" class="btn btn-dk" onclick="handleClose()" >
                 닫기
               </button>
