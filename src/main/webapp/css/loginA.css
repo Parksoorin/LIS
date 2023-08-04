@@ -1,0 +1,217 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+ }
+
+.loginHome {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: stretch;
+}
+
+.loginInput {
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+
+  gap: 10px;
+  background: #EEE;
+  
+  width:350px;
+}
+
+.loginbox {
+	
+	 background: #EEE;
+	 flex-direction: column;
+     
+     width: 100%;
+}
+
+.loginRightImg {
+  width:70%;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../../../images/loginimg/loginimg1.png');
+}
+
+
+.IdBox {
+  display: flex;
+width: 300px;
+height: 25px;
+padding: 20px ;
+align-items: center;
+justify-content: center;
+
+}
+
+.loginPwBox {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.loginIdPw {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  margin-bottom: 20px;
+  
+  width: 100%;
+}
+
+
+.btn-icon-l {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 30px;
+  color: white;
+  width: 100%;
+}
+
+.btn-p {
+  background-color: #218ECB;
+  margin-bottom: 10px;
+}
+
+.btn-dk {
+  background-color: gray;
+  margin-bottom: 50px;
+}
+
+.boxAll {
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color :paper;
+    border: 2px solid #000;
+    padding: 5px;
+    width: 750px;
+    
+    background-color: #F1F1F1;
+  }
+
+
+
+.divUp {
+  display: flex;
+  padding: 50px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.divUpOne {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  width: 100%;
+}
+
+.divUpOneUserId {
+  color : blue;
+}
+
+.divUpTwo {
+  
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  
+}
+
+.divUpTwoEquipment {
+  color : blue;
+
+  
+}
+
+.divUpThree {
+  /* background-color: aqua; */
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.divUpThreePort {
+  color: blue;
+}
+
+.divUpCheck {
+ 
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.divUpButton {
+  
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  width: 80%;
+  
+}
+
+.divUpButtonSave {
+  width: 50%;
+  
+  /* width: 100px; */
+  border: nane;
+}
+
+.divUpButtonSave1 {
+  width: 100%;
+  background-color: #218ECB;
+  color: white;
+  
+  height: 40px;
+}
+
+.divUpButtonClose {
+  width: 50%;
+}
+
+.divUpButtonClose1 {
+  background-color: gray !important;
+  width: 100%;
+  
+  color: white;
+  
+  height: 40px;
+}
+
+.divDown {
+  background-color: #696969;
+
+  color: white;
+ 
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal {
+    display: none; /* 모달 창을 처음에는 숨깁니다. */
+  }
