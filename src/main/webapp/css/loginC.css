@@ -104,6 +104,9 @@
     
     
 /* 모달 */
+.modal{
+	display: none;
+}
 .dig{
   border: 0px solid #CCC;
   background: #F1F1F1;
