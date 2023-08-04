@@ -22,8 +22,8 @@
                         </div>
                         <div class="save-find-box">
                             <div class="save">
-                                <input type="checkbox">
-                                <a href="#">아이디 저장</a>
+                                <input id="id-checkbox" type="checkbox">
+                                <a onclick="idSave(event)" href="#">아이디 저장</a>
                             </div>
                             <div class="find">
                                 <a href="#">비밀번호 찾기</a>
@@ -49,14 +49,17 @@
                 </div>
                 <div class="signup-grid">
                     <span class="modal-info">비밀번호 </span> 
-                    <input class="signup-input padding-left-md" type="password" name="password" placeholder="비밀번호를 입력해주세요.">
+                    <input class="signup-input padding-left-md" id="signup-password" type="password" name="password" placeholder="비밀번호를 입력해주세요.">
                 </div>
                 <div class="signup-grid ">
                     <span class="modal-info">비밀번호 확인 </span> 
-                    <input class="signup-input padding-left-md margin-bottom-lg" type="password" name="rePassword" placeholder="비밀번호를 다시 입력해주세요.">
+                    <input class="signup-input padding-left-md" id="signup-rePassword" type="password" name="rePassword" placeholder="비밀번호를 다시 입력해주세요.">
                 </div>
-                <input class="modal-button primary" type="button" value="가입" onclick="signup()">
-                <input class="modal-button gray" type="button" value="닫기" onclick="closeModal()">
+                <div class="signup-hint margin-bottom-lg"></div>
+                <div class="modal-button-container">
+	                <input class="modal-button primary" type="button" value="가입" onclick="signup()">
+	                <input class="modal-button gray" type="button" value="닫기" onclick="closeModal()">
+                </div>
             </div>
         </div>
        <script src="/js/loginB.js" defer></script>   

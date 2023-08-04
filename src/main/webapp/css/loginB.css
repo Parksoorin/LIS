@@ -98,6 +98,7 @@ img{
 
 
 .save-find-box{
+	font-size: 1.2em;
     display: flex;
     margin-bottom: 40px;
     justify-content: space-between;
@@ -180,7 +181,7 @@ img{
 .modal-button{
     color: #fff;
     width: 220px;
-    height: 34px;
+    height: 52px;
     border-radius: 10px;
     border-style: none;
     font-weight: 700;
@@ -191,6 +192,16 @@ img{
 .gray{
     background-color: #606477;
 }
+
+.red{
+    color: #ff0000;
+}
+
+.modal-button-container{
+	position: absolute;
+	bottom : 10px;
+}
+
 
    .dark-curtain{
             position: absolute;
