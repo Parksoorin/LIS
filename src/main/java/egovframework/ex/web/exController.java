@@ -25,18 +25,6 @@ public class exController {
 	@Resource(name = "exService")
 	private exService exService;
 	
-	@RequestMapping(value = "/loginA.do")
-	public String startPage(Model model) throws Exception {
-		return ".login/loginA";
-	}
-	@RequestMapping(value = "/loginC.do")
-	public String loginCPage(Model model) throws Exception {
-		return ".login/loginC";
-	}
-	@RequestMapping(value = "/loginD.do")
-	public String loginDPage(Model model) throws Exception {
-		return ".login/loginD";
-	}
 	@RequestMapping(value = "/oneGrid.do")
 	public String oneGrid(Model model) throws Exception {
 		return ".main/oneGrid";
