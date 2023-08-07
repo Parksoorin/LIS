@@ -3,6 +3,10 @@ const container = document.querySelector(".container");
 const curtain = document.getElementById("curtain");
 const checkbox = document.getElementById("id-checkbox");
 const signupHint = document.querySelector('.signup-hint');
+const signupId = document.getElementById('signup-id');
+const signupPassword = document.getElementById('signup-password');
+const signupRePassword = document.getElementById('signup-rePassword');
+
 container.addEventListener('click', modal);
 curtain.addEventListener('click', closeModal);
 
@@ -33,12 +37,18 @@ function idSave(event){
 function closeModal(){
     signupModal.classList.remove('isModal');
     curtain.classList.remove('dark-curtain');
+    initSignup();
+}
+
+function initSignup(){
+    signupId.value = '';
+    signupPassword.value = '';
+    signupRePassword.value = '';
+    signupHint.innerHTML = '';
 }
 
 function signup(){
-    const signupId = document.getElementById('signup-id');
-    const signupPassword = document.getElementById('signup-password');
-    const signupRePassword = document.getElementById('signup-rePassword');
+    
     const idRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     const passwordRegExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 
@@ -72,20 +82,8 @@ function signup(){
         signupHint.innerHTML = `<span class="red">비밀번호는 특문,문자,숫자 형태의 8~15자리 이내의 암호입니다. </span>`;
         return;
     }
-
-
-    signupId.value = '';
-    signupPassword.value = '';
-    signupRePassword.value = '';
-    signupHint.innerHTML = '';
-  
     // fetch('')
-
     closeModal();
-
-
-    
-   
 }
 
 function login(){
