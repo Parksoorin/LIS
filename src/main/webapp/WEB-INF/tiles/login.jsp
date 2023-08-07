@@ -3,7 +3,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+<tiles:insertAttribute name="header" />
 </head>
 <body>
 	<div id="wrap" class="wrap">
