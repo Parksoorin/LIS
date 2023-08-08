@@ -19,7 +19,14 @@ public interface AMapper {
 	// joinUserA 메서드를 선언한다. 이 메서드는 사용자 정보를 데이터베이스에 저장하는 역할을 한다. 반환값은 저장 성공 여부를 나타내는 정수이다.
 	int joinUserA(userADTO dto);
 	
+	// userADTO dto 이 매개변수는 사용자 정보(userADTO)를 나타낸다.
+	// 이 객체에서 아이디 정보를 가져와서 중복 여부를 확인할 때 사용된다.
+	// int 이 메서드는 정수(int) 값을 반환한다.
+	// 반환되는 값은 중복된 아이디가 존재하면 1, 중복된 아이디가 존재하지 않으면 0이다.
 	int duplicate(userADTO dto);
 		
+	// String id 이 매개변수는 조회하려는 사용자의 아이디를 나타낸다.
+	// userADTO 이 메서드는 userADTO 객체를 반환한다. 이 객체는 데이터베이스에서 조회한 사용자 정보의 데이터를 담고 있는 DTO이다.
+	// 만약 해당 아이디에 대한 사용자 정보가 존재하지 않으면, 'null'이 반환된다.
 	userADTO findOne(String id);
 }

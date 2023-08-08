@@ -91,24 +91,27 @@ public class AController {
 		
 	    JSONObject json = new JSONObject();
 	    
+	    // 요청 파라미터로부터 아이디와 비밀번호를 가져온다.
 	    String id = map.get("id").toString();
 	    String password = Sha256.encrypt(map.get("password").toString());
 	    
+	    // aService를 사용하여 해당 아이디에 대한 사용자 정보를 데이터베이스에서 조회한다.
 	    userADTO userADTO = aService.findOne(id);
 	    
+	    // 조회한 사용자가 없는 경우, "none" 결과를 반환한다.
 	    if(userADTO.getId() == null) {
-			json.put("result", "none");
-			json.put("id", id);
-			return json;
+			json.put("result", "none");  // 결과 키: "none"
+			json.put("id", id);  // 조회한 아이디도 함께 반환
+			return json;  // JSON 형태의 응답을 반환
 		}
 	    
+	    // 조회한 사용자 정보가 있는 경우, 입력한 아이디와 비밀번호를 비교하여 로그인 처리를 수행한다.
 	    if(id.equals(userADTO.getId()) && Sha256.encrypt(password).equals(userADTO.getPassword())) {
-			json.put("result", "success");
-			
+			json.put("result", "success");  // 로그인 성공시 "success" 결과를 반환
 		} else {
-			json.put("result", "fail");
+			json.put("result", "fail");  // 로그인 실패시 "fail" 결과를 반환
 		}
 		
-		return json;
+		return json;  // JSON 형태의 응답을 반환
 	}
 }

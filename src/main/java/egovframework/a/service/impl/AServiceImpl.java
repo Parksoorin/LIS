@@ -37,15 +37,22 @@ public class AServiceImpl implements AService{
 		@Override
 		public boolean duplicate(userADTO dto) {
 			
+			// aMapper 인터페이스의 duplicate 메서드를 호출하여 데이터베이스에서 중복 여부를 확인한다.
+			// 이때, 반환되는 'result' 값은 중복 여부에 따라 0 또는 1이다.
 			int result = aMapper.duplicate(dto);
 			System.out.println("=====result=====" + result);
+			// result 값이 1인 경우, 중복된 아이디가 있다는 의미. 따라서 true를 반환하여 중복 아이디임을 알려준다.
 			if(result == 1) return true;
+			// result 값이 0인 경우, 중복된 아이디가 없다는 의미. 따라서 false를 반환하여 중복 아이디가 아님을 알려준다.
 			return false;
 		}
 
+		// 이 메서드는 입력으로 받은 아이디에 해당하는 사용자 정보를 데이터베이스에서 조회하는 역할을 한다.
 		@Override
 		public userADTO findOne(String id) {
 			
+			// aMapper 인스턴스를 통해 aMapper인터페이스의 findOne 메서드를 호출하여
+			// 데이터베이스에서 해당 아이디에 해당하는 사용자 정보를 조회한다. 이 정보를 userADTO 형태로 반환한다.
 			return ((AService) aMapper).findOne(id);
 		}
 		
