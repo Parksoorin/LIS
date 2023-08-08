@@ -1,8 +1,10 @@
 package egovframework.a.web;
 
+import java.sql.PreparedStatement;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.resource.cci.ResultSet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -72,11 +74,41 @@ public class AController {
 				dto.setPassword(pw);
 			
 			// aService를 통해 'joinUser' 메서드를 호출하여 사용자 정보를 데이터베이스에 저장한다.
-			int join = aService.joinUser(dto);
+			int join = aService.joinUserA(dto);
 			// JSON 객체에 "result" 키와 "success" 값을 넣어서 결과를 저장한다.
 			json.put("result", "success");
-		
+			//데잍너가있따면 
+			//json에 result값으로 success 없다면 fail 
 		// JSON 객체를 반환하여 클라이언트에 응답한다.
+		return json;
+	}
+	
+	
+	@RequestMapping(value = "/loginUserA.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject login(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws Exception {
+		
+	    JSONObject json = new JSONObject();
+	    
+	    String id = map.get("id").toString();
+	    String password = Sha256.encrypt(map.get("password").toString());
+	    
+	    userADTO userADTO = aService.findOne(id);
+	    
+	    if(userADTO.getId() == null) {
+			json.put("result", "none");
+			json.put("id", id);
+			return json;
+		}
+	    
+	    if(id.equals(userADTO.getId()) && Sha256.encrypt(password).equals(userADTO.getPassword())) {
+			json.put("result", "success");
+			
+		} else {
+			json.put("result", "fail");
+		}
+		
 		return json;
 	}
 }

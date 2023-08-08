@@ -16,6 +16,10 @@ import egovframework.a.model.userADTO;
 @Mapper("AMapper")
 // AMapper 인터페이스를 정의한다. 이 인터페이스는 데이터베이스와의 상호 작용을 담당하는 메서드를 포함한다.
 public interface AMapper {
-	// joinUser 메서드를 선언한다. 이 메서드는 사용자 정보를 데이터베이스에 저장하는 역할을 한다. 반환값은 저장 성공 여부를 나타내는 정수이다.
-	int joinUser(userADTO dto);
+	// joinUserA 메서드를 선언한다. 이 메서드는 사용자 정보를 데이터베이스에 저장하는 역할을 한다. 반환값은 저장 성공 여부를 나타내는 정수이다.
+	int joinUserA(userADTO dto);
+	
+	int duplicate(userADTO dto);
+		
+	userADTO findOne(String id);
 }

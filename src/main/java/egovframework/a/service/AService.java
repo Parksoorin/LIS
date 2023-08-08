@@ -13,5 +13,8 @@ import egovframework.a.model.userADTO;
 public interface AService {
 	// joinUser 메서드를 선언한다. 이 메서드는 사용자 정보를 입력받아 데이터베이스에 저장하는 역할을 수행한다.
 	// 반환값은 저장 성공 여부를 나타내는 정수(0,1)이다.
-	int joinUser(userADTO dto);
+	int joinUserA(userADTO dto);
+	
+	boolean duplicate(userADTO dto);
+	userADTO findOne(String id);
 }

@@ -27,10 +27,27 @@ public class AServiceImpl implements AService{
 		private AMapper aMapper;
 
 		// AService 인터페이스의 joinUser 메서드를 구현한다. 이 메서드는 매퍼의 joinUser 메서드를 호출하여 사용자 데이터를 데이터베이스에 저장한다.
-		public int joinUser(userADTO dto) {
+		@Override
+		public int joinUserA(userADTO dto) {
 			// TODO Auto-generated method stub
 			// 매퍼의 joinUser 메서드를 호출하여 사용자 데이터를 데이터베이스에 저장하고, 저장 성공 여부를 정수 형태로 반환한다.
-			return aMapper.joinUser(dto);
-		}	
+			return aMapper.joinUserA(dto);
+		}
+
+		@Override
+		public boolean duplicate(userADTO dto) {
+			
+			int result = aMapper.duplicate(dto);
+			System.out.println("=====result=====" + result);
+			if(result == 1) return true;
+			return false;
+		}
+
+		@Override
+		public userADTO findOne(String id) {
+			
+			return ((AService) aMapper).findOne(id);
+		}
+		
 		
 	}
