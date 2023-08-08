@@ -53,11 +53,11 @@
           <h2 class="modal-modal-title">회원가입</h2>
           <div class="divUpOne">
             <div class="divUpOneUserId">아이디</div>
-            <input type="text" class="filled-basic" value="ID">
+            <input type="text" class="filled-basic" value="ID" id="userId">
           </div>
           <div class="divUpTwo">
             <div class="divUpTwoPassword">비밀번호</div>
-            <input type="text" class="filled-basic" value="비밀번호">
+            <input type="text" class="filled-basic" value="비밀번호" id="userPw">
           </div>
           <div class="divUpThree">
             <div class="divUpThreePassCheck">비밀번호 확인</div>
@@ -66,7 +66,7 @@
           
           <div class="divUpButton">
             <div class="divUpButtonSave">
-              <button class="divUpButtonSave1">회원가입</button>
+              <button class="divUpButtonSave1" id="joinBtn">회원가입</button>
             </div>
             <div class="divUpButtonClose">
   				<button class="divUpButtonClose1" onclick="handleClose()">나가기</button>
@@ -78,6 +78,29 @@
     </div>
   </div>
    <script src="/js/loginA.js"></script>
+   <script>
+   $('#joinBtn').on("click", function(){
+	   var id = $("#userId").val();
+	   var password = $("#userPw").val();
+	   $.ajax({
+		   type : "post",
+		   url : "/joinUser.do",
+		   data: {
+			   id: id,
+			   password: password
+		   },
+		   dataType: "json",
+		   error: function(){
+			   alert("에러발생");
+		   },
+		   success: function(data){
+			   alert("회원가입 성공");
+			   location.reload();
+		   }
+	   })
+	   
+   });
+   </script>
 </body>
 </html>
 
