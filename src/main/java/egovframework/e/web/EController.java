@@ -30,37 +30,7 @@ public class EController {
 	}
 	
 	
-	@RequestMapping(value= "/loginProcessE.do", method = RequestMethod.POST)
-	@ResponseBody
-	public JSONObject login(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
-			HttpServletResponse response, Model model) throws Exception{
-		
-		JSONObject json = new JSONObject();
-		String id = map.get("id").toString();
-		String password = map.get("password").toString();
-		
-		UserEDTO userEDTO = eService.findOne(id);
-		
-		if(userEDTO.getId() == null) {
-			json.put("result", "none");
-			json.put("id", id);
-			return json;
-		}
-		
-		if( id.equals(userEDTO.getId()) && 
-				Sha256.encrypt(password).equals(userEDTO.getPassword())) {
-			
-			json.put("result", "success");
-			
-			
-		} else {
-			json.put("result", "fail");
-		}
-		
-		
-		
-		return json;
-	}
+	
 	
 	@RequestMapping(value = "/joinUserE.do", method = RequestMethod.POST)
 	@ResponseBody
