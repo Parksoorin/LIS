@@ -4,8 +4,9 @@
     <html>
     <head>
         <meta charset="UTF-8">
-        <title>Insert title here</title>
+        <title>LIS 연습</title>
         <link rel="stylesheet" href="/css/loginB.css">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <body>
     	<div id="curtain"></div>
@@ -15,10 +16,10 @@
                     <div class="login-text">로그인</div>
                     <div>
                         <div class="id">
-                            <input class="padding-left-md " type="text" name="id" placeholder="ID" >
+                            <input class="padding-left-md " id="login-id" type="text" name="id" placeholder="ID" >
                         </div>
                         <div class="password " name="password">
-                            <input class="padding-left-md margin-bottom-lg" type="password" name="password" placeholder="PW" >
+                            <input class="padding-left-md margin-bottom-lg" id="login-password" type="password" name="password" placeholder="PW" >
                         </div>
                         <div class="save-find-box">
                             <div class="save">
@@ -30,7 +31,7 @@
                             </div>
                         </div>
                         <div class="login-button">
-                            <button onclick="login()">로그인</button>
+                            <button id="loginBtn">로그인</button>
                         </div>
                         <div class="exit-button">
                             <button onclick="openModal(event)">회원가입</button>
@@ -57,11 +58,143 @@
                 </div>
                 <div class="signup-hint margin-bottom-lg"></div>
                 <div class="modal-button-container">
-	                <input class="modal-button primary" type="button" value="가입" onclick="signup()">
+	                <input class="modal-button primary" id="joinBtn" type="button" value="가입">
 	                <input class="modal-button gray" type="button" value="닫기" onclick="closeModal()">
                 </div>
             </div>
         </div>
        <script src="/js/loginB.js" defer></script>   
+       <script>
+       	
+
+           function validator(id, password, rePassword){
+                const idRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+                const passwordRegExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+
+                if(!id){
+                    signupHint.innerHTML = `<span class="red">아이디를 입력해주세요.</span>`;
+                    alert('아이디를 입력해주세요.');
+                    return false;
+                }
+                if(!password){
+                    signupHint.innerHTML = `<span class="red">비밀번호를 입력해주세요.</span>`;
+                    alert('비밀번호를 입력해주세요.');
+                    return false;
+                }
+                if(!rePassword){
+                    signupHint.innerHTML = `<span class="red">비밀번호 확인을 입력해주세요.</span>`;
+                    alert('비밀번호 확인을 입력해주세요.');
+                    return false;
+                }
+
+                if(password !== rePassword){
+                    signupHint.innerHTML = `<span class="red">비밀번호가 동일하지 않습니다.</span>`;
+                    alert('비밀번호가 동일하지 않습니다.');
+                    return false;
+                }
+
+                if(id.match(idRegExp) == null){
+                    signupHint.innerHTML = `<span class="red">아이디 형식은 example@naver.com 입니다.</span>`;
+                    alert('아이디 형식은 example@naver.com 입니다.');
+                    return false;
+                }
+
+                if(password.match(passwordRegExp) == null && rePassword.match(passwordRegExp) == null){
+                    signupHint.innerHTML = `<span class="red">비밀번호는 특문,문자,숫자 형태의 8~15자리 이내의 암호입니다. </span>`;
+                    alert('비밀번호는 특문,문자,숫자 형태의 8~15자리 이내의 암호입니다.');
+                    return false;
+                }
+                return true;
+           }
+           
+            // 로그인 로직
+            $("#loginBtn").on("click", function(){
+                var id = $('#login-id').val();
+                var password = $('#login-password').val();
+                
+                if(!id){
+                    alert('아이디를 입력해주세요');
+                    return;
+                }
+                if(!password){
+                    alert('비밀번호를 입력해주세요');
+                    return;
+                }
+
+                $.ajax({
+                    type: "post",
+                    url : "/loginProcess.do",
+                    data: {
+                        id : id,
+                        password : password
+                    },
+                    dataType : "json",
+                    error: function(data){
+                        console.log('error');
+                        alert(id + '는 없는 아이디입니다.');
+                            
+                        
+
+                    },
+                    success: function(data){
+                        
+                
+                        if(data.result==='success'){
+                            // 로그인 성공 로직
+                            alert('로그인 성공!!!');
+                            location.href="http://localhost:8888/oneGrid.do";
+                            
+
+
+                        } else if(data.result==='fail'){
+                            // 로그인 실패 로직
+                            alert('아이디 또는 비밀번호가 틀렸습니다.');
+                        }
+                    }
+
+                })
+
+
+            })
+
+            // 회원가입 처리 로직
+            $("#joinBtn").on("click", function(){
+
+
+                var id = $('#signup-id').val();
+                var password = $('#signup-password').val();
+                var rePassword = $('#signup-rePassword').val();
+                
+                if(!validator(id, password, rePassword)) {
+                    return;
+                }
+
+
+                $.ajax({
+                    type: "post",
+                    url : "/joinUser.do",
+                    data: {
+                        id : id,
+                        password : password
+                    },
+                    dataType: "json",
+                    error: function(data) {
+                        console.log(data.result);
+
+                        alert("에러발생22");
+                    },
+                    success: function(data){
+                        if(data.result === 'success'){
+                            alert("회원가입 성공");
+                            location.reload();
+                        } else if(data.result === 'fail'){
+                            alert("중복된 아이디입니다.");
+                            signupHint.innerHTML = `중복된 아이디입니다.</span>`;
+                        }
+                    }
+                })
+            })
+       
+       </script>
     </body>
     </html>

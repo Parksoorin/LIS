@@ -57,33 +57,81 @@ function signup(){
 
     if(!signupId.value){
         signupHint.innerHTML = `<span class="red">아이디를 입력해주세요.</span>`;
-        return;
+        alert('아이디를 입력해주세요.');
+        return false;
     }
     if(!signupPassword.value){
         signupHint.innerHTML = `<span class="red">비밀번호를 입력해주세요.</span>`;
-        return;
+        alert('비밀번호를 입력해주세요.');
+        return false;
     }
     if(!signupRePassword.value){
         signupHint.innerHTML = `<span class="red">비밀번호 확인을 입력해주세요.</span>`;
-        return;
+        alert('비밀번호 확인을 입력해주세요.');
+        return false;
     }
 
     if(signupPassword.value !== signupRePassword.value){
         signupHint.innerHTML = `<span class="red">비밀번호가 동일하지 않습니다.</span>`;
-        return;
+        alert('비밀번호가 동일하지 않습니다.');
+        return false;
     }
 
     if(signupId.value.match(idRegExp) == null){
         signupHint.innerHTML = `<span class="red">아이디 형식은 example@naver.com 입니다.</span>`;
-        return;
+        alert('아이디 형식은 example@naver.com 입니다.');
+        return false;
     }
 
     if(signupPassword.value.match(passwordRegExp) == null && signupRePassword.value.match(passwordRegExp) == null){
         signupHint.innerHTML = `<span class="red">비밀번호는 특문,문자,숫자 형태의 8~15자리 이내의 암호입니다. </span>`;
-        return;
+        alert('비밀번호는 특문,문자,숫자 형태의 8~15자리 이내의 암호입니다.');
+        return false;
     }
+
+    return true;
     // fetch('')
-    closeModal();
+    // closeModal();
+}
+
+function validator(id, password, rePassword){
+    const idRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    const passwordRegExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+
+    if(!id){
+        signupHint.innerHTML = `<span class="red">아이디를 입력해주세요.</span>`;
+        alert('아이디를 입력해주세요.');
+        return false;
+    }
+    if(!password){
+        signupHint.innerHTML = `<span class="red">비밀번호를 입력해주세요.</span>`;
+        alert('비밀번호를 입력해주세요.');
+        return false;
+    }
+    if(!rePassword){
+        signupHint.innerHTML = `<span class="red">비밀번호 확인을 입력해주세요.</span>`;
+        alert('비밀번호 확인을 입력해주세요.');
+        return false;
+    }
+
+    if(password !== rePassword){
+        signupHint.innerHTML = `<span class="red">비밀번호가 동일하지 않습니다.</span>`;
+        alert('비밀번호가 동일하지 않습니다.');
+        return false;
+    }
+
+    if(id.match(idRegExp) == null){
+        signupHint.innerHTML = `<span class="red">아이디 형식은 example@naver.com 입니다.</span>`;
+        alert('아이디 형식은 example@naver.com 입니다.');
+        return false;
+    }
+
+    if(password.match(passwordRegExp) == null && rePassword.match(passwordRegExp) == null){
+        signupHint.innerHTML = `<span class="red">비밀번호는 특문,문자,숫자 형태의 8~15자리 이내의 암호입니다. </span>`;
+        alert('비밀번호는 특문,문자,숫자 형태의 8~15자리 이내의 암호입니다.');
+        return false;
+    }
+    return true;
 }
 
 function login(){
