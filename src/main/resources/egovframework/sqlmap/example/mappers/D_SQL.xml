@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.d.mapper.DMapper">
+	<insert id="joinUser" parameterType="egovframework.d.model.UserDDTO">
+		INSERT INTO USER (
+			id, 
+			password
+		) VALUES (
+			#{id},
+			#{password}
+		);
+	</insert>
+	
+	<select id="checkUser" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM USER
+		WHERE id=#{id};
+	</select>
+	
+	<select id="loginUser" parameterType="egovframework.d.model.UserDDTO" resultType="egovframework.d.model.UserDDTO">
+		SELECT *
+		FROM USER
+		WHERE id=#{id} AND password=#{password};
+	</select>
+</mapper>

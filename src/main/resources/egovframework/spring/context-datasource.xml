@@ -12,23 +12,24 @@
     </bean>
     -->  
     
-    <!-- Mysql (POM에서 commons-dbcp, mysql-connector-java 관련 라이브러리 설정 ) 
+    <!-- Mysql (POM에서 commons-dbcp, mysql-connector-java 관련 라이브러리 설정 ) -->
+
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/example" />
-        <property name="username" value="user"/>
-        <property name="password" value="password"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/HWIF" />
+        <property name="username" value="root"/>
+        <property name="password" value="123123"/>
     </bean>
-    -->
+   
     
-    <!-- oracle (POM에서 commons-dbcp, ojdbc(라이센스 사항으로 별도로 배포되지 않음) 관련 라이브러리 설정) --> 
+    <!-- oracle (POM에서 commons-dbcp, ojdbc(라이센스 사항으로 별도로 배포되지 않음) 관련 라이브러리 설정) 
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-        <property name="url" value="jdbc:log4jdbc:oracle:thin:@LAPTOP-S5NTPKVR:1521:medi" />
+        <property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:HWIF" />
         <property name="username" value="lab"/>
         <property name="password" value="lab"/>
     </bean>
-   
+   -->
  <!--    <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource"> 
 	<constructor-arg ref="dataSource_main" /> 
 	<property name="logFormatter"> 

@@ -9,11 +9,11 @@
 		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
 		<put-attribute name="content" value="/WEB-INF/tiles/loginContent.jsp" />
 	</definition>
-	<definition name="main" template="/WEB-INF/tiles/main.jsp">
-		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
-		<put-attribute name="top" value="/WEB-INF/tiles/top.jsp" />
-		<put-attribute name="content" value="/WEB-INF/tiles/content.jsp" />
-		<put-attribute name="foot" value="/WEB-INF/tiles/footer.jsp" />
+	<definition name="main" template="/WEB-INF/tiles/main/main.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/main/header.jsp" />
+		<put-attribute name="top" value="/WEB-INF/tiles/main/top.jsp" />
+		<put-attribute name="content" value="/WEB-INF/tiles/main/content.jsp" />
+		<put-attribute name="foot" value="/WEB-INF/tiles/main/footer.jsp" />
 	</definition>
 	
 	<!-- 타일 적용 부분  -->
