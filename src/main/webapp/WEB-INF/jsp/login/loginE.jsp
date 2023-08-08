@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <title>LIS 연습</title>
-        <link rel="stylesheet" href="/css/loginB.css">
+        <link rel="stylesheet" href="/css/loginE.css">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <body>
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-       <script src="/js/loginB.js" defer></script>   
+       <script src="/js/loginE.js" defer></script>   
        <script>
        	
 
@@ -107,55 +107,7 @@
                 return true;
            }
            
-            // 로그인 로직
-            $("#loginBtn").on("click", function(){
-                var id = $('#login-id').val();
-                var password = $('#login-password').val();
-                
-                if(!id){
-                    alert('아이디를 입력해주세요');
-                    return;
-                }
-                if(!password){
-                    alert('비밀번호를 입력해주세요');
-                    return;
-                }
-
-                $.ajax({
-                    type: "post",
-                    url : "/loginProcess.do",
-                    data: {
-                        id : id,
-                        password : password
-                    },
-                    dataType : "json",
-                    error: function(data){
-                        console.log('error');
-                        alert(id + '는 없는 아이디입니다.');
-                            
-                        
-
-                    },
-                    success: function(data){
-                        
-                
-                        if(data.result==='success'){
-                            // 로그인 성공 로직
-                            alert('로그인 성공!!!');
-                            location.href="http://localhost:8888/oneGrid.do";
-                            
-
-
-                        } else if(data.result==='fail'){
-                            // 로그인 실패 로직
-                            alert('아이디 또는 비밀번호가 틀렸습니다.');
-                        }
-                    }
-
-                })
-
-
-            })
+           
 
             // 회원가입 처리 로직
             $("#joinBtn").on("click", function(){
@@ -172,7 +124,7 @@
 
                 $.ajax({
                     type: "post",
-                    url : "/joinUserB.do",
+                    url : "/joinUserE.do",
                     data: {
                         id : id,
                         password : password
@@ -184,13 +136,10 @@
                         alert("에러발생22");
                     },
                     success: function(data){
-                        if(data.result === 'success'){
-                            alert("회원가입 성공");
-                            location.reload();
-                        } else if(data.result === 'fail'){
-                            alert("중복된 아이디입니다.");
-                            signupHint.innerHTML = `중복된 아이디입니다.</span>`;
-                        }
+                     
+                        alert("회원가입 성공");
+                        location.reload();
+                    
                     }
                 })
             })
