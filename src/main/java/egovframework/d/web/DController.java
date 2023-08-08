@@ -30,7 +30,7 @@ public class DController {
 		return ".login/loginD";
 	}
 	
-	@RequestMapping(value = "/joinUser.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/joinUserD.do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject singup(@RequestParam Map<String,Object> map, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response, Model model) throws Exception {
@@ -56,7 +56,7 @@ public class DController {
 		return json;
 	}
 	
-	@RequestMapping(value = "/loginUser.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginUserD.do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject login(@RequestParam Map<String,Object> map, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response, Model model) throws Exception {

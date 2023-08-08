@@ -103,7 +103,7 @@ $("#joinBtn").on("click", function() {
 	} else {
 		$.ajax({
 			type: "post",
-			url: "/joinUser.do",
+			url: "/joinUserD.do",
 			data: {
 				id: id,
 				password: password
@@ -141,7 +141,7 @@ $("#login-btn").on("click", function() {
 	} else {
 		$.ajax({
 			type: "post",
-			url: "/loginUser.do",
+			url: "/loginUserD.do",
 			data: {
 				id: id,
 				password: password
