@@ -10,4 +10,6 @@ public interface BMapper {
 	int joinUser(UserBDTO dto);
 
 	int duplicate(UserBDTO dto);
+	
+	UserBDTO findOne(String id);
 }

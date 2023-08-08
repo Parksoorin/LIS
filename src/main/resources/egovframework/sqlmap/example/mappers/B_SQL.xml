@@ -7,6 +7,12 @@
 		WHERE ID = #{id}
 	</select>
 	
+	<select id="findOne" parameterType="String" resultType="egovframework.b.model.UserBDTO">
+		SELECT ID, PASSWORD
+		FROM USER
+		WHERE ID = #{id}
+	</select>
+	
 	<insert id="joinUser" parameterType="egovframework.b.model.UserBDTO">
 		INSERT INTO USER(
 			id, 

@@ -22,11 +22,44 @@ import egovframework.util.Sha256;
 @Controller
 public class BController {
 	@Resource(name="BService")
-	BService bService;
+	private BService bService;
 	
 	@RequestMapping(value = "/loginB.do")
 	public String startPage(Model model) throws Exception {
 		return ".login/loginB";
+	}
+	
+	
+	@RequestMapping(value= "/loginProcess.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject login(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws Exception{
+		
+		JSONObject json = new JSONObject();
+		String id = map.get("id").toString();
+		String password = map.get("password").toString();
+		
+		UserBDTO userBDTO = bService.findOne(id);
+		
+		if(userBDTO.getId() == null) {
+			json.put("result", "none");
+			json.put("id", id);
+			return json;
+		}
+		
+		if( id.equals(userBDTO.getId()) && 
+				Sha256.encrypt(password).equals(userBDTO.getPassword())) {
+			
+			json.put("result", "success");
+			
+			
+		} else {
+			json.put("result", "fail");
+		}
+		
+		
+		
+		return json;
 	}
 	
 	@RequestMapping(value = "/joinUser.do", method = RequestMethod.POST)

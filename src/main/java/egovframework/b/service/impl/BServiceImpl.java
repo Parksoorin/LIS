@@ -29,4 +29,10 @@ public class BServiceImpl implements BService {
 		return false;
 	}
 
+	@Override
+	public UserBDTO findOne(String id) {
+		
+		return bMapper.findOne(id);
+	}
+
 }
