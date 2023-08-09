@@ -20,6 +20,18 @@ public class EServiceImpl implements EService {
 		return eMapper.joinUser(dto);
 	}
 
-	
+	@Override
+	public boolean duplicate(UserEDTO dto) {
+		
+		int result = eMapper.duplicate(dto);
+		if(result == 1) return true;
+		return false;
+	}
+
+	@Override
+	public UserEDTO findOne(String id) {
+		
+		return eMapper.findOne(id);
+	}
 
 }

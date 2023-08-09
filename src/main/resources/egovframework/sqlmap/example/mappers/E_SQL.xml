@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.e.mapper.EMapper">
+	<select id="duplicate" parameterType="egovframework.e.model.UserEDTO" resultType="int">
+		SELECT COUNT(*)
+		FROM USER
+		WHERE ID = #{id}
+	</select>
 	
-
+	<select id="findOne" parameterType="String" resultType="egovframework.e.model.UserEDTO">
+		SELECT ID, PASSWORD
+		FROM USER
+		WHERE ID = #{id}
+	</select>
+	
 	<insert id="joinUser" parameterType="egovframework.e.model.UserEDTO">
 		INSERT INTO USER(
 			id, 
