@@ -7,11 +7,12 @@ package egovframework.a.model;
  
 
 // userADTO 클래스를 정의한다. 이 클래스는 사용자 정보를 담는 DTO 역할을 한다.
-public class userADTO {
+public class UserADTO {
 	// 사용자의 아이디를 저장하는 멤버 변수이다.
 	private String id;	// 사용자ID
 	// 사용자의 비밀번호를 저장하는 멤버 변수이다.
 	private String password;  // 사용자 패스워드
+	
 	// 사용자의 아이디를 반환하는 게터(getter) 메서드이다.
 	public String getId() {
 		return id;
@@ -20,6 +21,7 @@ public class userADTO {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 	// 사용자의 비밀번호를 반환하는 게터 메서드이다.
 	public String getPassword() {
 		return password;
