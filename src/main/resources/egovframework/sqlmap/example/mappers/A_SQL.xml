@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.a.mapper.AMapper">
-	<insert id="joinUser" parameterType='egovframework.a.model.userADTO'> 
+	<insert id="joinUserA" parameterType='egovframework.a.model.UserADTO'> 
 		INSERT INTO USER (
 		id, password
 		) values(
@@ -9,4 +9,19 @@
 		#{password}
 		)
 	</insert>
+	
+	<!-- 데이터베이스에 같은 userId가 있는지 체크하는 쿼리문 -->
+	<select id="findOne" parameterType='String' resultType="int">
+		select count(id)
+		from user
+		where id = #{id}
+	</select>
+	
+	<select id="loginA" parameterType='egovframework.a.model.UserADTO' resultType="egovframework.a.model.UserADTO">
+	select id, password 
+	from user
+	where id = #{id} and password = #{password}
+	</select>
+	
+	
 </mapper>
