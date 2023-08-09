@@ -80,4 +80,9 @@ public class DController {
 		
 		return json;
 	}
+	
+	@RequestMapping(value = "/qcManagementGrid.do")
+	public String qcManagementGrid(Model model) throws Exception {
+		return ".main/qcmanagement/QCManagementGrid";
+	}
 }
