@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 // AMapper 클래스를 가져온다. 이 클래스는 데이터베이스와의 상호작용을 담당하는 매퍼(Mapper)이다.
 import egovframework.a.mapper.AMapper;
 // userADTO 클래스를 가져온다. 이 클래스는 사용자 데이터의 정보를 담는 DTO(Data Transfer Object)이다.
-import egovframework.a.model.userADTO;
+import egovframework.a.model.UserADTO;
 // AService 인터페이스를 가져온다. 이 인터페이스는 서비스 계층의 역할을 정의한 것이다.
 import egovframework.a.service.AService;
 
@@ -28,32 +28,32 @@ public class AServiceImpl implements AService{
 
 		// AService 인터페이스의 joinUser 메서드를 구현한다. 이 메서드는 매퍼의 joinUser 메서드를 호출하여 사용자 데이터를 데이터베이스에 저장한다.
 		@Override
-		public int joinUserA(userADTO dto) {
+		public int joinUserA(UserADTO dto) {
 			// TODO Auto-generated method stub
 			// 매퍼의 joinUser 메서드를 호출하여 사용자 데이터를 데이터베이스에 저장하고, 저장 성공 여부를 정수 형태로 반환한다.
 			return aMapper.joinUserA(dto);
 		}
 
 		@Override
-		public boolean duplicate(userADTO dto) {
+		public int findOne(String id) {
 			
 			// aMapper 인터페이스의 duplicate 메서드를 호출하여 데이터베이스에서 중복 여부를 확인한다.
 			// 이때, 반환되는 'result' 값은 중복 여부에 따라 0 또는 1이다.
-			int result = aMapper.duplicate(dto);
+			int result = aMapper.findOne(id);
 			System.out.println("=====result=====" + result);
 			// result 값이 1인 경우, 중복된 아이디가 있다는 의미. 따라서 true를 반환하여 중복 아이디임을 알려준다.
-			if(result == 1) return true;
+			if(result == 1) return 1;
 			// result 값이 0인 경우, 중복된 아이디가 없다는 의미. 따라서 false를 반환하여 중복 아이디가 아님을 알려준다.
-			return false;
+			return 0;
 		}
 
 		// 이 메서드는 입력으로 받은 아이디에 해당하는 사용자 정보를 데이터베이스에서 조회하는 역할을 한다.
 		@Override
-		public userADTO findOne(String id) {
+		public UserADTO loginA(UserADTO dto) {
 			
 			// aMapper 인스턴스를 통해 aMapper인터페이스의 findOne 메서드를 호출하여
 			// 데이터베이스에서 해당 아이디에 해당하는 사용자 정보를 조회한다. 이 정보를 userADTO 형태로 반환한다.
-			return ((AService) aMapper).findOne(id);
+			return aMapper.loginA(dto);
 		}
 		
 		

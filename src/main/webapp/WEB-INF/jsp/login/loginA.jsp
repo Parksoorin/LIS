@@ -110,8 +110,9 @@
 	         alert("에러발생");
 	      },
 	      success: function(data){
+	    	  console.log(data);
 	         if (data.result === "success") alert("회원가입 성공");
-	         else if (data.result === "fail")
+	         else if (data.result === "none")
 	         alert("이미 있는 아이디 입니다.");
 	         location.reload();
 	      }
@@ -135,10 +136,12 @@
 		      alert("에러발생");
 		   },
 		   success: function(data){
-		      if (data.result === "success") alert("로그인 성공");
-		      else if (data.result === "fail")
-		      alert("없는 정보 입니다.");
-		      location.reload();
+		      if (data.result === "success") {
+		    	  alert("로그인 성공");
+		    	  location.href="http://localhost:8080/oneGrid.do";
+		      }else if (data.result === "fail"){
+		    	  alert("없는 정보 입니다.");  
+		      }
 	      }
 	   })
 	})
