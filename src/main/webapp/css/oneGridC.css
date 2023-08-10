@@ -8,6 +8,16 @@ body {
     height: 100vh;
 }
 
+.icon {
+    margin-right: 5px;
+    height: 16px;
+}
+
+.icon-x {
+    margin-right: 5px;
+    height: 13px;
+}
+
 /*  위  */
 .up {
     display: flex;
@@ -19,21 +29,25 @@ body {
 
 .up-btn {
     padding: 10px 20px;
+    display: flex;
 }
 
 .btn {
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
     color: #333;
     text-align: center;
     font-family: Noto Sans KR;
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 22px;
     /* 171.429% */
     letter-spacing: 0.07px;
 
-    width: 110px;
-    padding: 6px;
+    width: 90px;
+    padding: 2px;
     justify-content: center;
     gap: 4px;
     border-radius: 4px;
@@ -53,16 +67,17 @@ body {
     background: #FAFAFA;
     display: flex;
     width: 100%;
-    height: calc(100% - 57px);
+    height: calc(100% - 51px);
 }
 
 /*  아래.왼쪽  */
 .down-left-btn {
     border-left: 1px solid #DBDBDB;
     border-right: 1px solid #DBDBDB;
-    padding: 10px 20px;
+    padding: 8px 15px;
     border-bottom: 1px solid #CCC;
     background: #005D92;
+    display: flex;
 }
 
 .down-left {
@@ -78,7 +93,7 @@ body {
     border-right: 1px solid #DBDBDB;
     padding: 10px 20px 10px 20px;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     align-self: stretch;
     display: flex;
 
@@ -87,12 +102,12 @@ body {
 
 .FC-btn {
     display: flex;
-    width: 82px;
-    padding: 7px 0px;
+    width: 80px;
+    padding: 6px 0px;
     justify-content: center;
     align-items: center;
     gap: 4px;
-
+    font-size: 12px;
     border-radius: 4px;
     border: 1px solid #CCC;
     background: #FFF;
@@ -101,7 +116,7 @@ body {
 #left-select {
     width: 65%;
     display: flex;
-    height: 34px;
+    height: 30px;
     padding: 6px 10px;
     justify-content: space-between;
     align-items: center;
@@ -149,9 +164,10 @@ body {
 }
 
 .down-right-btn {
+    display: flex;
     border-bottom: 1px solid #CCC;
     background: #5584AC;
-    padding: 10px 20px;
+    padding: 8px 15px;
 }
 
 
@@ -165,7 +181,7 @@ body {
     padding: 10px;
     flex-direction: column;
     align-items: flex-start;
-    height: calc(100% - 57px);
+    height: calc(100% - 45px);
 
     border-left: 1px solid #DBDBDB;
     border-right: 1px solid #DBDBDB;
@@ -177,15 +193,17 @@ body {
 .down-right-down {}
 
 .down-right-btn2 {
+
+    display: flex;
     border-bottom: 1px solid #CCC;
     background: #5584AC;
-    padding: 10px 20px;
+    padding: 8px 15px;
 }
 
 .grid3 {
     display: flex;
     padding: 10px;
-    height: calc(100% - 57px);
+    height: calc(100% - 45px);
     flex-direction: column;
     align-items: flex-start;
     flex: 1 0 0;
