@@ -29,6 +29,10 @@ public class CController {
 	public String startPage(Model model) throws Exception {
 		return ".login/loginC";
 	}
+	@RequestMapping(value = "/oneGridC.do")
+	public String oneGridCPage(Model model) throws Exception {
+		return ".main/oneGridC/oneGridC";
+	}
 	
 	@RequestMapping(value = "/joinUserC.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -58,20 +62,20 @@ public class CController {
 	@ResponseBody
 	public JSONObject oneGrid(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response, Model model) throws Exception {
-
+		
 		JSONObject json = new JSONObject();
 		UserCDTO dto = new UserCDTO();
 		String pw = Sha256.encrypt(map.get("password").toString());
 		dto.setId(map.get("id").toString());
 		dto.setPassword(pw);
 		
-		int result = cService.loginID(dto);  // boolean도 사용 가능. true or false
+		UserCDTO result = cService.loginID(dto);  // boolean도 사용 가능. true or false
 		
-		if (result == 1) {
-			json.put("result", "success");  // 서비스에서 가져온걸 리턴. 거의 값 전달만 해줌.
+		if (result == null) {
+			json.put("result", "none");  // 서비스에서 가져온걸 리턴. 거의 값 전달만 해줌.
 		}
 		else {
-			json.put("result", "fail");  // 서비스에서 가져온걸 리턴. 거의 값 전달만 해줌.
+			json.put("result", "success");  // 서비스에서 가져온걸 리턴. 거의 값 전달만 해줌.
 		}
 		
 		return json;
