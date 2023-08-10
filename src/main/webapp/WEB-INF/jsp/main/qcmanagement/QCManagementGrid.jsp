@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
-    <link rel="stylesheet" href="/css/QCManagementGrid.css" />
-  </head>
+    <link rel="stylesheet" href="/css/QCManagementGrid.css" /></head
+  >
   <body>
     <!-- 상단 조회바 -->
     <nav class="nav">
@@ -38,7 +38,7 @@
         </div>
 
         <!-- 검사파트/QC물질명 조회 -->
-        <div class="flex-box search-box">
+        <div class="flex-box">
           <div class="inspection-select-container">
             <div class="inspection-select-box check-part-select">
               <label class="inspection-label" for="inspectionPart"
@@ -64,7 +64,10 @@
               </select>
             </div>
           </div>
-          <button class="btn btn-big check-btn">조회</button>
+          
+          <div class="search-box">
+            <button class="btn btn-big check-btn">조회</button>
+          </div>
         </div>
       </div>
 
@@ -125,75 +128,81 @@
     <div class="result-container">
       <p class="result-title">QC품질별 검사항목 설정</p>
       <div class="result-top-box">
-        <div class="result-option-container">
-          <input type="checkbox" name="result-check-all" id="resultCheckAll" />
-          <label class="result-check-all" for="resultCheckAll">전체선택</label>
-
-          <label class="result-label" for="qcCode">QC코드</label>
-          <input
-            class="result-input qcCode-input"
-            id="qcCode"
-            type="text"
-            placeholder="Chemistry QC"
-          />
-
-          <label class="result-label" for="qcMaterialName">QC물질명</label>
-          <input
-            class="result-input qcMaterial-input"
-            id="qcMaterialName"
-            type="text"
-            placeholder="BioRad Chemistry Control"
-          />
-
-          <label class="result-label" for="startDate">시작일</label>
-          <input
-            class="result-input"
-            id="startDate"
-            type="date"
-            value="2016-11-01"
-          />
-
-          <div class="must-option">
+        <div class="result-subtop-box">
+          <div class="result-option-container">
             <input
               type="checkbox"
-              name="result-check-subOption"
-              id="resultCheckSuboption"
+              name="result-check-all"
+              id="resultCheckAll"
             />
-            <label for="resultCheckSuboption"
-              >Low,High 값입력, Mean,SD 계산</label
+            <label class="result-check-all" for="resultCheckAll"
+              >전체선택</label
             >
+
+            <label class="result-label" for="qcCode">QC코드</label>
+            <input
+              class="result-input qcCode-input"
+              id="qcCode"
+              type="text"
+              placeholder="Chemistry QC"
+            />
+
+            <label class="result-label" for="qcMaterialName">QC물질명</label>
+            <input
+              class="result-input qcMaterial-input"
+              id="qcMaterialName"
+              type="text"
+              placeholder="BioRad Chemistry Control"
+            />
+
+            <label class="result-label" for="startDate">시작일</label>
+            <input
+              class="result-input"
+              id="startDate"
+              type="date"
+              value="2016-11-01"
+            />
+
+            <div class="must-option">
+              <input
+                type="checkbox"
+                name="result-check-subOption"
+                id="resultCheckSuboption"
+              />
+              <label for="resultCheckSuboption"
+                >Low,High 값입력, Mean,SD 계산</label
+              >
+            </div>
+          </div>
+
+          <div class="flex-box result-check-container">
+            <input type="checkbox" name="result-check-option" id="3SDRange" />
+            <label for="3SDRange">3SD범위 사용</label>
+
+            <input type="checkbox" name="result-check-option" id="1_2S" />
+            <label for="1_2S">1_2S</label>
+
+            <input type="checkbox" name="result-check-option" id="1_3S" />
+            <label for="1_3S">1_3S</label>
+
+            <input type="checkbox" name="result-check-option" id="2_2S" />
+            <label for="2_2S">2_2S</label>
+
+            <input type="checkbox" name="result-check-option" id="R_4S" />
+            <label for="R_4S">R_4S</label>
+
+            <input type="checkbox" name="result-check-option" id="4_1S" />
+            <label for="4_1S">4_1S</label>
+
+            <input type="checkbox" name="result-check-option" id="10X" />
+            <label for="10X">10X</label>
           </div>
         </div>
 
-        <div class="flex-box result-check-container">
-          <input type="checkbox" name="result-check-option" id="3SDRange" />
-          <label for="3SDRange">3SD범위 사용</label>
-
-          <input type="checkbox" name="result-check-option" id="1_2S" />
-          <label for="1_2S">1_2S</label>
-
-          <input type="checkbox" name="result-check-option" id="1_3S" />
-          <label for="1_3S">1_3S</label>
-
-          <input type="checkbox" name="result-check-option" id="2_2S" />
-          <label for="2_2S">2_2S</label>
-
-          <input type="checkbox" name="result-check-option" id="R_4S" />
-          <label for="R_4S">R_4S</label>
-
-          <input type="checkbox" name="result-check-option" id="4_1S" />
-          <label for="4_1S">4_1S</label>
-
-          <input type="checkbox" name="result-check-option" id="10X" />
-          <label for="10X">10X</label>
-
-          <div class="result-btn-container">
-            <button class="btn btn-mid item-btn item-add-btn">항목추가</button>
-            <button class="btn btn-mid item-btn item-save-btn">항목저장</button>
-            <button class="btn btn-mid item-btn item-delete-btn">
-              항목삭제
-            </button>
-          </div>
+        <div class="result-btn-container">
+          <button class="btn btn-mid item-btn item-add-btn">항목추가</button>
+          <button class="btn btn-mid item-btn item-save-btn">항목저장</button>
+          <button class="btn btn-mid item-btn item-delete-btn">항목삭제</button>
         </div>
       </div>
     </div>

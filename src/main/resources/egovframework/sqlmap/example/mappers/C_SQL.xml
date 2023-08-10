@@ -14,8 +14,8 @@
 		select count(id) from user
 		where id = #{id}
 	</select>
-	<select id="loginID" parameterType="egovframework.c.model.UserCDTO" resultType="int">
-		select count(*) from user
+	<select id="loginID" parameterType="egovframework.c.model.UserCDTO" resultType="egovframework.c.model.UserCDTO">
+		select * from user
 		where id = #{id} and password = #{password}
 	</select>
 </mapper>
