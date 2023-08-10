@@ -32,6 +32,9 @@
 				</li>
 				<li class="oneDepth__menu-item">연습페이지
 					<ul class="twoDepth__menu-items">
+						<li class="twoDepth__menu-item"><a href="/qcManagementGrid.do"
+							class="bookmark__item-link"><img
+								src="/images/icons/icon_li.png" alt="li" /> QC 검사항목 관리</a></li>
 					</ul>
 				</li>
 			</ul>
