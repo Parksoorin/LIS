@@ -39,10 +39,6 @@
 				</li>
 			</ul>
 		</header>
-		<header class="header__bookmark">
-			<ul class="bookmark__items">
-			</ul>
-			<div class="header_user"></div>
-		</header>
+		
 	</div>
 </div>
