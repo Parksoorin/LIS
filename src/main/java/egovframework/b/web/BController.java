@@ -29,6 +29,10 @@ public class BController {
 		return ".login/loginB";
 	}
 	
+	@RequestMapping(value = "/qcResult.do")
+	public String qcResultPage(Model model) throws Exception {
+		return ".main/qcresultfind/qcResult";
+	}
 	
 	@RequestMapping(value= "/loginProcess.do", method = RequestMethod.POST)
 	@ResponseBody
