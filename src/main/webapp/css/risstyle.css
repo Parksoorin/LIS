@@ -254,9 +254,9 @@ body {
   color: white;
   font-weight:300;
   font-size:15px;
-  height:65%;
+  height:100%;
   display: flex;
-  align-items: center;
+  align-items: center;	
   
 }
 .header__flex header.header__bookmark {
@@ -458,7 +458,7 @@ ul.twoDepth__menu-items li:first-child{
 	height: 99.9%;
 }
 #header{
-	height: 8%;
+	height: 28px;
 }
 #contents{
 	font-size:10px;
