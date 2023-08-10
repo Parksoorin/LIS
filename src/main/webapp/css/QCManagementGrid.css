@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-weight: 400 !important;
 }
 
 .flex-box {
@@ -26,6 +27,10 @@ input[type="checkbox"] {
   height: 15px;
 }
 
+input[type="checkbox"], input[type="radio"]:hover {
+  cursor: pointer;
+}
+
 label {
   font-size: 14px;
 }
@@ -44,6 +49,14 @@ select:hover {
   border-radius: 4px;
 }
 
+.btn:hover {
+  background-color: #F8F9FC;
+}
+
+.btn:active {
+  background-color: #DADADA;
+}
+
 .btn-big {
   position: relative;
   padding: 2px 16px;
@@ -51,9 +64,9 @@ select:hover {
 }
 
 .btn-mid {
-  margin-right: 1px;
-  padding: 1px 4px;
-  width: 80px;
+  margin-right: 5px;
+  padding: 5px;
+  width: 85px;
   text-align: end;
 }
 
@@ -71,7 +84,7 @@ select:hover {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  background-color: #005d92;
+  background-color: #68baf2;
   color: #fff;
   border-bottom: 1px solid #ccc;
 }
@@ -83,40 +96,40 @@ select:hover {
 .nav-division-title {
   margin-right: 20px;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 24px;
 }
 
 .radio-container {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
+  height: 24px;
 }
 
 .search-box {
+  display: flex;
   align-items: flex-end;
 }
 
 .search-radio-label {
   margin-left: 5px;
   margin-right: 10px;
-  line-height: 20px;
 }
 
 .inspection-label {
   display: inline-block;
   width: 70px;
-  line-height: 20px;
 }
 
 .inspection-select-container {
-  margin-right: 10px;
+  margin-right: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .inspection-select-box {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
 }
@@ -126,7 +139,8 @@ select:hover {
 }
 
 .check-btn {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  height: 24px;
   text-align: end;
 }
 
@@ -143,7 +157,7 @@ select:hover {
 }
 
 .inspection-item-container {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
 }
@@ -159,7 +173,7 @@ select:hover {
 
 .search-container {
   display: flex;
-  height: 300px;
+  height: 250px;
 }
 
 .search-left-box {
@@ -172,20 +186,19 @@ select:hover {
 }
 
 .search-grid-top {
-  padding: 1px 10px;
-  background-color: #5584ac;
+  background-color: #005d92;
   border-bottom: 1px solid #ccc;
 }
 
 .search-grid-title {
-  margin-top: 5px;
-  margin-bottom: 10px;
+  padding: 7px 10px;
   font-size: 14px;
   color: #fff;
+  background-color: #218ecb;
 }
 
 .search-select-container {
-  margin-bottom: 10px;
+  padding: 10px;
   display: flex;
 }
 
@@ -200,19 +213,23 @@ select:hover {
 }
 
 .result-title {
-  padding: 5px 10px;
-  font-size: 14px;
+  padding: 7px 10px;
   color: #fff;
-  background-color: #005d92;
+  font-size: 14px;
+  background-color: #218ecb;
 }
 
 .result-top-box {
+  padding: 10px;
+  background-color: #005d92;
+}
+
+.result-subtop-box {
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
   color: #fff;
-  background-color: #5584ac;
 }
 
 .result-option-container {
@@ -247,7 +264,8 @@ select:hover {
 }
 
 .result-btn-container {
-  margin-left: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .item-btn {
@@ -255,7 +273,7 @@ select:hover {
   text-align: end;
 }
 
-.search-btn:before {
+.btn-small:before {
   content: "";
   display: inline-block;
   position: absolute;
@@ -264,63 +282,46 @@ select:hover {
   width: 15px;
   height: 15px;
   transform: translate(-50%, -50%);
+}
+
+.search-btn:before {
   background: url("/images/search.png") no-repeat center / cover;
 }
 
 .clear-btn:before {
-  content: "";
-  display: inline-block;
-  position: absolute;
-  top: 50%;
-  left: 18px;
-  width: 15px;
-  height: 15px;
-  transform: translate(-50%, -50%);
   background: url("/images/clear.png") no-repeat center / cover;
 }
 
-.item-add-btn:before {
+.btn-mid:before {
   content: "";
   display: inline-block;
   position: absolute;
   top: 50%;
-  left: 12px;
+  left: 15px;
   width: 15px;
   height: 15px;
   transform: translate(-50%, -50%);
+}
+
+.item-add-btn:before {
   background: url("/images/add.png") no-repeat center / cover;
 }
 
 .item-save-btn:before {
-  content: "";
-  display: inline-block;
-  position: absolute;
-  top: 50%;
-  left: 12px;
-  width: 14px;
-  height: 14px;
-  transform: translate(-50%, -50%);
   background: url("/images/save.png") no-repeat center / cover;
 }
 
 .item-delete-btn:before {
-  content: "";
-  display: inline-block;
-  position: absolute;
-  top: 50%;
-  left: 12px;
-  width: 12px;
-  height: 12px;
-  transform: translate(-50%, -50%);
   background: url("/images/delete.png") no-repeat center / cover;
 }
 
 .must-option {
   padding: 2px;
+  height: 24px;
   display: flex;
   align-items: center;
-  background-color: yellow;
-  color: #000;
+  background-color: #F39100;
+  color: #fff;
 }
 
 .must-option input[type="checkbox"] {
