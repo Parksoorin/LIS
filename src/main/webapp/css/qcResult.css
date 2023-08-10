@@ -53,6 +53,10 @@ button:active{
     background-color: #218ECB;
     color: #fff;
 }
+.button-container button:active{
+    background: #005D92;
+    color: #fff;
+}
 
 .button-container button{
     border-radius: 4px;
@@ -177,6 +181,11 @@ button:active{
 
 .footer-header button:hover{
     background-color: #218ECB;
+    color: #fff;
+}
+
+.footer-header button:active{
+    background: #005D92;
     color: #fff;
 }
 .check-item-button{
