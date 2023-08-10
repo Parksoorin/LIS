@@ -47,6 +47,15 @@ public class AController {
 		return ".login/loginA";
 	}
 	
+	// "/loginA.do"라는 경로로 들어온 요청에 대한 처리를 위한 메서드를 정의.
+		@RequestMapping(value = "/reagentA.do")
+		public String reagentA(Model model) throws Exception {
+			
+			// '.login/loginA'뷰 페이지를 반환한다.
+			return ".main/reagent/reagentA";
+		}
+	
+	
 	// "/joinUserA.do" 경로로 POST 요청이 들어왔을 때 처리를 위한 메서드를 정의한다.
 	// 이 메서드는 JSON 형태의 데이터를 반환할 것이므로 @ResponseBody 어노테이션을 사용한다.
 	@RequestMapping(value = "/joinUserA.do", method = RequestMethod.POST)
