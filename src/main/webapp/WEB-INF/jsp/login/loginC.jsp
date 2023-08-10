@@ -20,7 +20,7 @@
                     <input type="text" name="userid" class="outlined-basic" placeholder="ID" id="loginID">
                     <input type="password" name="passwd" class="outlined-basic" placeholder="PW" id="loginPW">
                     <div class="checkbox">
-                        <div><input type="checkbox"> 아이디 저장</div>
+                        <div><input type="checkbox" id="idck"><label for="idck"> 아이디 저장</label></div>
                         <div><a href="#" class="pwlink">비밀번호 찾기</a></div>
                     </div>
                 </div>
@@ -76,10 +76,15 @@ $('#loginBtn').on("click", function(){
 			alert("에러발생");
 		},
 		success: function(data){
-			if (data.result === "success") alert("로그인 성공");
-			else if (data.result === "fail")
-			alert("없는 정보 입니다.");
-			location.reload();
+			console.log(data);
+			if (data.result === "success"){
+				alert("로그인 성공");
+				location.href="http://localhost:8080/oneGridC.do";
+			} 
+			else if (data.result === "none") {			
+				alert("없는 정보 입니다.");
+				location.reload();
+			}
 		}
 	})
 })

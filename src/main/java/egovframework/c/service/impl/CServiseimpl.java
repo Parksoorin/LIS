@@ -22,7 +22,7 @@ public class CServiseimpl implements CService{
 		// TODO Auto-generated method stub
 		return cMapper.userID(dto);
 	}
-	public int loginID(UserCDTO dto) {
+	public UserCDTO loginID(UserCDTO dto) {
 		// TODO Auto-generated method stub
 		return cMapper.loginID(dto);
 	}
