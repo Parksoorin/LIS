@@ -70,10 +70,6 @@
     <div class="body">
         <table id="list1" ></table>
     </div>
-	<div class="state-container">
-	 <div>상태 메세지 > </div>
-	 <div>저장 성공!</div>
-	</div>
     <div class="footer">
         <div class="footer-header">
             <input type="radio" name="graph" id="regular" value="regular" checked>
