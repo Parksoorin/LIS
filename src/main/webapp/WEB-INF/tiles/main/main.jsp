@@ -11,9 +11,7 @@
 		<tiles:insertAttribute name="top" />
 		</div>
 		<div id="contents">
-		<tiles:insertAttribute name="content" />
-		</div>
-		<div id="bottom">
+		<tiles:insertAttribute name="content" />	
 		</div>
 	</div>
 </body>

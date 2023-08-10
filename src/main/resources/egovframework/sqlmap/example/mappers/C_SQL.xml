@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.c.mapper.CMapper">
+	<insert id="joinUserC" parameterType="egovframework.c.model.UserCDTO">
+		insert into user (
+			id, 
+			password
+		) values(
+			#{id},
+			#{password}
+		)
+	</insert>
+	<select id="userID" parameterType="egovframework.c.model.UserCDTO" resultType="int">
+		select count(id) from user
+		where id = #{id}
+	</select>
+	<select id="loginID" parameterType="egovframework.c.model.UserCDTO" resultType="int">
+		select count(*) from user
+		where id = #{id} and password = #{password}
+	</select>
+</mapper>

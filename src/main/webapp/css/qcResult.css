@@ -1,0 +1,244 @@
+.header {
+    box-sizing: border-box;
+    padding: 10px;
+    background: #005D92;
+    color: #FFF;
+    font-weight: 700;
+    border-bottom: 1px solid #CCC;
+}
+
+section {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    line-height: 2rem;
+}
+
+label{
+    margin-left: 5px;
+    margin-right: 10px;
+}
+body{
+	position: relative;
+    background: #F1F1F1;
+}
+.body{
+    height: 60vh;
+    overflow: auto;
+}
+/* section .button-container{
+    border: 1px solid #000;
+    position: absolute;
+    right: 0;
+} */
+.button-container button{
+    border-radius: 4px;
+    border: 1px solid #CCC;
+    background: #E8E8E8;
+    width: 60px;
+    height: 30px;
+    position: relative;
+    padding-left: 20px;
+}
+.container{
+    display: flex;
+}
+
+.container div:first-child{
+    text-align: right;
+}
+.check-title{
+    width: 50px;
+    text-align: right;
+    margin-right: 5px;
+}
+.check-inputbox1{
+    width: 90px;
+}
+.check-inputbox2{
+    width: 90px;
+    margin-right: 20px;
+}
+.check-part-title {
+    width: 60px;
+    text-align: right;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+.check-part-select{
+    width: 200px;
+}
+.check-external{
+    margin-left: 12px;
+}
+.lotno-title{
+    margin-left: 20px;
+    margin-right: 10px;
+}
+.level-title{
+    width: 50px;
+    text-align: right;
+    margin-left: 20px;
+    margin-right: 5px;    
+}
+.level-select{
+    width: 100px;
+}
+.check-wave{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.check-item-title{
+    width: 50px;
+    text-align: right;
+    margin-right: 5px;
+}
+.check-inputbox{
+    width: 160px;
+    margin-right: 8px;
+}
+.check-item-button{
+    margin-right: 20px;
+}
+.check-item-margin{
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.substance-title{
+    width: 60px;
+    text-align: right;
+}
+
+.substance-select{
+    margin-left: 5px;
+    margin-right: 20px;
+    width: 200px;
+}
+
+.qccode-input{
+    margin-left: 6px;
+    margin-right: 20px;
+}
+.check-jangbi-title{
+    width: 50px;
+    text-align: right;
+}
+.check-jangbi-select{
+    margin-left: 5px;
+    width: 100px;
+}
+
+.footer-header{
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    line-height: 2rem;
+    padding-left: 20px;
+    background-color: #5584AC;
+}
+
+.footer-header button{
+    position: relative;
+    border-radius: 4px;
+    border: 1px solid #CCC;
+    background-color: #FFF;
+    width: 120px;
+    padding-left: 30px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.check-item-button{
+    width: 30px;
+    height: 30px;
+}
+.check-item-button:before{
+    content: '';
+    background: url(../images/icons/searchsearch.png);
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: relative;
+    z-index: 10000;
+    left: 5px;
+}
+
+
+.excel-btn:before{
+    content: '';
+    background: url(../images/icons/excel.png);
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    z-index: 10000;
+    left: 5px;
+}
+.save-btn:before{
+    content: '';
+    background: url(../images/icons/save.png);
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    z-index: 10000;
+    left: 5px;
+}
+.find-btn:before{
+    content: '';
+    background: url(../images/icons/searchsearch.png);
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    z-index: 10000;
+    left: 5px;
+}
+
+
+.delete-btn:before{
+    content: '';
+    background: url(../images/icons/delete.png);
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    z-index: 10000;
+    left: 5px;
+}
+
+.graph-view:before{
+    content: '';
+    background: url(../images/icons/bar-graph.png);
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    z-index: 10000;
+    left: 5px;
+}
+.graph-output:before{
+    content: '';
+    background: url(../images/icons/printer.png);
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    z-index: 10000;
+    left: 5px;
+}
+
+.state-container{
+	display : flex;
+	position : fixed;
+	width : 100vw;
+	bottom : 0;
+	z-index : 10000;
+	color : #fff;
+	border-top: 1px solid #D2D2D2;
+	background: #606477;
+	padding: 10px 20px;
+	align-items: center;
+}
