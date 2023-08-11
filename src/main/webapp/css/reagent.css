@@ -1,0 +1,283 @@
+* {
+    margin: 0px;
+}
+
+.divAll {
+    width:100%;
+    height: 100%;
+}
+
+.divUp {
+    background-color: #005D92;
+    width:100%;
+    height: 7%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.divUpLeft {
+    /* background-color: aqua; */
+   
+    height: 100%;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    margin-left: 5px;
+}
+
+#part, #acc, #manu {
+    width: 200px;
+    height: 25px;
+    
+    margin: 10px;
+}
+
+.topButton {
+    
+    height: 15px;
+    
+    display: flex;
+    
+    align-items: center;
+    
+    color: white;
+}
+
+.divUpRight {
+    /* background-color: blue; */
+    
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.btn-sec {
+    width: 75px;
+    height: 25px;
+    margin: 5px;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 4px;
+    border: 1px solid #DADADA;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.btn-sec:hover {
+    opacity: 0.9;
+}
+
+.btn-thr {
+	width: 65px;
+    height: 20px;
+    margin: 5px;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 4px;
+    border: 1px solid #DADADA;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.btn-thr:hover {
+    opacity: 0.9;
+}
+
+.btn-pir {
+	width: 80px;
+    height: 25px;
+    margin: 5px;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 4px;
+    border: 1px solid #DADADA;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.btn-pir:hover {
+	opacity: 0.9;
+}
+
+.img {
+    margin-right: 5px;
+    height: 15px;
+}
+
+.img2 {
+    margin-right: 5px;
+    height: 12px;
+}
+
+.img1 {
+    height: 17px;
+    margin-right: 5px;
+}
+
+.divDown{
+    /* background-color: #92d7fe; */
+    width: 100%;
+    height: 93%;
+
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    
+}
+
+.divDownLeft {
+    /* background-color: bisque; */
+    width: 77%;
+    height: 100%;
+
+    border-right: 2px solid rgb(248, 246, 246);
+}
+
+.divDownLeftUpButton {
+    background-color: #5584AC;
+    width: 100%;
+    height: 7%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+   
+}
+
+.optionSearch {
+    color: rgba(0, 0, 0, .3);
+
+    width: 520px;
+    height: 25px;
+    
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.optionSearch option {
+  color: #000;
+  
+  
+}
+
+.divDownLeftList {
+    background-color: rgb(222, 239, 246);
+    width: 100%;
+    height: 93%;
+    
+    border-top: 2px solid rgb(248, 246, 246);
+}
+
+.divDownRight {
+    background-color: lightgoldenrodyellow;
+    width: 23%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+.divDownRightUp {
+    /* background-color: darkturquoise; */
+    width: 100%;
+    height: 30%;
+
+    border-bottom: 1px solid rgb(248, 246, 246);
+}
+
+.divDownRightUpList {
+    /* background-color: rgb(222, 239, 246); */
+    width: 100%;
+    height: 87%;
+}
+
+.divDownRightUpListUp {
+    background-color: #5584AC;
+    width: 100%;
+    height: 15%;
+
+    padding-left: 20px;
+	font-size: 13px;
+	
+	color: white;
+	
+	display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.divDownRightUpListDown {
+    
+    width: 100%;
+    height: 85%;
+
+    border-top: 2px solid rgb(248, 246, 246);
+}
+
+.divDownRightUpButton {
+    background-color: #5584AC;
+    width: 100%;
+    height: 13%;
+
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.divDownRightDown {
+    /* background-color: darkgray; */
+    width: 100%;
+    height: 100%;
+}
+
+.divDownRightDownButton {
+    background-color: #5584AC;
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.optionSearchRight{
+    color: rgba(0, 0, 0, .3);
+
+    width: 180px;
+    height: 25px;
+    
+    margin-left:5px;
+    margin-right:5px;
+}
+
+.optionSearchRight option {
+  color: #000;
+}
+
+
+
+.divDownRightDownList {
+    background-color: cornsilk;
+    width: 100%;
+    height: 100%;
+
+    border-top: 2px solid rgb(248, 246, 246);
+}

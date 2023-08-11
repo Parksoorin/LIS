@@ -14,7 +14,9 @@
 	<div class="header__flex">
 		<header class="header__menu">
 			<div style="font-size: 20pt;">
-				<a href="" class="header__logo-link">HWIF</a>
+			<a href="">
+				<img src="/images/logo2.png" style="width:140px; height:40px; margin-left:20px;"></img>
+			</a>
 			</div>
 			<ul class="oneDepth__menu-items">
 				<li class="oneDepth__menu-item">예제
@@ -35,6 +37,12 @@
 						<li class="twoDepth__menu-item"><a href="/qcManagementGrid.do"
 							class="bookmark__item-link"><img
 								src="/images/icons/icon_li.png" alt="li" /> QC 검사항목 관리</a></li>
+						<li class="twoDepth__menu-item"><a href="/qcResult.do"
+							class="bookmark__item-link"><img
+								src="/images/icons/icon_li.png" alt="li" /> QC 결과조회 (일별)</a></li>
+						<li class="twoDepth__menu-item"><a href="/oneGridC.do"
+							class="bookmark__item-link"><img
+								src="/images/icons/icon_li.png" alt="li" /> 기준정보 설정</a></li>
 					</ul>
 				</li>
 			</ul>
