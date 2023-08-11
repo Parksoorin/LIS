@@ -104,6 +104,8 @@ pageEncoding="UTF-8"%>
             <button class="btn btn-small clear-btn">Clear</button>
           </div>
         </div>
+        
+        <table id="list1" ></table>
       </div>
 
       <div class="search-right-box">
@@ -206,5 +208,54 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
     </div>
+    
+<script>
+$('#list1').jqGrid({
+    url: "/qcManagementLisq100.do",	// 서버주소 
+    reordercolNames:true,
+    postData : { 
+        type:"QCManagement",								
+	}, // 보낼 파라미터
+    mtype:'POST',	// 전송 타입
+    datatype : "json",	// 받는 데이터 형태 
+    colNames:['플래그', 'QC 코드','QC물질명','Lot No', 'Level', '검사파트', '시작일', '종료일', '고정검체번호',],	//컬럼명
+    colModel:[
+		{ name: 'iud',				index: 'iud',			width: '20', align:"center", hidden: true,
+			formatter:"select", 
+			formatoptions :{value:"N:불용"},
+			edittype:"select", 
+			editoptions: {value:"N:불용"}   
+		},
+		{ name: 'qcCode', 			index: 'qcCode',		width: '40', align: "left", hidden: false},
+		{ name: 'qcName', 			index: 'qcName',		width: '80', align: "left" },
+		{ name: 'lotNo', 			index: 'lotNo',			width: '50', align: "left" },
+		{ name: 'qcLevel',			index: 'qcLevel',		width: '20', align: "left" },
+		{ name: 'testPart',			index: 'testPart',		width: '60', align: "left" },
+		{ name: 'startDate',		index: 'startDate',		width: '40', align: "left" },
+		{ name: 'endDate',			index: 'endDate',		width: '40', align: "left" },
+		{ name: 'qcSpecimenSer',	index: 'qcSpecimenSer',	width: '40', align: "left" },
+    ], //서버에서 startDate 데이터 설정
+    jsonReader: {
+	     repeatitems: false, //서버에서 받은 data와 Grid 상의 column 순서를 맞출것인지?
+	     root:'rows', //서버의 결과 내용에서 데이터를 읽어오는 기준점
+	     records:'records'  // 보여지는 데이터 갯수(레코드) totalRecord 
+    },
+    autowidth: true,
+	shrinkToFit: true,
+    height: "auto",//테이블의 세로 크기, Grid의 높이         
+  loadtext : "자료 조회중입니다. 잠시만 기다리세요..." ,   // 데이터 로드중일때      
+  emptyrecords: "Nothing to display",  // 데이터없을떄
+  rowNum:-1, 
+  rownumbers: true,         
+  gridview : true,  // 선표시 true/false         
+  loadComplete: function(data){  
+      console.log(data);
+  },	// loadComplete END   
+  onSelectRow: function(rowid) {
+      console.log(rowid)
+  }
+  
+})
+</script>
   </body>
 </html>
