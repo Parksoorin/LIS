@@ -38,6 +38,9 @@
 						<li class="twoDepth__menu-item"><a href="/qcResult.do"
 							class="bookmark__item-link"><img
 								src="/images/icons/icon_li.png" alt="li" /> QC 결과조회 (일별)</a></li>
+						<li class="twoDepth__menu-item"><a href="/oneGridC.do"
+							class="bookmark__item-link"><img
+								src="/images/icons/icon_li.png" alt="li" /> 기준정보 설정</a></li>
 					</ul>
 				</li>
 			</ul>
