@@ -35,6 +35,9 @@
 						<li class="twoDepth__menu-item"><a href="/qcManagementGrid.do"
 							class="bookmark__item-link"><img
 								src="/images/icons/icon_li.png" alt="li" /> QC 검사항목 관리</a></li>
+						<li class="twoDepth__menu-item"><a href="/qcResult.do"
+							class="bookmark__item-link"><img
+								src="/images/icons/icon_li.png" alt="li" /> QC 결과조회 (일별)</a></li>
 					</ul>
 				</li>
 			</ul>

@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- 첫번째줄은 JSP 페이지의 지시어이다. 이것은 해당 JSP 페이지의 속성을 설정한다. language 속성은 페이지에서 사용할 Java 언어를 정의하며, contentType은 출력되는 콘텐츠의 유형과 문자 인코딩을 설정한다. -->
+<!-- 두번째줄은 JSP 페이지에서 JSTL(Core JSP Standard Tag Library)을 사용하기 위한 태그 라이브러리를 선언하는 부분이다. JSTL은 JSP 페이지에서 반복문, 조건문 등과 같은 일반적인 로직을 처리하기 위한 태그들을 제공한다. -->
+<!-- prefix는 사용할 태그의 접두사를 정의하고, uri 는 해당 태그 라이브러리의 위치를 지정한다. -->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -138,7 +142,7 @@
 		   success: function(data){
 		      if (data.result === "success") {
 		    	  alert("로그인 성공");
-		    	  location.href="http://localhost:8080/oneGrid.do";
+		    	  location.href="http://localhost:8080/reagentA.do";
 		      }else if (data.result === "fail"){
 		    	  alert("없는 정보 입니다.");  
 		      }
