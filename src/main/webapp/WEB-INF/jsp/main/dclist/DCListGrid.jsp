@@ -19,17 +19,19 @@
             justify-content: space-between;
         }
 
-        .footer {
+         .footer {
             clear: both; 
             padding: 20px;
             border-top: 1px solid #ccc;
+            text-align: left; 
             position: relative;
             bottom: 0;
             left: 0;
-            width: 49%;
-            height: 8%;      
+            width: 49%; 
+            height: 50px;
             background-color: rgb(168, 199, 210);
-            font-size: small;
+            font-size: 10px;
+            overflow: hidden;
         }
 
         .grid1,
@@ -43,7 +45,7 @@
         }
 
         .grid2 {
-            height: 98%; 
+            height:95%; 
         }
 
         .tabs {
@@ -90,7 +92,7 @@
 
         .search-input {
             width: 70%;
-            height: 20px;
+            height: 22px;
         }
 
         .search-buttons {
@@ -109,7 +111,7 @@
             display: inline-block;
             width: 16px;
             height: 16px;
-            background: url(/images/icons/collect.png) no-repeat center / contain;
+            background: url(/images/icons/searchsearch.png) no-repeat center / contain;
             margin-right: 5px;
             vertical-align: middle;
         }
@@ -134,12 +136,12 @@
             vertical-align: middle;
         }
         
-         .img4::before {
+        .img4::before {
             content: "";
             display: inline-block;
             width: 16px;
             height: 16px;
-            background: url(/images/icons/save.png) no-repeat center / contain;
+            background: url(/images/icons/collect.png) no-repeat center / contain;
             margin-right: 5px;
             vertical-align: middle;
         }
@@ -149,7 +151,7 @@
             display: inline-block;
             width: 16px;
             height: 16px;
-            background: url(/images/icons/exit.png) no-repeat center / contain;
+            background: url(/images/icons/garbage.png) no-repeat center / contain;
             margin-right: 5px;
             vertical-align: middle;
         }
@@ -159,7 +161,7 @@
             display: inline-block;
             width: 16px;
             height: 16px;
-            background: url(/images/icons/searchsearch.png) no-repeat center / contain;
+            background: url(/images/icons/save.png) no-repeat center / contain;
             margin-right: 5px;
             vertical-align: middle;
         }
@@ -169,12 +171,12 @@
             display: inline-block;
             width: 16px;
             height: 16px;
-            background: url(/images/icons/garbage.png) no-repeat center / contain;
+            background: url(/images/icons/exit.png) no-repeat center / contain;
             margin-right: 5px;
             vertical-align: middle;
         }
         
-         .img8::before {
+        .img8::before {
             content: "";
             display: inline-block;
             width: 16px;
@@ -183,18 +185,28 @@
             margin-right: 5px;
             vertical-align: middle;
         }
+        
+        .img9::before {
+            content: "";
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url(/images/icons/close.png) no-repeat center / contain;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
     <div class="up">
         <div>
-            <button class="btn-sec check"><span class="img"></span> 조 회</button>
+            <button class="btn-sec check"><span class="img4"></span> 조 회</button>
             <button class="btn-sec input"><span class="img8"></span> 입 력</button>
-            <button class="btn-sec delete"><span class="img7"></span> 삭 제</button>
-            <button class="btn-sec save"><span class="img4"></span> 저 장</button>
+            <button class="btn-sec delete"><span class="img5"></span> 삭 제</button>
+            <button class="btn-sec save"><span class="img6"></span> 저 장</button>
             <input type="checkbox" id="includeExpired" />
             <label for="includeExpired">사용종료 포함</label>
-            <button class="btn-sec exit" style="float:right"><span class="img5"></span> 닫 기</button>
+            <button class="btn-sec close" style="float:right"><span class="img9"></span> 닫 기</button>
         </div>
     </div>
 
@@ -204,9 +216,8 @@
                 <div class="search-bar">
                     <input type="text" id="searchInput" class="search-input" placeholder="검색어를 입력하세요">
                     <div class="search-buttons">
-                        <button class="btn-sec save"><span class="img6"></span> 찾 기</button>
-                        
-                        <button class="btn-sec save"><span class="img7"></span> 지우기</button>
+                        <button class="btn-sec check"><span class="img"></span> 찾기</button>
+                        <button class="btn-sec check"><span class="img3"></span> 지우기</button>
                     </div>
                 </div>
             </div>
@@ -229,10 +240,10 @@
                 <div class="search-bar">
                     <input type="text" id="searchInput3" class="search-input" placeholder="검색어를 입력하세요">
                     <div class="search-buttons">
-                        <button class="btn-sec save"><span class="img6"></span> 찾 기</button>
-                        <button class="btn-sec save"><span class="img7"></span> 지우기</button>
-                        <button class="btn-sec save"><span class="img2"></span> 사용등록</button>
-                        <button class="btn-sec save"><span class="img3"></span> 사용종료</button>
+                       <button class="btn-sec check"><span class="img"></span> 찾기</button>
+                        <button class="btn-sec check"><span class="img3"></span> 지우기</button>
+                        <button class="btn-sec input"><span class="img2"></span> 사용등록</button>
+                       <button class="btn-sec input"><span class="img7"></span> 사용종료</button>
                     </div>
                 </div>
             </div>
@@ -249,4 +260,3 @@
     </div>
 </body>
 </html>
-
