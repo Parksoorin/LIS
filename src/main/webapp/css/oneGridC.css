@@ -111,6 +111,12 @@ body {
     border-radius: 4px;
     border: 1px solid #CCC;
     background: #FFF;
+    cursor: pointer;
+    opacity: 1;
+}
+
+.FC-btn:hover {
+	opacity: 0.9;
 }
 
 #left-select {
