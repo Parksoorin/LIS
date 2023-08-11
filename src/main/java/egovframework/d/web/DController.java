@@ -1,5 +1,8 @@
 package egovframework.d.web;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.d.model.UserDDTO;
+import egovframework.d.model.lisq100DTO;
 import egovframework.d.service.DService;
 import egovframework.util.Sha256;
 
@@ -84,5 +88,31 @@ public class DController {
 	@RequestMapping(value = "/qcManagementGrid.do")
 	public String qcManagementGrid(Model model) throws Exception {
 		return ".main/qcmanagement/QCManagementGrid";
+	}
+	
+	
+	@RequestMapping(value = "/qcManagementLisq100.do")
+	@ResponseBody
+	public JSONObject qcManagementLisq100(@RequestParam Map<String,Object> map, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws Exception {
+		JSONObject json = new JSONObject();
+		List<lisq100DTO> data = dService.lisq100();
+//		List<Map> dataList = new ArrayList();
+		
+		System.out.println(data);
+		System.out.println(data.size());
+		System.out.println(data.get(0).getQcCode());
+		
+//		for(int i=0;i<data.size();i++) {
+//			Map<String,Object> map1 = new HashMap<String,Object>();
+//			// 'QC 코드','QC물질명','Lot No', 'Level', '검사파트', '시작일', '종료일', '고정검체번호',
+//			map1.put("QC 코드", data.get(i).getQcCode());
+////			map1.put("QC물질명", i+20);
+//			dataList.add(map1);
+//		}
+		
+//		json.put("rows", dataList);
+		
+		return json;
 	}
 }

@@ -22,4 +22,9 @@
 		FROM USER
 		WHERE id=#{id} AND password=#{password};
 	</select>
+	
+	<select id="lisq100" resultType="hashMap">
+		SELECT *
+		FROM lisq100;
+	</select>
 </mapper>
