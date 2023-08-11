@@ -19,7 +19,7 @@
 
     <div class="divUp">
         <div class="divUpLeft">
-            <label for="part"><div class="topButton">파트</div></label>
+            <label class="topButton" for="part">파트</label>
             <select id="part" name="reagentPart">
                 <option value="">전체</option>
                 <option value="reagentPart1">reagentPart1</option>
@@ -27,7 +27,7 @@
                 <option value="reagentPart3">reagentPart3</option>
             </select>
 
-            <label for="acc"><div class="topButton">거래처</div></label>
+            <label class="topButton" for="acc">거래처</label>
             <select id="acc" name="account">
                 <option value="">전체</option>
                 <option value="account1">account1</option>
@@ -35,7 +35,7 @@
                 <option value="account3">account3</option>
             </select>
 
-            <label for="manu"><div class="topButton">제조사</div></label>
+            <label class="topButton" for="manu">제조사</label>
             <select id="manu" name="manufacturer">
                 <option value="">전체</option>
                 <option value="manufacturer1">manufacturer1</option>
@@ -44,26 +44,20 @@
             </select>
         </div>
         <div class="divUpRight">
-            <button class="btn check"><img src="/images/icons/searchsearch.png" class="img"> 조 회</button>
-            <button class="btn input"><img src="/images/icons/printer.png" class="img">입 력</button>
-            <button class="btn save"><img src="/images/icons/save.png" class="img"> 저 장</button>
-            <button class="btn delete"><img src="/images/icons/delete.png" class="img2">삭 제</button>
-            <button class="btn excel"><img src="/images/icons/excel.png" class="img">EXCEL</button>
+            <button class="btn-sec check"><img src="/images/icons/searchsearch.png" class="img"> 조 회</button>
+            <button class="btn-sec input"><img src="/images/icons/printer.png" class="img">입 력</button>
+            <button class="btn-sec save"><img src="/images/icons/save.png" class="img"> 저 장</button>
+            <button class="btn-sec delete"><img src="/images/icons/delete.png" class="img2">삭 제</button>
+            <button class="btn-sec excel"><img src="/images/icons/excel.png" class="img">EXCEL</button>
         </div>
     </div>
 
     <div class="divDown"> 
         <div class="divDownLeft">
             <div class="divDownLeftUpButton">
-                <select id="search" name="searchAll" class="optionSearch">
-                    <option value="" disabled selected hidden>Enter text to search</option>
-                    <option value="search1">search1</option>
-                    <option value="search2">search2</option>
-                    <option value="search3">search3</option>
-                </select>
-
-                <button class="btn">검 색</button>
-                <button class="btn">클리어</button>
+				<input type="text" name="search_name" class="optionSearch" placeholder="Enter text to search"></input>
+                <button class="btn-pir">검 색</button>
+                <button class="btn-pir">클리어</button>
             </div>
             <div class="divDownLeftList">그리드1</div>
         </div>
@@ -75,22 +69,17 @@
                     <div class="divDownRightUpListDown">그리드2</div>
                 </div>
                 <div class="divDownRightUpButton">
-                    <button class="btn"><img src="/images/icons/up.png" class="img1">등 록</button>
-                    <button class="btn"><img src="/images/icons/down.png" class="img1">제 외</button>
+                    <button class="btn-thr"><img src="/images/icons/up.png" class="img1">등 록</button>
+                    <button class="btn-thr"><img src="/images/icons/down.png" class="img1">제 외</button>
                 </div>
             </div>
         
             <div class="divDownRightDown">
                 <div class="divDownRightDownButton">
-                    <select id="search" name="searchAllRight" class="optionSearchRight">
-                        <option value="" disabled selected hidden>Enter text</option>
-                        <option value="search1">search1</option>
-                        <option value="search2">search2</option>
-                        <option value="search3">search3</option>
-                    </select>
+                    <input type="text" name="search_name" class="optionSearchRight" placeholder="Enter text to search"></input>
     
-                    <button class="btn">검 색</button>
-                    <button class="btn">클리어</button>
+                    <button class="btn-pir">검 색</button>
+                    <button class="btn-pir">클리어</button>
                 </div>
                 <div class="divDownRightDownList">
                     그리드3
