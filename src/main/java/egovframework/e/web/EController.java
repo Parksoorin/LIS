@@ -88,4 +88,9 @@ public class EController {
 		
 		return json;
 	}
+	
+	@RequestMapping(value = "/DCListGrid.do")
+	public String qcManagementGrid(Model model) throws Exception {
+		return ".main/dclist/DCListGrid";
+	}
 }
