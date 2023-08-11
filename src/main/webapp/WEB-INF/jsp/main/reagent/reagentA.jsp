@@ -19,7 +19,7 @@
 
     <div class="divUp">
         <div class="divUpLeft">
-            <label for="part"><div class="topButton">파트</div></label>
+            <label class="topButton" for="part">파트</label>
             <select id="part" name="reagentPart">
                 <option value="">전체</option>
                 <option value="reagentPart1">reagentPart1</option>
@@ -27,7 +27,7 @@
                 <option value="reagentPart3">reagentPart3</option>
             </select>
 
-            <label for="acc"><div class="topButton">거래처</div></label>
+            <label class="topButton" for="acc">거래처</label>
             <select id="acc" name="account">
                 <option value="">전체</option>
                 <option value="account1">account1</option>
@@ -35,7 +35,7 @@
                 <option value="account3">account3</option>
             </select>
 
-            <label for="manu"><div class="topButton">제조사</div></label>
+            <label class="topButton" for="manu">제조사</label>
             <select id="manu" name="manufacturer">
                 <option value="">전체</option>
                 <option value="manufacturer1">manufacturer1</option>
