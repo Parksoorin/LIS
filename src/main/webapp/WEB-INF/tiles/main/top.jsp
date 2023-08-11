@@ -14,7 +14,9 @@
 	<div class="header__flex">
 		<header class="header__menu">
 			<div style="font-size: 20pt;">
-				<a href="" class="header__logo-link">HWIF</a>
+			<a href="">
+				<img src="/images/logo2.png" style="width:140px; height:40px; margin-left:20px;"></img>
+			</a>
 			</div>
 			<ul class="oneDepth__menu-items">
 				<li class="oneDepth__menu-item">예제
