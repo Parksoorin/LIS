@@ -43,6 +43,9 @@
 						<li class="twoDepth__menu-item"><a href="/oneGridC.do"
 							class="bookmark__item-link"><img
 								src="/images/icons/icon_li.png" alt="li" /> 기준정보 설정</a></li>
+						<li class="twoDepth__menu-item"><a href="/reagentA.do"
+							class="bookmark__item-link"><img
+								src="/images/icons/icon_li.png" alt="li" /> 시약코드 설정</a></li>
 					</ul>
 				</li>
 			</ul>
