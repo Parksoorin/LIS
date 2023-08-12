@@ -1,5 +1,6 @@
 * {
     margin: 0px;
+    box-sizing: border-box;
 }
 
 .divAll {
@@ -280,4 +281,10 @@
     height: 100%;
 
     border-top: 2px solid rgb(248, 246, 246);
+}
+
+@media (max-width: 900px) { /* 화면 너비가 900px 이하일 때 적용 */
+    .divAll {
+        height: auto; /* 높이를 자동으로 조정하여 내용에 맞게 표시 */
+    }
 }
