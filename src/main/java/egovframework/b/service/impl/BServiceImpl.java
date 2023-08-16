@@ -1,10 +1,14 @@
 package egovframework.b.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import egovframework.b.mapper.BMapper;
+import egovframework.b.model.QcResultDTO;
 import egovframework.b.model.UserBDTO;
 import egovframework.b.service.BService;
 
@@ -33,6 +37,17 @@ public class BServiceImpl implements BService {
 	public UserBDTO findOne(String id) {
 		
 		return bMapper.findOne(id);
+	}
+
+	
+	@Override
+	public List<String> qcResultDate() {
+		return bMapper.qcResultDate();
+	}
+
+	@Override
+	public List<Map<String, Object>> qcResultFindHashMap(List<String> dateList) {
+		return bMapper.qcResultFindHashMap(dateList);
 	}
 
 }

@@ -1,5 +1,5 @@
 $('#list1').jqGrid({
-    url: "<c:url value='/exGrid.do'/>",	// 서버주소 
+    url: "<c:url value='/qcResultFindAll.do'/>",	// 서버주소 
     reordercolNames:true,
     postData : { 
              type:"A",								
@@ -16,16 +16,16 @@ $('#list1').jqGrid({
              edittype:"select", 
              editoptions: {value:"N:불용"}   
              },
-         { name: 'name'	  , index: 'name'    , width: '20' ,align:"center"    , hidden: false}					,
-         { name: 'age'	  , index: 'age'	, width: '20'  , align: "center" },
-         { name: 'name'	  , index: 'name'    , width: '20' ,align:"center"    , hidden: false}	,
-         { name: 'name'	  , index: 'name'    , width: '20' ,align:"center"    , hidden: false}	,
-         { name: 'name'	  , index: 'name'    , width: '20' ,align:"center"    , hidden: false}	,
-         { name: 'name'	  , index: 'name'    , width: '20' ,align:"center"    , hidden: false}	,
-         { name: 'name'	  , index: 'name'    , width: '20' ,align:"center"    , hidden: false}	,
-         { name: 'name'	  , index: 'name'    , width: '20' ,align:"center"    , hidden: false}	,
-         { name: 'name'	  , index: 'name'    , width: '20' ,align:"center"    , hidden: false}	,
-         { name: 'name'	  , index: 'name'    , width: '20' ,align:"center"    , hidden: false}	,
+         { name: 'qcName'	  , index: 'qcName'    , width: '20' ,align:"center"    , hidden: false}					,
+         { name: 'gumsaName'	  , index: 'gumsaName'	, width: '20'  , align: "center" },
+         { name: 'qcLevel'	  , index: 'qcLevel'    , width: '20' ,align:"center"    , hidden: false}	,
+         { name: 'lotNo'	  , index: 'lotNo'    , width: '20' ,align:"center"    , hidden: false}	,
+         { name: 'fixedMean'	  , index: 'fixedMean'    , width: '20' ,align:"center"    , hidden: false}	,
+         { name: 'fixedSD'	  , index: 'fixedSD'    , width: '20' ,align:"center"    , hidden: false}	,
+         { name: 'fixedCV'	  , index: 'fixedCV'    , width: '20' ,align:"center"    , hidden: false}	,
+         { name: 'cumMean'	  , index: 'cumMean'    , width: '20' ,align:"center"    , hidden: false}	,
+         { name: 'cumSD'	  , index: 'cumSD'    , width: '20' ,align:"center"    , hidden: false}	,
+         { name: 'cumCV'	  , index: 'cumCV'    , width: '20' ,align:"center"    , hidden: false}	,
          { name: 'name'	  , index: 'name'    , width: '20' ,align:"center"    , hidden: false}	,
          ], //서버에서 받은 데이터 설정
     jsonReader: {
