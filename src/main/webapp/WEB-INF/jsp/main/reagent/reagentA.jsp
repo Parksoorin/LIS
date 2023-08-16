@@ -59,14 +59,18 @@
                 <button class="btn-pir">검 색</button>
                 <button class="btn-pir">클리어</button>
             </div>
-            <div class="divDownLeftList">그리드1</div>
+            <div class="divDownLeftList" style= "height=100%; overflow = hidden;">
+            	<table id="list1" ></table>
+            </div>
         </div>
 
         <div class="divDownRight">
             <div class="divDownRightUp">
                 <div class="divDownRightUpList">
                     <div class="divDownRightUpListUp">시약별 검사코드 관리</div>
-                    <div class="divDownRightUpListDown">그리드2</div>
+                    <div class="divDownRightUpListDown">
+                    	<table id="list2" ></table>
+                    </div>
                 </div>
                 <div class="divDownRightUpButton">
                     <button class="btn-thr"><img src="/images/icons/up.png" class="img1">등 록</button>
@@ -82,14 +86,145 @@
                     <button class="btn-pir">클리어</button>
                 </div>
                 <div class="divDownRightDownList">
-                    그리드3
+                    <table id="list3" ></table>
                 </div>
             </div>
         </div>
     </div>
-
+	
 </div>
    <script>  
+   $('#list1').jqGrid({
+	    url: "<c:url value='/reagentA.do'/>",	// 서버주소 
+	    reordercolNames:true,
+	    postData : { 
+	   	 	 type:"A",								
+		 }, // 보낼 파라미터`
+	    mtype:'POST',	// 전송 타입
+	    datatype : "json",	// 받는 데이터 형태 
+	    colNames:['제품코드','제품명','파트','물품구분','규격','입고단위','출고단위','환산수량','입고바코드','출고단위별출력','창고바코드','창고출고단위','사용등록바코드','유효기간','개봉유효기간','보관방법','개봉후보관방법','거래처명','제조사코드(명)','바코드','단가','Lot no','적용일','불용일','병원코드'],	//컬럼명
+	    colModel:[
+	   	     { name: 'testCode'	,   index: 'testCode'    , width: '75' ,  align:"center", hidden: false},
+		     { name: 'testName'	  , index: 'testName'   , width: '100' ,  align:"center", hidden: false}					,
+		     { name: 'jundalPart'	  , index: 'jundalPart'	, width: '100'  , align: "center" },
+		     { name: 'testGunun'	  , index: 'testGunun'	, width: '100'  , align: "center" },
+		     { name: 'kukuk'	  , index: 'kukuk'	, width: '100'  , align: "center" },
+		     { name: 'inDanui'	  , index: 'inDanui'	, width: '100'  , align: "center" },
+		     { name: 'outDanui'	  , index: 'outDanui'	, width: '100'  , align: "center" },
+		     { name: 'changeQty'	  , index: 'changeQty'	, width: '100'  , align: "center" },
+		     { name: 'barcodeInYn'	  , index: 'barcodeInYn'	, width: '100'  , align: "center" },
+		     { name: 'barcodeDiv'	  , index: 'barcodeDiv'	, width: '100'  , align: "center" },
+		     { name: 'barcodeStoreYn'	  , index: 'barcodeStoreYn'	, width: '100'  , align: "center" },
+		     { name: 'storeDanui'	  , index: 'storeDanui'	, width: '100'  , align: "center" },
+		     { name: 'barcodeOutYn'	  , index: 'barcodeOutYn'	, width: '100'  , align: "center" },
+		     { name: 'expDay'	  , index: 'expDay'	, width: '100'  , align: "center" },
+		     { name: 'expOpenDay'	  , index: 'expOpenDay'	, width: '100'  , align: "center" },
+		     { name: 'keepName'	  , index: 'keepName'	, width: '100'  , align: "center" },
+		     { name: 'KeepOpenName'	  , index: 'KeepOpenName'	, width: '100'  , align: "center" },
+		     { name: 'supplierName'	  , index: 'supplierName'	, width: '100'  , align: "center" },
+		     { name: 'jejoCode'	  , index: 'jejoCode'	, width: '100'  , align: "center" },
+		     { name: 'barcode'	  , index: 'barcode'	, width: '100'  , align: "center" },
+		     { name: 'danga'	  , index: 'danga'	, width: '100'  , align: "center" },
+		     { name: 'lotNo'	  , index: 'lotNo'	, width: '100'  , align: "center" },
+		     { name: 'startDate'	  , index: 'startDate'	, width: '100'  , align: "center" },
+		     { name: 'endDate'	  , index: 'endDate'	, width: '100'  , align: "center" },
+		     { name: 'hospitalCode'	  , index: 'hospitalCode'	, width: '100'  , align: "center" }
+		     ], //서버에서 받은 데이터 설정
+	    jsonReader: {
+		     repeatitems: false, //서버에서 받은 data와 Grid 상의 column 순서를 맞출것인지?
+		     root:'rows', //서버의 결과 내용에서 데이터를 읽어오는 기준점
+		     records:'records'  // 보여지는 데이터 갯수(레코드) totalRecord 
+	    },
+	    autowidth: true,
+		shrinkToFit: true,
+	    height: "auto",  //테이블의 세로 크기, Grid의 높이       
+	  loadtext : "자료 조회중입니다. 잠시만 기다리세요..." ,   // 데이터 로드중일때      
+	  emptyrecords: "Nothing to display",  // 데이터없을떄
+	  rowNum:-1, 
+	  rownumbers: true,         
+	  gridview : true,  // 선표시 true/false         
+	  loadComplete: function(data){  
+	      console.log(data);
+	  },	// loadComplete END   
+	  onSelectRow: function(rowid) {
+	     	console.log(rowid)
+	  }
+	  
+	})
+	
+	
+	$('#list2').jqGrid({
+	    url: "<c:url value='/reagentA.do'/>",	// 서버주소 
+	    reordercolNames:true,
+	    postData : { 
+	   	 	 type:"A",								
+		 }, // 보낼 파라미터
+	    mtype:'POST',	// 전송 타입
+	    datatype : "json",	// 받는 데이터 형태 
+	    colNames:['제품코드','제품명','파트',],	//컬럼명
+	    colModel:[
+	   	     { name: 'iud'	,   index: 'iud'    , width: '20' ,  align:"center", hidden: false},
+		     { name: 'name'	  , index: 'name'   , width: '20' ,  align:"center", hidden: false}					,
+		     { name: 'age'	  , index: 'age'	, width: '80'  , align: "center" }
+		     ], //서버에서 받은 데이터 설정
+	    jsonReader: {
+		     repeatitems: false, //서버에서 받은 data와 Grid 상의 column 순서를 맞출것인지?
+		     root:'rows', //서버의 결과 내용에서 데이터를 읽어오는 기준점
+		     records:'records'  // 보여지는 데이터 갯수(레코드) totalRecord 
+	    },
+	    autowidth: true,
+		shrinkToFit: true,
+	    height: "auto",//테이블의 세로 크기, Grid의 높이       
+	  loadtext : "자료 조회중입니다. 잠시만 기다리세요..." ,   // 데이터 로드중일때      
+	  emptyrecords: "Nothing to display",  // 데이터없을떄
+	  rowNum:-1, 
+	  rownumbers: true,         
+	  gridview : true,  // 선표시 true/false         
+	  loadComplete: function(data){  
+	      console.log(data);
+	  },	// loadComplete END   
+	  onSelectRow: function(rowid) {
+	     	console.log(rowid)
+	  }
+	  
+	})
+	
+	
+	$('#list3').jqGrid({
+	    url: "<c:url value='/reagentA.do'/>",	// 서버주소 
+	    reordercolNames:true,
+	    postData : { 
+	   	 	 type:"A",								
+		 }, // 보낼 파라미터
+	    mtype:'POST',	// 전송 타입
+	    datatype : "json",	// 받는 데이터 형태 
+	    colNames:['제품코드','제품명','파트',],	//컬럼명
+	    colModel:[
+	   	     { name: 'iud'	,   index: 'iud'    , width: '20' ,  align:"center", hidden: false},
+		     { name: 'name'	  , index: 'name'   , width: '20' ,  align:"center", hidden: false}					,
+		     { name: 'age'	  , index: 'age'	, width: '80'  , align: "center" }
+		     ], //서버에서 받은 데이터 설정
+	    jsonReader: {
+		     repeatitems: false, //서버에서 받은 data와 Grid 상의 column 순서를 맞출것인지?
+		     root:'rows', //서버의 결과 내용에서 데이터를 읽어오는 기준점
+		     records:'records'  // 보여지는 데이터 갯수(레코드) totalRecord 
+	    },
+	    autowidth: true,
+		shrinkToFit: true,
+	    height: "auto",//테이블의 세로 크기, Grid의 높이       
+	  loadtext : "자료 조회중입니다. 잠시만 기다리세요..." ,   // 데이터 로드중일때      
+	  emptyrecords: "Nothing to display",  // 데이터없을떄
+	  rowNum:-1, 
+	  rownumbers: true,         
+	  gridview : true,  // 선표시 true/false         
+	  loadComplete: function(data){  
+	      console.log(data);
+	  },	// loadComplete END   
+	  onSelectRow: function(rowid) {
+	     	console.log(rowid)
+	  }
+	  
+	})
    </script>
 </body>
 </html>
