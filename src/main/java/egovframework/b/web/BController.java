@@ -2,6 +2,7 @@ package egovframework.b.web;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,9 +61,11 @@ public class BController {
 		List<Map> dataList = new ArrayList();
 		
 		for(Map<String, Object> listMap : list) {
-			Map<String,Object> map = new HashMap<String,Object>();
+			
+			Map<String,Object> map = new LinkedHashMap<String,Object>();
 			
 			for(String key : listMap.keySet()) {
+				System.out.println(key);
 				map.put(key, listMap.get(key));
 			}
 			dataList.add(map);
