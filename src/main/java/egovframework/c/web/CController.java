@@ -98,7 +98,7 @@ public class CController {
 		    for (lisc001DTO item : data) {
 		        JSONObject row = new JSONObject();
 		        row.put("CODE_TYPE", item.getCodeType());
-		        row.put("CODE_TYPE_NAME", item.getCodeTypeName());
+		        row.put("CODE_TYPE_NAME", item.getCodeType());
 		        row.put("COMMENTS", item.getComments());
 		        // 필요한 다른 필드 추가
 		        rowsArray.add(row);
