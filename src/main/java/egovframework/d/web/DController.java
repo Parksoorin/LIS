@@ -121,10 +121,13 @@ public class DController {
 	
 	@RequestMapping(value = "/qcManagementLisq110.do")
 	@ResponseBody
-	public JSONObject qcManagementLisq110(@RequestParam Map<String,Object> map, HttpSession session, HttpServletRequest request,
+	public JSONObject qcManagementLisq110(@RequestParam Map<String,String> map, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response, Model model) throws Exception {
 		JSONObject json = new JSONObject();
-		List<lisq110DTO> data = dService.lisq110();
+		
+		System.out.println(map);
+		List<lisq110DTO> data = dService.lisq110(map.get("qcCode"));
+		
 		List<Map> dataList = new ArrayList();
 		
 		System.out.println(data.get(0));

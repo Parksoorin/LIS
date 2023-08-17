@@ -92,13 +92,13 @@ pageEncoding="UTF-8"%>
         <div class="search-grid-top">
           <p class="search-grid-title">QC품질 검사항목관리 1.0</p>
           <div class="search-select-container">
-            <select
+            <input
               class="qcQuality-select-box"
               name="qcQualityItems"
               id="qcQualityItem"
-            >
-              <option value="">(전체)</option>
-            </select>
+              type="text"
+              placeholder="Enter text to search..."
+            />
 
             <button class="btn btn-small search-btn">검색</button>
             <button class="btn btn-small clear-btn">Clear</button>
@@ -114,13 +114,13 @@ pageEncoding="UTF-8"%>
         <div class="search-grid-top">
           <p class="search-grid-title">검사항목 리스트</p>
           <div class="search-select-container">
-            <select
+            <input
               class="inspectionList-select-box"
               name="inspectionLists"
               id="inspectionList"
-            >
-              <option value="">(전체)</option>
-            </select>
+              type="text"
+              placeholder="Enter text to search..."
+            />
 
             <button class="btn btn-small search-btn">검색</button>
             <button class="btn btn-small clear-btn">Clear</button>
@@ -138,37 +138,28 @@ pageEncoding="UTF-8"%>
       <div class="result-top-box">
         <div class="result-subtop-box">
           <div class="result-option-container">
-            <input
-              type="checkbox"
-              name="result-check-all"
-              id="resultCheckAll"
-            />
-            <label class="result-check-all" for="resultCheckAll"
-              >전체선택</label
-            >
-
             <label class="result-label" for="qcCode">QC코드</label>
             <input
               class="result-input qcCode-input"
               id="qcCode"
               type="text"
-              placeholder="Chemistry QC"
+              disabled
             />
 
             <label class="result-label" for="qcMaterialName">QC물질명</label>
             <input
               class="result-input qcMaterial-input"
-              id="qcMaterialName"
+              id="qcName"
               type="text"
-              placeholder="BioRad Chemistry Control"
+              disabled
             />
 
             <label class="result-label" for="startDate">시작일</label>
             <input
-              class="result-input"
+              class="result-input date"
               id="startDate"
-              type="date"
-              value="2016-11-01"
+              type="text"
+              disabled
             />
 
             <div class="must-option">
@@ -231,7 +222,7 @@ $('#list1').jqGrid({
     colNames:['플래그', 'QC 코드', 'QC물질명', 'Lot No', 'Level', '검사파트', '시작일', '종료일', '고정검체번호',],	//컬럼명
     colModel:[
 		{ name: '플래그',				index: 'iud',			hidden: true, },
-		{ name: 'qcCode', 			index: 'qcCode',		width: '40', 	align: "left", sorttype: "string"},
+		{ name: 'qcCode', 			index: 'qcCode',		width: '40', 	align: "left" },
 		{ name: 'qcName', 			index: 'qcName',		width: '80', 	align: "left" },
 		{ name: 'lotNo', 			index: 'lotNo',			width: '50', 	align: "left" },
 		{ name: 'qcLevel',			index: 'qcLevel',		width: '20', 	align: "left" },
@@ -249,25 +240,95 @@ $('#list1').jqGrid({
     autoheight: true,
 	loadtext : "자료 조회중입니다. 잠시만 기다리세요..." ,   // 데이터 로드중일때      
 	emptyrecords: "Nothing to display",  // 데이터 없을때
-	rowNum:-1, 
+	rowNum: 2000, 
 	rownumbers: false,  
-	multiselect: true,  // 체크 박스 생성
-	multiselectWidth: 30, // 체크 박스 크기
 	gridview : true,  // 선 표시 true/false
-	sortname: "qcCode",
 	sortable: true,
 	loadonce: true,
 	loadComplete: function(data){  
 		console.log(data);
 	},	// loadComplete END   
 	beforeSelectRow: function(rowid, e) {  // 하나의 행만 체크
-		$("#list2").jqGrid('resetSelection');
+		$("#list1").jqGrid('resetSelection');
 		return(true);
 	},
 	onSelectRow: function(rowid) {
-		console.log(rowid)
+		console.log($("#list1").getRowData(rowid));
+		const selectRow = $("#list1").getRowData(rowid);
+		
+		$("#qcCode").val(selectRow.qcCode);
+		$("#qcName").val(selectRow.qcName);
+		$("#startDate").val(selectRow.startDate);
+		
+		$("#list3").jqGrid("GridUnload"); // 첫 번째 조회했던 그 값으로만 조회될 때 초기화
+		$('#list3').jqGrid({
+		    url: "/qcManagementLisq110.do",	// 서버주소 
+		    reordercolNames:true,
+		    postData : { 
+		        qcCode: selectRow.qcCode
+			}, // 보낼 파라미터
+		    mtype:'POST',	// 전송 타입
+		    datatype : "json",	// 받는 데이터 형태 
+		    colNames:['플래그', '검사코드', '검사명', '검사파트', 'Mean', 'SD', 'CV', '허용(L)', '허용(H)', '서술형', '단위', '시작일', '종료일', '1(2S)', '판정(1_2S)', '1(3S)', '판정(1_3S)', '2(2S)', '판정(2_2S)',
+		    	'R(4S)', '판정(R_4S)', '4(1S)', '판정(4_1S)', '10X', '판정(10X)', '순번', '그래프'
+		    ],	//컬럼명
+		    colModel:[
+				{ name: '플래그',				index: 'iud',			hidden: true, },
+				{ name: 'testCode',			index: 'testCode',		width: '60', 	align: "left" },
+				{ name: 'gumsaName',		index: 'gumsaName',		width: '180', 	align: "left" },
+				{ name: 'jundalPart',		index: 'jundalPart',	width: '80', 	align: "left" },
+				{ name: 'meanValue',		index: 'meanValue',		width: '70', 	align: "left", editable: true, edittype: 'text' },
+				{ name: 'sdValue',			index: 'sdValue',		width: '60', 	align: "left" },
+				{ name: 'cvValue',			index: 'cvValue',		width: '60', 	align: "left" },
+				{ name: 'lowValue',			index: 'lowValue',		width: '60', 	align: "left" },
+				{ name: 'highValue',		index: 'highValue',		width: '60', 	align: "left" },
+				{ name: 'susulValue',		index: 'susulValue',	width: '60', 	align: "left" },
+				{ name: 'danui',			index: 'danui',			width: '60', 	align: "left" },
+				{ name: 'startDate',		index: 'startDate',		width: '80', 	align: "left" },
+				{ name: 'endDate',			index: 'endDate',		width: '80', 	align: "left" },
+				{ name: 'rule12S',			index: 'rule12S',		width: '40', 	align: "center", formatter: checkBoxFormatter },
+				{ name: 'gubun12S',			index: 'gubun12S',		width: '60', 	align: "left" },
+				{ name: 'rule13S',			index: 'rule13S',		width: '40', 	align: "center", formatter: checkBoxFormatter },
+				{ name: 'gubun13S',			index: 'gubun13S',		width: '60', 	align: "left" },
+				{ name: 'rule22S',			index: 'rule22S',		width: '40', 	align: "center", formatter: checkBoxFormatter },
+				{ name: 'gubun22S',			index: 'gubun22S',		width: '60', 	align: "left" },
+				{ name: 'ruleR4S',			index: 'ruleR4S',		width: '40', 	align: "center", formatter: checkBoxFormatter },
+				{ name: 'gubunR4S',			index: 'gubunR4S',		width: '60', 	align: "left" },
+				{ name: 'rule41S',			index: 'rule41S',		width: '40', 	align: "center", formatter: checkBoxFormatter },
+				{ name: 'gubun41S',			index: 'gubun41S',		width: '60', 	align: "left" },
+				{ name: 'rule10X',			index: 'rule10X',		width: '40', 	align: "center", formatter: checkBoxFormatter },
+				{ name: 'gubun10X',			index: 'gubun10X',		width: '60', 	align: "left" },
+				{ name: 'testCodeSeq',		index: 'testCodeSeq',	width: '40', 	align: "right" },
+				{ name: 'graphYN',			index: 'graphYN',		width: '40', 	align: "center", formatter: checkBoxFormatter },
+		    ], //서버에서 startDate 데이터 설정
+		    jsonReader: {
+			     repeatitems: false, //서버에서 받은 data와 Grid 상의 column 순서를 맞출것인지?
+			     root:'rows', //서버의 결과 내용에서 데이터를 읽어오는 기준점
+			     records:'records'  // 보여지는 데이터 개수(레코드) totalRecord 
+		    },
+		    height: '80%',
+			loadtext : "자료 조회중입니다. 잠시만 기다리세요..." ,   // 데이터 로드중일때      
+			emptyrecords: "Nothing to display",  // 데이터 없을때
+			rowNum: 2000, 
+			rownumbers: false,  
+			multiselect: true,  // 체크 박스 생성
+			multiselectWidth: 30, // 체크 박스 크기
+			gridview : true,  // 선 표시 true/false 
+			sortable: true,
+			loadonce: true,
+			loadComplete: function(data){  
+				console.log(data);
+			},	// loadComplete END   
+			beforeSelectRow: function(rowid, e) {  // 하나의 행만 체크
+				$("#list3").jqGrid('resetSelection');
+				return(true);
+			},
+			onSelectRow: function(rowid) {
+				console.log(rowid)
+			}
+		});
 	}
-})
+});
 
 $('#list2').jqGrid({
     url: "/qcManagementLisc100.do",	// 서버주소 
@@ -292,13 +353,12 @@ $('#list2').jqGrid({
     autoheight: true,
 	loadtext : "자료 조회중입니다. 잠시만 기다리세요..." ,   // 데이터 로드중일때      
 	emptyrecords: "Nothing to display",  // 데이터 없을때
-	rowNum:-1, 
+	rowNum: 2000, 
 	rownumbers: false,  
 	multiselect: true,  // 체크 박스 생성
 	multiselectWidth: 30, // 체크 박스 크기
 	gridview : true,  // 선 표시 true/false      
 	sortable: true,
-	sortname: "testCode",
 	loadonce: true,
 	loadComplete: function(data){  
 		console.log(data);
@@ -310,75 +370,19 @@ $('#list2').jqGrid({
 	onSelectRow: function(rowid) {
 		console.log(rowid)
 	}
-})
-
-$('#list3').jqGrid({
-    url: "/qcManagementLisq110.do",	// 서버주소 
-    reordercolNames:true,
-    postData : { 
-        type:"C",
-	}, // 보낼 파라미터
-    mtype:'POST',	// 전송 타입
-    datatype : "json",	// 받는 데이터 형태 
-    colNames:['플래그', '검사코드', '검사명', '검사파트', 'Mean', 'SD', 'CV', '허용(L)', '허용(H)', '서술형', '단위', '시작일', '종료일', '1(2S)', '판정(1_2S)', '1(3S)', '판정(1_3S)', '2(2S)', '판정(2_2S)',
-    	'R(4S)', '판정(R_4S)', '4(1S)', '판정(4_1S)', '10X', '판정(10X)', '순번', '그래프'
-    ],	//컬럼명
-    colModel:[
-		{ name: '플래그',				index: 'iud',			hidden: true, },
-		{ name: 'testCode',			index: 'testCode',		width: '60', 	align: "left" },
-		{ name: 'gumsaName',		index: 'gumsaName',		width: '180', 	align: "left"  },
-		{ name: 'jundalPart',		index: 'jundalPart',	width: '80', 	align: "left" },
-		{ name: 'meanValue',		index: 'meanValue',		width: '70', 	align: "left" },
-		{ name: 'sdValue',			index: 'sdValue',		width: '60', 	align: "left" },
-		{ name: 'cvValue',			index: 'cvValue',		width: '60', 	align: "left" },
-		{ name: 'lowValue',			index: 'lowValue',		width: '60', 	align: "left" },
-		{ name: 'highValue',		index: 'highValue',		width: '60', 	align: "left" },
-		{ name: 'susulValue',		index: 'susulValue',	width: '60', 	align: "left" },
-		{ name: 'danui',			index: 'danui',			width: '60', 	align: "left" },
-		{ name: 'startDate',		index: 'startDate',		width: '80', 	align: "left" },
-		{ name: 'endDate',			index: 'endDate',		width: '80', 	align: "left" },
-		{ name: 'rule12S',			index: 'rule12S',		width: '40', 	align: "left" },
-		{ name: 'gubun12S',			index: 'gubun12S',		width: '60', 	align: "left" },
-		{ name: 'rule13S',			index: 'rule13S',		width: '40', 	align: "left" },
-		{ name: 'gubun13S',			index: 'gubun13S',		width: '60', 	align: "left" },
-		{ name: 'rule22S',			index: 'rule22S',		width: '40', 	align: "left" },
-		{ name: 'gubun22S',			index: 'gubun22S',		width: '60', 	align: "left" },
-		{ name: 'ruleR4S',			index: 'ruleR4S',		width: '40', 	align: "left" },
-		{ name: 'gubunR4S',			index: 'gubunR4S',		width: '60', 	align: "left" },
-		{ name: 'rule41S',			index: 'rule41S',		width: '40', 	align: "left" },
-		{ name: 'gubun41S',			index: 'gubun41S',		width: '60', 	align: "left" },
-		{ name: 'rule10X',			index: 'rule10X',		width: '40', 	align: "left" },
-		{ name: 'gubun10X',			index: 'gubun10X',		width: '60', 	align: "left" },
-		{ name: 'testCodeSeq',		index: 'testCodeSeq',	width: '40', 	align: "right" },
-		{ name: 'graphYN',			index: 'graphYN',		width: '40', 	align: "left" },
-    ], //서버에서 startDate 데이터 설정
-    jsonReader: {
-	     repeatitems: false, //서버에서 받은 data와 Grid 상의 column 순서를 맞출것인지?
-	     root:'rows', //서버의 결과 내용에서 데이터를 읽어오는 기준점
-	     records:'records'  // 보여지는 데이터 개수(레코드) totalRecord 
-    },
-    autoheight: true,
-	loadtext : "자료 조회중입니다. 잠시만 기다리세요..." ,   // 데이터 로드중일때      
-	emptyrecords: "Nothing to display",  // 데이터 없을때
-	rowNum:-1, 
-	rownumbers: false,  
-	multiselect: true,  // 체크 박스 생성
-	multiselectWidth: 30, // 체크 박스 크기
-	gridview : true,  // 선 표시 true/false 
-	sortable: true,
-	sortname: "testCode",
-	loadonce: true,
-	loadComplete: function(data){  
-		console.log(data);
-	},	// loadComplete END   
-	beforeSelectRow: function(rowid, e) {  // 하나의 행만 체크
-		$("#list3").jqGrid('resetSelection');
-		return(true);
-	},
-	onSelectRow: function(rowid) {
-		console.log(rowid)
-	}
 });
+
+function checkBoxFormatter(cellvalue, options, rowObject) {
+    if (cellvalue == 'Y') { // replace myProperty with your actual property
+        // if condition is met, return disabled checkbox
+        return '<input type="checkbox" checked />';
+    } else {
+        // else, return enabled checkbox
+        return '<input type="checkbox" />';
+    }
+};
+
+
 </script>
   </body>
 </html>

@@ -262,6 +262,11 @@ select:hover {
 .result-input {
   margin-right: 10px;
   height: 24px;
+  background-color: #fff;
+}
+
+.result-input.date {
+  width: 100px;
 }
 
 .qcCode-input {
@@ -343,7 +348,7 @@ select:hover {
   overflow: scroll;
 }
 
-.ui-jqgrid tr.jqgrow td {
+.ui-jqgrid tr td {
   text-overflow : ellipsis;
   -o-text-overflow : ellipsis;
 }

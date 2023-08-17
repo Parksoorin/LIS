@@ -12,6 +12,6 @@ public interface DService {
 	int checkUser(String id);
 	UserDDTO loginUser(UserDDTO dto);
 	List<lisq100DTO> lisq100();
-	List<lisq110DTO> lisq110();
+	List<lisq110DTO> lisq110(String qcCode);
 	List<lisc100DTO> lisc100();
 }

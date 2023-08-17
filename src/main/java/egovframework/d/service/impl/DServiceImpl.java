@@ -40,8 +40,8 @@ public class DServiceImpl implements DService {
 	}
 	
 	@Override
-	public List<lisq110DTO> lisq110() {
-		return dMapper.lisq110();
+	public List<lisq110DTO> lisq110(String qcCode) {
+		return dMapper.lisq110(qcCode);
 	}
 
 	@Override

@@ -5,7 +5,7 @@ public class lisq100DTO {
 	private String qcName;			// QC 물질명
 	private String lotNo;			// Lot No
 	private String qcLevel;			// Level
-	private String item1;		// 검사파트
+	private String item1;			// 검사파트
 	private String startDate;		// 시작일
 	private String endDate;			// 종료일
 	private String qcSpecimenSer;	// 고정검체번호
