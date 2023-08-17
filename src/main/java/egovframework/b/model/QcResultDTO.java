@@ -7,7 +7,7 @@ public class QcResultDTO {
 	private String qcName;
     private String gumsaName1;
     private String qcLevel;
-    private String lotNo;
+    private String lotNo; 
     private Double fixedMean;
     private Double fixedSD;
     private Double fixedCV;
