@@ -4,7 +4,7 @@ public class lisc500DTO {
 	private String testCode;        // 제품코드
 	private String testName;        // 제품명
 	private String jundalPart;      // 파트
-	private String testGunun;       // 물품구분
+	private String testGubun;       // 물품구분
 	private String kukuk;           // 규격
 	private String inDanui;         // 입고단위
 	private String outDanui;        // 출고단위
@@ -27,6 +27,9 @@ public class lisc500DTO {
 	private String endDate;         // 불용일 
 	private String hospitalCode;    // 병원코드
 	
+	 
+	
+	
 	
 	public String getTestCode() {
 		return testCode;
@@ -46,11 +49,11 @@ public class lisc500DTO {
 	public void setJundalPart(String jundalPart) {
 		this.jundalPart = jundalPart;
 	}
-	public String getTestGunun() {
-		return testGunun;
+	public String getTestGubun() {
+		return testGubun;
 	}
-	public void setTestGunun(String testGunun) {
-		this.testGunun = testGunun;
+	public void setTestGubun(String testGubun) {
+		this.testGubun = testGubun;
 	}
 	public String getKukuk() {
 		return kukuk;
