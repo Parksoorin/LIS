@@ -1,5 +1,7 @@
 package egovframework.a.service.impl;
 
+import java.util.List;
+
 // javax.annotation 패키지에서 'Resource'어노테이션을 가져온다. 이 어노테이션은  의존성 주입(Dependency Injection)을 위해 사용된다.
 import javax.annotation.Resource;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import egovframework.a.mapper.AMapper;
 // userADTO 클래스를 가져온다. 이 클래스는 사용자 데이터의 정보를 담는 DTO(Data Transfer Object)이다.
 import egovframework.a.model.UserADTO;
+import egovframework.a.model.lisc500DTO;
 // AService 인터페이스를 가져온다. 이 인터페이스는 서비스 계층의 역할을 정의한 것이다.
 import egovframework.a.service.AService;
 
@@ -56,5 +59,9 @@ public class AServiceImpl implements AService{
 			return aMapper.loginA(dto);
 		}
 		
+		@Override
+		public List<lisc500DTO> lisc500() {
+			return aMapper.lisc500();
+		}
 		
 	}

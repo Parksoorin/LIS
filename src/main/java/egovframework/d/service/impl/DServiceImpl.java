@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import egovframework.d.mapper.DMapper;
 import egovframework.d.model.UserDDTO;
+import egovframework.d.model.lisc100DTO;
 import egovframework.d.model.lisq100DTO;
+import egovframework.d.model.lisq110DTO;
 import egovframework.d.service.DService;
 
 @Service("DService")
@@ -35,6 +37,16 @@ public class DServiceImpl implements DService {
 	@Override
 	public List<lisq100DTO> lisq100() {
 		return dMapper.lisq100();
+	}
+	
+	@Override
+	public List<lisq110DTO> lisq110(String qcCode) {
+		return dMapper.lisq110(qcCode);
+	}
+
+	@Override
+	public List<lisc100DTO> lisc100() {
+		return dMapper.lisc100();
 	}
 
 }
