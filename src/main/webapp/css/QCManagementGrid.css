@@ -212,6 +212,15 @@ select:hover {
   width: 250px;
 }
 
+.grid-container {
+  height: 176px;
+  overflow: hidden;
+}
+
+.result-container {
+  height: 55%;
+}
+
 .result-title {
   padding: 7px 10px;
   color: #fff;
@@ -326,4 +335,15 @@ select:hover {
 
 .must-option input[type="checkbox"] {
   margin-left: 0;
+}
+
+.grid-3 {
+  width: 100%;
+  height: calc(100% - 130px);
+  overflow: scroll;
+}
+
+.ui-jqgrid tr.jqgrow td {
+  text-overflow : ellipsis;
+  -o-text-overflow : ellipsis;
 }

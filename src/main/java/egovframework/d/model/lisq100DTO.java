@@ -5,7 +5,7 @@ public class lisq100DTO {
 	private String qcName;			// QC 물질명
 	private String lotNo;			// Lot No
 	private String qcLevel;			// Level
-	private String testPart;		// 검사파트
+	private String item1;		// 검사파트
 	private String startDate;		// 시작일
 	private String endDate;			// 종료일
 	private String qcSpecimenSer;	// 고정검체번호
@@ -34,11 +34,11 @@ public class lisq100DTO {
 	public void setQcLevel(String qcLevel) {
 		this.qcLevel = qcLevel;
 	}
-	public String getTestPart() {
-		return testPart;
+	public String getItem1() {
+		return item1;
 	}
-	public void setTestPart(String testPart) {
-		this.testPart = testPart;
+	public void setItem1(String item1) {
+		this.item1 = item1;
 	}
 	public String getStartDate() {
 		return startDate;

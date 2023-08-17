@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.d.model.UserDDTO;
+import egovframework.d.model.lisc100DTO;
 import egovframework.d.model.lisq100DTO;
+import egovframework.d.model.lisq110DTO;
 import egovframework.d.service.DService;
 import egovframework.util.Sha256;
 
@@ -90,28 +92,98 @@ public class DController {
 		return ".main/qcmanagement/QCManagementGrid";
 	}
 	
-	
 	@RequestMapping(value = "/qcManagementLisq100.do")
 	@ResponseBody
 	public JSONObject qcManagementLisq100(@RequestParam Map<String,Object> map, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response, Model model) throws Exception {
 		JSONObject json = new JSONObject();
 		List<lisq100DTO> data = dService.lisq100();
-//		List<Map> dataList = new ArrayList();
+		List<Map> dataList = new ArrayList();
 		
-		System.out.println(data);
-		System.out.println(data.size());
-		System.out.println(data.get(0).getQcCode());
+		for(int i=0; i<data.size(); i++) {
+			Map<String,Object> map1 = new HashMap<String,Object>();
+			// 'QC 코드','QC물질명','Lot No', 'Level', '검사파트', '시작일', '종료일', '고정검체번호',
+			map1.put("qcCode", data.get(i).getQcCode());
+			map1.put("qcName", data.get(i).getQcName());
+			map1.put("lotNo", data.get(i).getLotNo());
+			map1.put("qcLevel", data.get(i).getQcLevel());
+			map1.put("testPart", data.get(i).getItem1());
+			map1.put("startDate", data.get(i).getStartDate());
+			map1.put("endDate", data.get(i).getEndDate());
+			map1.put("qcSpecimenSer", data.get(i).getQcSpecimenSer());
+			dataList.add(map1);
+		}
 		
-//		for(int i=0;i<data.size();i++) {
-//			Map<String,Object> map1 = new HashMap<String,Object>();
-//			// 'QC 코드','QC물질명','Lot No', 'Level', '검사파트', '시작일', '종료일', '고정검체번호',
-//			map1.put("QC 코드", data.get(i).getQcCode());
-////			map1.put("QC물질명", i+20);
-//			dataList.add(map1);
-//		}
+		json.put("rows", dataList);
 		
-//		json.put("rows", dataList);
+		return json;
+	}
+	
+	@RequestMapping(value = "/qcManagementLisq110.do")
+	@ResponseBody
+	public JSONObject qcManagementLisq110(@RequestParam Map<String,Object> map, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws Exception {
+		JSONObject json = new JSONObject();
+		List<lisq110DTO> data = dService.lisq110();
+		List<Map> dataList = new ArrayList();
+		
+		System.out.println(data.get(0));
+		
+		for(int i=0; i<data.size(); i++) {
+			Map<String,Object> map1 = new HashMap<String,Object>();
+			// '검사코드', '검사명', '검사파트', 'Mean', 'SD', 'CV', '허용(L)', '허용(H)', '서술형', '단위', '시작일', '종료일', 
+	    	// '1(2S)', '판정(1_2S)', '1(3S)', '판정(1_3S)', '2(2S)', '판정(2_2S)', 'R(4S)', '판정(R_4S)', '4(1S)', '판정(4_1S)', '10X', '판정(10X)', '순번', '그래프'
+			map1.put("testCode", data.get(i).getTestCode());
+			map1.put("gumsaName", data.get(i).getGumsaName1());
+			map1.put("jundalPart", data.get(i).getItem1());
+			map1.put("meanValue", data.get(i).getMeanValue());
+			map1.put("sdValue", data.get(i).getSdValue());
+			map1.put("cvValue", data.get(i).getCvValue());
+			map1.put("lowValue", data.get(i).getLowValue());
+			map1.put("highValue", data.get(i).getHighValue());
+			map1.put("susulValue", data.get(i).getSusulValue());
+			map1.put("danui", data.get(i).getDanui());
+			map1.put("startDate", data.get(i).getStartDate());
+			map1.put("endDate", data.get(i).getEndDate());
+			map1.put("rule12S", data.get(i).getRule12S());
+			map1.put("gubun12S", data.get(i).getGubun12S());
+			map1.put("rule13S", data.get(i).getRule13S());
+			map1.put("gubun13S", data.get(i).getGubun13S());
+			map1.put("rule22S", data.get(i).getRule22S());
+			map1.put("gubun22S", data.get(i).getGubun22S());
+			map1.put("ruleR4S", data.get(i).getRuleR4S());
+			map1.put("gubunR4S", data.get(i).getGubunR4S());
+			map1.put("rule41S", data.get(i).getRuleR41S());
+			map1.put("gubun41S", data.get(i).getGubunR41S());
+			map1.put("rule10X", data.get(i).getRule10X());
+			map1.put("gubun10X", data.get(i).getGubun10X());
+			map1.put("testCodeSeq", data.get(i).getTestCodeSeq());
+			map1.put("graphYN", data.get(i).getGraphYN());
+			dataList.add(map1);
+		}
+		
+		json.put("rows", dataList);
+		
+		return json;
+	}
+	
+	@RequestMapping(value = "/qcManagementLisc100.do")
+	@ResponseBody
+	public JSONObject qcManagementLisc100(@RequestParam Map<String,Object> map, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws Exception {
+		JSONObject json = new JSONObject();
+		List<lisc100DTO> data = dService.lisc100();
+		List<Map> dataList = new ArrayList();
+		
+		for(int i=0; i<data.size(); i++) {
+			Map<String,Object> map1 = new HashMap<String,Object>();
+			// '검사코드', '검사명',
+			map1.put("testCode", data.get(i).getTestCode());
+			map1.put("gumsaName", data.get(i).getGumsaName1());
+			dataList.add(map1);
+		}
+		
+		json.put("rows", dataList);
 		
 		return json;
 	}
