@@ -1,11 +1,14 @@
 package egovframework.c.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import egovframework.c.mapper.CMapper;
 import egovframework.c.model.UserCDTO;
+import egovframework.c.model.lisc001DTO;
 import egovframework.c.service.CService;
 @Service("CService")
 
@@ -22,8 +25,13 @@ public class CServiseimpl implements CService{
 		// TODO Auto-generated method stub
 		return cMapper.userID(dto);
 	}
+	@Override
 	public UserCDTO loginID(UserCDTO dto) {
 		// TODO Auto-generated method stub
 		return cMapper.loginID(dto);
+	}
+	@Override
+	public List<lisc001DTO> lisc001list() {
+		return cMapper.lisc001list();
 	}
 }
