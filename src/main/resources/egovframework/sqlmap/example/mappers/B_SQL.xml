@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.b.mapper.BMapper">
+
+	<resultMap id="qcResultMap" type="egovframework.b.model.QcResultDTO">
+	    <id property="qcName" column="qc_name" />
+	    <result property="gumsaName1" column="gumsa_name1" />
+	    <result property="qcLevel" column="qc_level" />
+	    <result property="lotNo" column="lot_no" />
+	    <result property="fixedMean" column="FixedMean" />
+	    <result property="fixedSD" column="FixedSD" />
+	    <result property="fixedCV" column="FixedCV" />
+	    <result property="cumMean" column="CumMean" />
+	    <result property="cumSD" column="CumSD" />
+	    <result property="cumCV" column="CumCV" />
+    
+   		 <!-- 동적 컬럼들을 매핑하기 위한 collection -->
+	    <collection property="dynamicColumns" ofType="java.util.HashMap">
+	        <result column="dynamic_column_name" property="key" />
+	        <result column="dynamic_column_value" property="value" />
+	    </collection>
+	</resultMap>
+	
+	
 	<select id="duplicate" parameterType="egovframework.b.model.UserBDTO" resultType="int">
 		SELECT COUNT(*)
 		FROM USER
@@ -13,6 +34,61 @@
 		WHERE ID = #{id}
 	</select>
 	
+	<select id="qcResultDate" resultType="string">
+		<![CDATA[
+			select distinct final_date
+			from lisq200 a
+			where 1=1
+			and final_date <= "2016-12-16"
+			order by 1;
+		]]>
+	</select>
+
+	
+	<select id="qcResultFindAll" parameterType="java.util.List" resultType="egovframework.b.model.QcResultDTO">
+		
+			select c.qc_name, gumsa_name1, a.qc_level, a.lot_no, max(a.mean_value) as 'FixedMean', max(a.sd_value) as 'FixedSD', max(a.cv_value) as 'FixedCV',  ROUND(AVG(test_result), 2) as 'CumMean',  ROUND(STDDEV(test_result), 2) AS 'CumSD',  ROUND(STDDEV(test_result)/AVG(test_result)*100, 2) as 'CumCV',
+		  <foreach collection="dateList" item="i" separator="," index="index">    
+             MAX(CASE WHEN final_date = #{i} THEN test_result ELSE null END) AS '${i}'
+   		  </foreach>    
+			<![CDATA[
+			from lisq200 a
+			left join lisc100 b
+			on a.test_code = b.test_code
+			and a.fk_start_date = b.start_date
+			left join lisq100 c
+			on a.qc_code = c.qc_code
+			and a.qc_level = c.qc_level
+			and a.lot_no = c.lot_no
+			where 1=1
+			and qc_name is not null
+			group by c.qc_name, gumsa_name1, a.qc_level, a.lot_no
+			order by 1,2,3,4
+		]]>
+	</select>
+	
+	
+	<select id="qcResultFindHashMap" parameterType="java.util.List" resultType="java.util.LinkedHashMap">
+		
+			select c.qc_name, gumsa_name1, a.qc_level, a.lot_no, max(a.mean_value) as 'FixedMean', max(a.sd_value) as 'FixedSD', max(a.cv_value) as 'FixedCV',  ROUND(AVG(test_result), 2) as 'CumMean',  ROUND(STDDEV(test_result), 2) AS 'CumSD',  ROUND(STDDEV(test_result)/AVG(test_result)*100, 2) as 'CumCV',
+		  <foreach collection="dateList" item="i" separator="," index="index">    
+             MAX(CASE WHEN final_date = #{i} THEN test_result ELSE null END) AS '${i}'
+   		  </foreach>    
+			<![CDATA[
+			from lisq200 a
+			left join lisc100 b
+			on a.test_code = b.test_code
+			and a.fk_start_date = b.start_date
+			left join lisq100 c
+			on a.qc_code = c.qc_code
+			and a.qc_level = c.qc_level
+			and a.lot_no = c.lot_no
+			where 1=1
+			and qc_name is not null
+			group by c.qc_name, gumsa_name1, a.qc_level, a.lot_no
+			order by 1,2,3,4
+		]]>
+	</select>
 	<insert id="joinUser" parameterType="egovframework.b.model.UserBDTO">
 		INSERT INTO USER(
 			id, 
