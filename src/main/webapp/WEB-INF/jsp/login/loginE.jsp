@@ -46,19 +46,19 @@
                 <div class="signup-title">회원가입</div>
                 <div class="signup-grid">
                     <span class="modal-info">아이디 </span> 
-                    <input class="signup-input padding-left-md" id="signup-id" type="text" name="signupId" placeholder="아이디를 입력해주세요.">
+                    <input class="signup-input padding-left-md" id="signup-id" type="text" name="signupId" placeholder="아이디를 입력해주시기 바랍니다">
                 </div>
                 <div class="signup-grid">
                     <span class="modal-info">비밀번호 </span> 
-                    <input class="signup-input padding-left-md" id="signup-password" type="password" name="password" placeholder="비밀번호를 입력해주세요.">
+                    <input class="signup-input padding-left-md" id="signup-password" type="password" name="password" placeholder="비밀번호를 입력해주시기 바랍니다">
                 </div>
                 <div class="signup-grid ">
                     <span class="modal-info">비밀번호 확인 </span> 
-                    <input class="signup-input padding-left-md" id="signup-rePassword" type="password" name="rePassword" placeholder="비밀번호를 다시 입력해주세요.">
+                    <input class="signup-input padding-left-md" id="signup-rePassword" type="password" name="rePassword" placeholder="비밀번호 확인해주시기 바랍니다">
                 </div>
                 <div class="signup-hint margin-bottom-lg"></div>
                 <div class="modal-button-container">
-	                <input class="modal-button primary" id="joinBtn" type="button" value="가입">
+	                <input class="modal-button primary" id="joinBtn" type="button" value="회원가입">
 	                <input class="modal-button gray" type="button" value="닫기" onclick="closeModal()">
                 </div>
             </div>
@@ -72,42 +72,80 @@
                 const passwordRegExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 
                 if(!id){
-                    signupHint.innerHTML = `<span class="red">아이디를 입력해주세요.</span>`;
-                    alert('아이디를 입력해주세요.');
+                    signupHint.innerHTML = `<span class="red">아이디를 입력해주시기 바랍니다</span>`;
+                    alert('아이디를 입력해주시기 바랍니다');
                     return false;
                 }
                 if(!password){
-                    signupHint.innerHTML = `<span class="red">비밀번호를 입력해주세요.</span>`;
-                    alert('비밀번호를 입력해주세요.');
+                    signupHint.innerHTML = `<span class="red">비밀번호를 입력해주시기 바랍니다</span>`;
+                    alert('비밀번호를 입력해주시기 바랍니다');
                     return false;
                 }
                 if(!rePassword){
-                    signupHint.innerHTML = `<span class="red">비밀번호 확인을 입력해주세요.</span>`;
-                    alert('비밀번호 확인을 입력해주세요.');
+                    signupHint.innerHTML = `<span class="red">비밀번호 확인해주시기 바랍니다</span>`;
+                    alert('비밀번호 확인해주시기 바랍니다');
                     return false;
                 }
 
                 if(password !== rePassword){
-                    signupHint.innerHTML = `<span class="red">비밀번호가 동일하지 않습니다.</span>`;
-                    alert('비밀번호가 동일하지 않습니다.');
+                    signupHint.innerHTML = `<span class="red">비밀번호가 동일하지 않습니다</span>`;
+                    alert('비밀번호가 동일하지 않습니다');
                     return false;
                 }
 
-                if(id.match(idRegExp) == null){
-                    signupHint.innerHTML = `<span class="red">아이디 형식은 example@naver.com 입니다.</span>`;
-                    alert('아이디 형식은 example@naver.com 입니다.');
-                    return false;
-                }
-
-                if(password.match(passwordRegExp) == null && rePassword.match(passwordRegExp) == null){
-                    signupHint.innerHTML = `<span class="red">비밀번호는 특문,문자,숫자 형태의 8~15자리 이내의 암호입니다. </span>`;
-                    alert('비밀번호는 특문,문자,숫자 형태의 8~15자리 이내의 암호입니다.');
-                    return false;
-                }
+           
                 return true;
            }
            
-           
+            // 로그인 로직
+            $("#loginBtn").on("click", function(){
+                var id = $('#login-id').val();
+                var password = $('#login-password').val();
+                
+                if(!id){
+                    alert('아이디를 입력해주세요');
+                    return;
+                }
+                if(!password){
+                    alert('비밀번호를 입력해주세요');
+                    return;
+                }
+
+                $.ajax({
+                    type: "post",
+                    url : "/loginProcessE.do",
+                    data: {
+                        id : id,
+                        password : password
+                    },
+                    dataType : "json",
+                    error: function(data){
+                        console.log('error');
+                        alert(id + '는 없는 아이디입니다.');
+                            
+                        
+
+                    },
+                    success: function(data){
+                        
+                
+                        if(data.result==='success'){
+                            // 로그인 성공 로직
+                            alert('로그인 완료');
+                            location.href="http://localhost:8888/oneGrid.do";
+                            
+
+
+                        } else if(data.result==='fail'){
+                            // 로그인 실패 로직
+                            alert('아이디 or 비밀번호가 잘못되었습니다');
+                        }
+                    }
+
+                })
+
+
+            })
 
             // 회원가입 처리 로직
             $("#joinBtn").on("click", function(){
@@ -133,13 +171,16 @@
                     error: function(data) {
                         console.log(data.result);
 
-                        alert("에러발생22");
+                        alert("오류발생");
                     },
                     success: function(data){
-                     
-                        alert("회원가입 성공");
-                        location.reload();
-                    
+                        if(data.result === 'success'){
+                            alert("회원가입 완료");
+                            location.reload();
+                        } else if(data.result === 'fail'){
+                            alert("아이디가 중복되었습니다");
+                            signupHint.innerHTML = `아이디가 중복되었습니다</span>`;
+                        }
                     }
                 })
             })
