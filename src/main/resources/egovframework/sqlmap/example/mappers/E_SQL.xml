@@ -23,4 +23,48 @@
 			#{password}
 		)
 	</insert>
+	
+	<select id="grid1" parameterType="egovframework.e.model.grid1DTO" resultType="egovframework.e.model.grid1DTO">
+    SELECT a.*
+	    FROM `HWIF`.`LISC002` a
+	  <if test="item1 != null and !item1.equals('')">
+	  where a.item1 like CONCAT('%',#{item1},'%') 
+	  </if>  
+	</select>
+
+	<select id="grid1First" parameterType="egovframework.e.model.grid1DTO" resultType="egovframework.e.model.grid1DTO">
+    SELECT *
+		FROM HWIF.LISC002 A
+	  WHERE A.CODE IN ('H_201901','L-200-02','L-200-03','L-200-04','Z-200-01','L-100-01','L-200-01')
+	ORDER BY FIELD(code, 'H_201901', 'L-100-01', 'L-200-01','L-200-02','L-200-03','L-200-04','Z-200-01')  
+	</select>
+	
+	<select id="grid2" parameterType="egovframework.e.model.grid2DTO" resultType="egovframework.e.model.grid2DTO">
+     SELECT b.*
+		FROM `HWIF`.`LISC960` b
+	  <where>	
+		  <if test="fileName != null and !fileName.equals('')">
+		  and b.file_name like CONCAT('%',#{fileName},'%') 
+		  </if>
+		  <if test="code != null and !code.equals('')">
+		  and b.code = #{code} 
+		  </if>
+	  </where>
+	</select>
+	
+	<delete id="setDcListInfoDelete" parameterType="java.util.Map" >
+      DELETE FROM `HWIF`.`LISC002`
+        WHERE code = #{code}
+	</delete>
+
+	<delete id="setDcListFileDelete" parameterType="java.util.Map" >
+      DELETE FROM `HWIF`.`LISC960`
+        WHERE code = #{code}
+        <if test="codeNo != null and !codeNo.equals('')">
+          AND codeNo = #{codeNo}
+        </if>
+	</delete>
+	
+	
+	
 </mapper>
