@@ -79,7 +79,7 @@ $('#loginBtn').on("click", function(){
 			console.log(data);
 			if (data.result === "success"){
 				alert("로그인 성공");
-				location.href="http://localhost:8080/oneGridC.do";
+				location.href="http://localhost:8080/oneGridPage.do";
 			} 
 			else if (data.result === "none") {			
 				alert("없는 정보 입니다.");

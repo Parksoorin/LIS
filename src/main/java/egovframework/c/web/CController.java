@@ -109,6 +109,32 @@ public class CController {
 		}
 		return json;
 	}
+	
+	@RequestMapping(value = "/oneGridC002.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject lisc002DTO(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
+	HttpServletResponse response, Model model) throws Exception {
+		System.out.println("111111111111111111111");
+		System.out.println(map.get("type"));
+		JSONObject json = new JSONObject();
+		try {
+		    List<lisc001DTO> data = cService.lisc001list();
+		    System.out.println(data);
+		    JSONArray rowsArray = new JSONArray();
+		    for (lisc001DTO item : data) {
+		        JSONObject row = new JSONObject();
+		        row.put("CODE_TYPE", item.getCodeType());
+		        row.put("CODE_TYPE_NAME", item.getCodeType());
+		        row.put("COMMENTS", item.getComments());
+		        // 필요한 다른 필드 추가
+		        rowsArray.add(row);
+		    }
+		    json.put("rows", rowsArray);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
 }
 
 

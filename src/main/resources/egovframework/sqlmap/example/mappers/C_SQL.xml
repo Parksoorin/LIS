@@ -20,5 +20,6 @@
 	</select>
 	<select id="lisc001list" resultType="egovframework.c.model.lisc001DTO">
 		select CODE_TYPE, CODE_TYPE_NAME, COMMENTS from lisc001
+		order by CODE_TYPE
 	</select>
 </mapper>
