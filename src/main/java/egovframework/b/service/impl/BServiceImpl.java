@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import egovframework.b.mapper.BMapper;
 import egovframework.b.model.QcResultDTO;
 import egovframework.b.model.UserBDTO;
+import egovframework.b.model.QcCodeDTO;
 import egovframework.b.service.BService;
 
 @Service("BService")
@@ -48,6 +49,30 @@ public class BServiceImpl implements BService {
 	@Override
 	public List<Map<String, Object>> qcResultFindHashMap(List<String> dateList) {
 		return bMapper.qcResultFindHashMap(dateList);
+	}
+
+	@Override
+	public List<String> gumsapartList() {
+		// TODO Auto-generated method stub
+		return bMapper.gumsapartFindAll();
+	}
+
+	@Override
+	public List<String> jangbiFindAll() {
+		// TODO Auto-generated method stub
+		return bMapper.jangbiFindAll();
+	}
+
+	@Override
+	public List<String> levelList() {
+		// TODO Auto-generated method stub
+		return bMapper.levelListFindAll();
+	}
+
+	@Override
+	public List<QcCodeDTO> qcCodeList() {
+		// TODO Auto-generated method stub
+		return bMapper.qcCodeFindAll();
 	}
 
 }

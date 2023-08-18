@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import egovframework.b.model.QcResultDTO;
 import egovframework.b.model.UserBDTO;
+import egovframework.b.model.QcCodeDTO;
 
 public interface BService {
 	int joinUser(UserBDTO dto);
@@ -15,4 +16,12 @@ public interface BService {
 	UserBDTO findOne(String id);
 	List<String> qcResultDate();
 	List<Map<String, Object>> qcResultFindHashMap(List<String> dateList);
+
+	List<String> gumsapartList();
+
+	List<String> jangbiFindAll();
+
+	List<String> levelList();
+
+	List<QcCodeDTO> qcCodeList();
 }

@@ -18,9 +18,9 @@
                 <input class="check-inputbox1" type="date" >
                 <div class="check-wave"> ~ </div>
                 <input class="check-inputbox2" type="date" >
-                <input type="radio" name="check-date" value="check-total" id="check-total" checked>
+                <input type="radio" name="check-date" value="check-total" id="check-total" >
                 <label for="check-total">전체</label>
-                <input type="radio" name="check-date" value="check-inside" id="check-inside">
+                <input type="radio" name="check-date" value="check-inside" id="check-inside" checked>
                 <label for="check-inside" class="check-inside">내부</label>
                 <input class="check-external" type="radio" name="check-date" value="check-external" id="check-external">
                 <label for="check-external">외부</label>
@@ -28,12 +28,18 @@
             <div class="check-part-title">검사파트</div>
             <select class="check-part-select">
                 <option value="">(전체)</option>
+                <c:forEach var="item" items="${gumsapartList}">
+                    <option value="${item}">${item}</option>
+                </c:forEach>
             </select>
             <div class="lotno-title">Lot No</div>
             <input type="text">
             <div class="level-title">Level</div>
             <select class="level-select">
                 <option value="">(전체)</option>
+                <c:forEach var="item" items="${levelList}">
+                    <option value="${item}">${item}</option>
+                </c:forEach>
             </select>
             </div>
             <div class="button-container">
@@ -46,21 +52,27 @@
                 <div class="check-item-title">검사항목</div>
                 <input class="check-inputbox" type="text">
                 <button class="check-item-button"></button>
-                <input type="radio" name="check-item" value="check-item-total" id="check-item-total" checked>
+                <input type="radio" name="check-item" value="check-item-total" id="check-item-total" >
                 <label for="check-item-total">전체</label>
-                <input type="radio" name="check-item" value="check-item-accept" id="check-item-accept" >
+                <input type="radio" name="check-item" value="check-item-accept" id="check-item-accept" checked>
                 <label for="check-item-accept">Accept</label>
                 <input type="radio" name="check-item" value="check-item-reject" id="check-item-reject">
                 <label for="check-item-reject">Reject</label>
                 <div class="substance-title">물질명</div>
                 <select class="substance-select">
                     <option value="">(전체)</option>
+                        <c:forEach var="item" items="${qcCodeList}">
+                            <option value="${item.item1}">${item.item1}</option>
+                        </c:forEach>
                 </select>
                 <div>QC 코드</div>
-                <input class="qccode-input" type="text">
+                <input style="background-color: #fff;" class="qccode-input" type="text" disabled>
                 <div class="check-jangbi-title">검사장비</div>
                 <select class="check-jangbi-select">
                     <option value="">(전체)</option>
+                    <c:forEach var="item" items="${jangbiList}">
+                        <option value="${item}">${item}</option>
+                    </c:forEach>
                 </select>
            </div>
             <div class="button-container">
@@ -89,6 +101,11 @@
     <!-- <script src="./js/qcResult.js" defer></script> -->
     <script>
        
+       $('.substance-select').change(function(e){
+        //    const 
+
+           console.log(e.target.value);
+       });
         
 
         window.onbeforeprint = function () { 
@@ -132,12 +149,34 @@
      }
 
 
-     
+     function dateConvert(today){
+            var year = today.getFullYear();
+            var month = String(today.getMonth() + 1).padStart(2, '0'); // 0-based month
+            var day = String(today.getDate()).padStart(2, '0');
+            var formattedDate = year + '-' + month + '-' + day;
+            return formattedDate;
+     }
+
+     function dateInit(){
+        $checkInputbox1 = document.querySelector('.check-inputbox1');
+        $checkInputbox2 = document.querySelector('.check-inputbox2');
+        var today = new Date();
+        var thirtyDaysAgo = new Date(today);
+        thirtyDaysAgo.setDate(today.getDate() - 30);
+        $checkInputbox1.value = dateConvert(thirtyDaysAgo);
+        $checkInputbox2.value = dateConvert(today);   
+     }
+
+     function init(){
+        dateInit();
+    }
 
 
 
     $(document).ready(function() {
         
+        init();
+
         $.ajax({
             type: "POST",
             url: "http://localhost:8888/qcResultFindAll.do",
@@ -174,7 +213,8 @@
                     index: dynamicColumns[i],
                     width: 20,
                     align: 'center',
-                    hidden: false
+                    hidden: false,
+                    editable : true
                 });
             }
 
@@ -207,6 +247,8 @@
                 multiselect: true,
                 sortable: true,
                 loadonce : true,
+                cellEdit: true,
+                cellsubmit: 'clientArray',
                 loadComplete: function (data) {
                     console.log(data);
                 },
@@ -262,7 +304,7 @@
             }
             // console.log(xValues);
             // console.log(yValues);
-            const {lot_no, gumsa_name1} = arr[i]; 
+            const {LotNo, 검사명} = arr[i]; 
             const name = "myChart" + i;
             // console.log(gumsa_name1);
             const chartCanvas = document.createElement('canvas');
@@ -277,7 +319,7 @@
                 data: {
                     labels: xValues,
                     datasets: [{
-                        label: lot_no,
+                        label: LotNo,
                         fill: false,
                         lineTension: 0,
                         backgroundColor: "rgba(0,0,255,1.0)",
@@ -289,7 +331,7 @@
                 	plugins: {
                         title: {
                             display: true,
-                            text: gumsa_name1,
+                            text: 검사명,
                             position: 'left'
                         }
                     },

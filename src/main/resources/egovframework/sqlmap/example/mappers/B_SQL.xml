@@ -43,34 +43,46 @@
 			order by 1;
 		]]>
 	</select>
-
 	
-	<select id="qcResultFindAll" parameterType="java.util.List" resultType="egovframework.b.model.QcResultDTO">
+	<select id="gumsapartFindAll" resultType="string">
+	<![CDATA[
+		select concat('[', code, ']  ', item1) as 'jundal_part'
+		from lisc002
+		where code_type = UPPER('jundal_part')
+		and item4 = 'Y';
+		]]>
 		
-			select c.qc_name, gumsa_name1, a.qc_level, a.lot_no, max(a.mean_value) as 'FixedMean', max(a.sd_value) as 'FixedSD', max(a.cv_value) as 'FixedCV',  ROUND(AVG(test_result), 2) as 'CumMean',  ROUND(STDDEV(test_result), 2) AS 'CumSD',  ROUND(STDDEV(test_result)/AVG(test_result)*100, 2) as 'CumCV',
-		  <foreach collection="dateList" item="i" separator="," index="index">    
-             MAX(CASE WHEN final_date = #{i} THEN test_result ELSE null END) AS '${i}'
-   		  </foreach>    
-			<![CDATA[
-			from lisq200 a
-			left join lisc100 b
-			on a.test_code = b.test_code
-			and a.fk_start_date = b.start_date
-			left join lisq100 c
-			on a.qc_code = c.qc_code
-			and a.qc_level = c.qc_level
-			and a.lot_no = c.lot_no
-			where 1=1
-			and qc_name is not null
-			group by c.qc_name, gumsa_name1, a.qc_level, a.lot_no
-			order by 1,2,3,4
+	</select>
+	
+	<select id="jangbiFindAll" resultType="string">
+	<![CDATA[	
+		select item1
+		from lisc002
+		where code_type = UPPER('jangbi_code');
+		]]>
+	</select>
+	<select id="levelListFindAll" resultType="string">
+	<![CDATA[
+		select item1
+		from lisc002
+		where code_type = UPPER('qc_level');
+		]]>
+	</select>
+	<select id="qcCodeFindAll" resultType="egovframework.b.model.QcCodeDTO">
+	<![CDATA[
+		select code, item1
+		from lisc002
+		where code_type = UPPER('QC_MATERIAL_CODE');
 		]]>
 	</select>
 	
 	
+	
+	
 	<select id="qcResultFindHashMap" parameterType="java.util.List" resultType="java.util.LinkedHashMap">
 		
-			select c.qc_name, gumsa_name1, a.qc_level, a.lot_no, max(a.mean_value) as 'FixedMean', max(a.sd_value) as 'FixedSD', max(a.cv_value) as 'FixedCV',  ROUND(AVG(test_result), 2) as 'CumMean',  ROUND(STDDEV(test_result), 2) AS 'CumSD',  ROUND(STDDEV(test_result)/AVG(test_result)*100, 2) as 'CumCV',
+			select c.qc_name as 'QC물질명', gumsa_name1 as '검사명', a.qc_level as 'Level', a.lot_no as 'LotNo', max(a.mean_value) as 'FixedMean', max(a.sd_value) as 'FixedSD', max(a.cv_value) as 'FixedCV',  ROUND(AVG(test_result), 2) as 'CumMean',  ROUND(STDDEV(test_result), 2) AS 'CumSD',  ROUND(STDDEV(test_result)/AVG(test_result)*100, 2) as 'CumCV', 
+			d.item1 as '장비명',
 		  <foreach collection="dateList" item="i" separator="," index="index">    
              MAX(CASE WHEN final_date = #{i} THEN test_result ELSE null END) AS '${i}'
    		  </foreach>    
@@ -83,9 +95,15 @@
 			on a.qc_code = c.qc_code
 			and a.qc_level = c.qc_level
 			and a.lot_no = c.lot_no
+			left join (
+				select code, item1
+				from lisc002
+				where code_type = UPPER('jangbi_code')
+            ) d
+            on a.jangbi_code = d.code
 			where 1=1
 			and qc_name is not null
-			group by c.qc_name, gumsa_name1, a.qc_level, a.lot_no
+			group by c.qc_name, gumsa_name1, a.qc_level, a.lot_no, 장비명
 			order by 1,2,3,4
 		]]>
 	</select>
