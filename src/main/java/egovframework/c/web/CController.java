@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.c.model.UserCDTO;
 import egovframework.c.model.lisc001DTO;
+import egovframework.c.model.lisc002DTO;
+import egovframework.c.model.lisc003DTO;
 import egovframework.c.service.CService;
 import egovframework.util.Sha256;
 
@@ -98,7 +100,73 @@ public class CController {
 		    for (lisc001DTO item : data) {
 		        JSONObject row = new JSONObject();
 		        row.put("CODE_TYPE", item.getCodeType());
-		        row.put("CODE_TYPE_NAME", item.getCodeType());
+		        row.put("CODE_TYPE_NAME", item.getCodeTypeName());
+		        row.put("COMMENTS", item.getComments());
+		        // 필요한 다른 필드 추가
+		        rowsArray.add(row);
+		    }
+		    json.put("rows", rowsArray);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
+	
+	@RequestMapping(value = "/oneGridC002.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject lisc002DTO(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
+	HttpServletResponse response, Model model) throws Exception {
+		String codetype = (String) map.get("type");
+		System.out.println(map.get("type"));
+		JSONObject json = new JSONObject();
+		try {
+		    List<lisc002DTO> data = cService.codetype(codetype);
+		    System.out.println(data);
+		    JSONArray rowsArray = new JSONArray();
+		    for (lisc002DTO item : data) {
+		        JSONObject row = new JSONObject();
+		        row.put("CODE_TYPE", item.getCodeType());
+		        row.put("CODE", item.getCode());
+		        row.put("ITEM1", item.getItem1());
+		        row.put("ITEM2", item.getItem2());
+		        row.put("ITEM3", item.getItem3());
+		        row.put("ITEM4", item.getItem4());
+		        row.put("ITEM5", item.getItem5());
+		        row.put("REMARK1", item.getRemark1());
+		        row.put("REMARK2", item.getRemark2());
+		        row.put("COMMENTS", item.getComments());
+		        // 필요한 다른 필드 추가
+		        rowsArray.add(row);
+		    }
+		    json.put("rows", rowsArray);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
+	
+	@RequestMapping(value = "/oneGridC003.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject lisc003DTO(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
+	HttpServletResponse response, Model model) throws Exception {
+		String code = (String) map.get("type");
+		System.out.println(map.get("type"));
+		JSONObject json = new JSONObject();
+		try {
+		    List<lisc003DTO> data = cService.code(code);
+		    System.out.println(data);
+		    JSONArray rowsArray = new JSONArray();
+		    for (lisc003DTO item : data) {
+		        JSONObject row = new JSONObject();
+		        row.put("CODE_TYPE", item.getCodeType());
+		        row.put("CODE", item.getCode());
+		        row.put("ITEM1", item.getItem1());
+		        row.put("ITEM2", item.getItem2());
+		        row.put("ITEM3", item.getItem3());
+		        row.put("ITEM4", item.getItem4());
+		        row.put("ITEM5", item.getItem5());
+		        row.put("REMARK1", item.getRemark1());
+		        row.put("REMARK2", item.getRemark2());
 		        row.put("COMMENTS", item.getComments());
 		        // 필요한 다른 필드 추가
 		        rowsArray.add(row);

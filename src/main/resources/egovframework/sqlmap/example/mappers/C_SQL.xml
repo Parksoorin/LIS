@@ -20,5 +20,18 @@
 	</select>
 	<select id="lisc001list" resultType="egovframework.c.model.lisc001DTO">
 		select CODE_TYPE, CODE_TYPE_NAME, COMMENTS from lisc001
+		order by CODE_TYPE
+	</select>
+	<select id="lisc002list" resultType="egovframework.c.model.lisc002DTO">
+		select CODE_TYPE,CODE, ITEM1, ITEM2, ITEM3, ITEM4, ITEM5, REMARK1, REMARK2, COMMENTS from lisc002
+		order by CODE_TYPE
+	</select>
+	<select id="codetype" parameterType="String" resultType="egovframework.c.model.lisc002DTO">
+		select * from lisc002
+		where CODE_TYPE = #{type}
+	</select>
+	<select id="code" parameterType="String" resultType="egovframework.c.model.lisc003DTO">
+		select * from lisc003
+		where CODE = #{type}
 	</select>
 </mapper>

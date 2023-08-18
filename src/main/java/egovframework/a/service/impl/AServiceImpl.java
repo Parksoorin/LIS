@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import egovframework.a.mapper.AMapper;
 // userADTO 클래스를 가져온다. 이 클래스는 사용자 데이터의 정보를 담는 DTO(Data Transfer Object)이다.
 import egovframework.a.model.UserADTO;
+import egovframework.a.model.lisc100DTO;
 import egovframework.a.model.lisc500DTO;
 // AService 인터페이스를 가져온다. 이 인터페이스는 서비스 계층의 역할을 정의한 것이다.
 import egovframework.a.service.AService;
@@ -62,6 +63,11 @@ public class AServiceImpl implements AService{
 		@Override
 		public List<lisc500DTO> lisc500() {
 			return aMapper.lisc500();
+		}
+		
+		@Override
+		public List<lisc100DTO> lisc100() {
+			return aMapper.lisc100();
 		}
 		
 	}

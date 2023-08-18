@@ -8,6 +8,7 @@ import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 
 // userADTO 클래스를 가져온다. 이 클래스는 사용자 데이터의 정보를 담는 DTO이다.
 import egovframework.a.model.UserADTO;
+import egovframework.a.model.lisc100DTO;
 import egovframework.a.model.lisc500DTO;
 
 /*
@@ -36,4 +37,6 @@ public interface AMapper {
 	UserADTO loginA(UserADTO dto);
 	
 	List<lisc500DTO> lisc500();
+	
+	List<lisc100DTO> lisc100();
 }

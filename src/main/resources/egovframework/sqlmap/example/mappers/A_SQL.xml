@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.a.mapper.AMapper">
-	<insert id="joinUserA" parameterType='egovframework.a.model.UserADTO'> 
+	<insert id="joinUserA"
+		parameterType='egovframework.a.model.UserADTO'>
 		INSERT INTO USER (
 		id, password
 		) values(
@@ -9,19 +10,38 @@
 		#{password}
 		)
 	</insert>
-	
+
 	<!-- 데이터베이스에 같은 userId가 있는지 체크하는 쿼리문 -->
 	<select id="findOne" parameterType='String' resultType="int">
-		select count(id)
+		select
+		count(id)
 		from user
 		where id = #{id}
 	</select>
-	
-	<select id="loginA" parameterType='egovframework.a.model.UserADTO' resultType="egovframework.a.model.UserADTO">
-	select id, password 
-	from user
-	where id = #{id} and password = #{password}
+
+	<select id="loginA"
+		parameterType='egovframework.a.model.UserADTO'
+		resultType="egovframework.a.model.UserADTO">
+		select id, password
+		from user
+		where id = #{id} and password =
+		#{password}
+	</select>
+
+	<select id="lisc500" resultType="egovframework.a.model.lisc500DTO">
+		select TEST_CODE, TEST_NAME, JUNDAL_PART, TEST_GUBUN, KUKUK,
+		IN_DANUI, OUT_DANUI, CHANGE_QTY, BARCODE_IN_YN, BARCODE_DIV, BARCODE_STORE_YN,
+		STORE_DANUI, BARCODE_OUT_YN, EXP_DAY, EXP_OPEN_DAY, KEEP_NAME,
+		KEEP_OPEN_NAME, SUPPLIER_NAME, JEJO_CODE, BARCODE, DANGA, LOT_NO,
+		START_DATE, END_DATE, HOSPITAL_CODE
+		from lisc500
+		order by TEST_CODE, TEST_NAME;
 	</select>
 	
-	
+	<select id="lisc100" resultType="egovframework.a.model.lisc100DTO">
+		select TEST_CODE, GUMSA_NAME1 
+		from lisc100mod
+		order by TEST_CODE, GUMSA_NAME1;
+	</select>
+
 </mapper>

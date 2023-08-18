@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.a.model.UserADTO;
+import egovframework.a.model.lisc100DTO;
 import egovframework.a.model.lisc500DTO;
 import egovframework.a.service.AService;
 import egovframework.util.Sha256;
@@ -154,7 +154,7 @@ public class AController {
 	}
 	
 	
-	// jqGrid
+	// jqGrid list1
 	@RequestMapping(value = "/reagentA.do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject reagentA(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
@@ -170,7 +170,7 @@ public class AController {
 			map1.put("testCode", data.get(i).getTestCode());
 			map1.put("testName", data.get(i).getTestName());
 			map1.put("jundalPart", data.get(i).getJundalPart());
-			map1.put("testGunun", data.get(i).getTestGunun());
+			map1.put("testGubun", data.get(i).getTestGubun());
 			map1.put("kukuk", data.get(i).getKukuk());
 			map1.put("inDanui", data.get(i).getInDanui());
 			map1.put("outDanui", data.get(i).getOutDanui());
@@ -194,46 +194,39 @@ public class AController {
 			map1.put("hospitalCode", data.get(i).getHospitalCode());
 			
 			dataList.add(map1);
+			
+			
+//			System.out.println(map1);
 		}
 		json.put("rows", dataList);
-	
-		
-	
-//		JSONArray jsonArray = new JSONArray();	
-//		for (lisc500DTO dto : data) {
-//			JSONObject item = new JSONObject();
-//			item.put("testCode", dto.getTestCode());
-//	        item.put("testName", dto.getTestName());
-//	        item.put("jundalPart", dto.getJundalPart());
-//	        item.put("testGunun", dto.getTestGunun());
-//	        item.put("kukuk", dto.getKukuk());
-//	        item.put("inDanui", dto.getInDanui());
-//	        item.put("outDanui", dto.getOutDanui());
-//	        item.put("changeQty", dto.getChangeQty());
-//	        item.put("barcodeInYn", dto.getBarcodeInYn());
-//	        item.put("barcodeDiv", dto.getBarcodeDiv());
-//	        item.put("barcodeStoreYn", dto.getBarcodeStoreYn());
-//	        item.put("storeDanui", dto.getStoreDanui());
-//	        item.put("barcodeOutYn", dto.getBarcodeOutYn());
-//	        item.put("expDay", dto.getExpDay());
-//	        item.put("expOpenDay", dto.getExpOpenDay());
-//	        item.put("keepName", dto.getKeepName());
-//	        item.put("keepOpenName", dto.getKeepOpenName());
-//	        item.put("supplierName", dto.getSupplierName());
-//	        item.put("jejoCode", dto.getJejoCode());
-//	        item.put("barcode", dto.getBarcode());
-//	        item.put("danga", dto.getDanga());
-//	        item.put("lotNo", dto.getLotNo());
-//	        item.put("startDate", dto.getStartDate());
-//	        item.put("endDate", dto.getEndDate());
-//	        item.put("hospitalCode", dto.getHospitalCode());
-//
-//	        jsonArray.put(item);
-//	    }
-//
-//	    json.put("rows", jsonArray);
-
 		
 		return json;
 	}
+	
+	
+	// jqGrid list3
+		@RequestMapping(value = "/reagentA3.do", method = RequestMethod.POST)
+		@ResponseBody
+		public JSONObject reagentA3(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
+				HttpServletResponse response, Model model) throws Exception {
+			
+			JSONObject json = new JSONObject();
+			
+			List<lisc100DTO> data3 = aService.lisc100();
+			List<Map> dataList3 = new ArrayList();
+			
+			for(int i=0;i<data3.size();i++) {
+				Map<String,Object> map3 = new HashMap<String,Object>();
+				map3.put("testCode", data3.get(i).getTestCode());
+				map3.put("gumsaName", data3.get(i).getGumsaName1());
+				
+				dataList3.add(map3);
+				
+//				System.out.println(map3);
+			}
+			json.put("rows", dataList3);
+			
+			return json;
+		}
+			
 }
