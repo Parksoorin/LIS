@@ -1,11 +1,15 @@
 package egovframework.a.mapper;
 
+import java.util.List;
+
 // org.egovframe.rte.psl.dataaccess.mapper 패키지에서 Mapper 어노테이션을 가져온다.
 // 이 어노테이션은 스프링의 @Repository 어노테이션과 유사한 역할을 한다. 즉, 매퍼를 스프링 빈으로 등록하기 위해 사용한다.
 import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 
 // userADTO 클래스를 가져온다. 이 클래스는 사용자 데이터의 정보를 담는 DTO이다.
 import egovframework.a.model.UserADTO;
+import egovframework.a.model.lisc100DTO;
+import egovframework.a.model.lisc500DTO;
 
 /*
  * 데이터베이스와의 상호작용을 처리하는 매퍼 인터페이스로, 
@@ -32,5 +36,7 @@ public interface AMapper {
 	// userADTO 가 사용자의 정보를 담는것인데 findOne으로 찾아오겠다. 데이터의 형태는 String, id를 찾겠다 는 뜻!
 	UserADTO loginA(UserADTO dto);
 	
+	List<lisc500DTO> lisc500();
 	
+	List<lisc100DTO> lisc100();
 }

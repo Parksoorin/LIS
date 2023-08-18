@@ -1,5 +1,9 @@
 package egovframework.b.web;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -8,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import egovframework.b.model.QcResultDTO;
 import egovframework.b.model.UserBDTO;
 import egovframework.b.service.BService;
 import egovframework.util.Sha256;
@@ -23,6 +30,7 @@ import egovframework.util.Sha256;
 public class BController {
 	@Resource(name="BService")
 	private BService bService;
+	
 	
 	@RequestMapping(value = "/loginB.do")
 	public String startPage(Model model) throws Exception {
@@ -33,6 +41,45 @@ public class BController {
 	public String qcResultPage(Model model) throws Exception {
 		return ".main/qcresultfind/qcResult";
 	}
+	
+	
+	@RequestMapping(value= "/qcResultFindAll.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject qcResultfindAll(String type, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws Exception{	
+//		System.out.println(type);
+		JSONObject json = new JSONObject();
+		
+		List<String> dateList = bService.qcResultDate();
+		
+//		for(String date : dateList ) {
+//			System.out.println(date);
+//		}
+		
+
+		List<Map<String, Object>> list = bService.qcResultFindHashMap(dateList);
+		List<Map> dataList = new ArrayList();
+		
+		for(Map<String, Object> listMap : list) {
+			
+			Map<String,Object> map = new LinkedHashMap<String,Object>();
+			
+			for(String key : listMap.keySet()) {
+				System.out.println(key);
+				map.put(key, listMap.get(key));
+			}
+			dataList.add(map);
+			
+		}
+		
+		
+	
+		json.put("rows",dataList);
+				
+		return json;
+	}
+	
+	
 	
 	@RequestMapping(value= "/loginProcess.do", method = RequestMethod.POST)
 	@ResponseBody

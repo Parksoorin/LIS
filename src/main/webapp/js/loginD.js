@@ -53,7 +53,7 @@ $("#joinBtn").on("click", function() {
 	}
 })
 
-$("#login-btn").on("click", function() {
+const loginFn = function () {
 	var id = $("#loginId").val();
 	var password = $("#loginPw").val();
 	
@@ -92,4 +92,14 @@ $("#login-btn").on("click", function() {
 			}
 		})
 	}
-})
+}
+
+$("#login-btn").on("click", function() {
+	loginFn();
+});
+
+$("#loginPw").on("keyup", function(key) {
+	if (key.keyCode == 13) {
+		loginFn();
+	}
+});

@@ -1,5 +1,8 @@
 package egovframework.a.web;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.a.model.UserADTO;
+import egovframework.a.model.lisc100DTO;
+import egovframework.a.model.lisc500DTO;
 import egovframework.a.service.AService;
 import egovframework.util.Sha256;
 
@@ -56,11 +61,12 @@ public class AController {
 		}
 	
 	
+	// 회원가입 로직
 	// "/joinUserA.do" 경로로 POST 요청이 들어왔을 때 처리를 위한 메서드를 정의한다.
 	// 이 메서드는 JSON 형태의 데이터를 반환할 것이므로 @ResponseBody 어노테이션을 사용한다.
 	@RequestMapping(value = "/joinUserA.do", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject exGrid(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
+	public JSONObject join(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response, Model model) throws Exception {
 		System.out.println(map);
 		
@@ -103,10 +109,7 @@ public class AController {
 		return json;
 	}
 	
-	
-	
-	
-	
+	// 로그인 로직
 	// "/loginUserA.do" 경로로 POST 요청이 들어왔을 때 처리를 위한 메서드를 정의한다.
 	// 이 메서드는 JSON 형태의 데이터를 반환할 것이므로 @ResponseBody 어노테이션을 사용한다.
 	@RequestMapping(value = "/loginUserA.do", method = RequestMethod.POST)
@@ -145,9 +148,85 @@ public class AController {
 	    
 	    if (userADTO != null) {
 			json.put("result", "success"); 
-			
 		}
 		
 		return json;  // JSON 형태의 응답을 반환
 	}
+	
+	
+	// jqGrid list1
+	@RequestMapping(value = "/reagentA.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject reagentA(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws Exception {
+		
+		JSONObject json = new JSONObject();
+		
+		List<lisc500DTO> data = aService.lisc500();
+		List<Map> dataList = new ArrayList();
+		
+		for(int i=0;i<data.size();i++) {
+			Map<String,Object> map1 = new HashMap<String,Object>();
+			map1.put("testCode", data.get(i).getTestCode());
+			map1.put("testName", data.get(i).getTestName());
+			map1.put("jundalPart", data.get(i).getJundalPart());
+			map1.put("testGubun", data.get(i).getTestGubun());
+			map1.put("kukuk", data.get(i).getKukuk());
+			map1.put("inDanui", data.get(i).getInDanui());
+			map1.put("outDanui", data.get(i).getOutDanui());
+			map1.put("changeQty", data.get(i).getChangeQty());
+			map1.put("barcodeInYn", data.get(i).getBarcodeInYn());
+			map1.put("barcodeDiv", data.get(i).getBarcodeDiv());
+			map1.put("barcodeStoreYn", data.get(i).getBarcodeStoreYn());
+			map1.put("storeDanui", data.get(i).getStoreDanui());
+			map1.put("barcodeOutYn", data.get(i).getBarcodeOutYn());
+			map1.put("expDay", data.get(i).getExpDay());
+			map1.put("expOpenDay", data.get(i).getExpOpenDay());
+			map1.put("keepName", data.get(i).getKeepName());
+			map1.put("keepOpenName", data.get(i).getKeepOpenName());
+			map1.put("supplierName", data.get(i).getSupplierName());
+			map1.put("jejoCode", data.get(i).getJejoCode());
+			map1.put("barcode", data.get(i).getBarcode());
+			map1.put("danga", data.get(i).getDanga());
+			map1.put("lotNo", data.get(i).getLotNo());
+			map1.put("startDate", data.get(i).getStartDate());
+			map1.put("endDate", data.get(i).getEndDate());
+			map1.put("hospitalCode", data.get(i).getHospitalCode());
+			
+			dataList.add(map1);
+			
+			
+//			System.out.println(map1);
+		}
+		json.put("rows", dataList);
+		
+		return json;
+	}
+	
+	
+	// jqGrid list3
+		@RequestMapping(value = "/reagentA3.do", method = RequestMethod.POST)
+		@ResponseBody
+		public JSONObject reagentA3(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
+				HttpServletResponse response, Model model) throws Exception {
+			
+			JSONObject json = new JSONObject();
+			
+			List<lisc100DTO> data3 = aService.lisc100();
+			List<Map> dataList3 = new ArrayList();
+			
+			for(int i=0;i<data3.size();i++) {
+				Map<String,Object> map3 = new HashMap<String,Object>();
+				map3.put("testCode", data3.get(i).getTestCode());
+				map3.put("gumsaName", data3.get(i).getGumsaName1());
+				
+				dataList3.add(map3);
+				
+//				System.out.println(map3);
+			}
+			json.put("rows", dataList3);
+			
+			return json;
+		}
+			
 }

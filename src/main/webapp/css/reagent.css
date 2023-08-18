@@ -185,6 +185,8 @@
     height: 93%;
     
     border-top: 2px solid rgb(248, 246, 246);
+    
+    overflow: auto;
 }
 
 .divDownRight {
@@ -230,6 +232,8 @@
     height: 85%;
 
     border-top: 2px solid rgb(248, 246, 246);
+    
+    overflow: auto;
 }
 
 .divDownRightUpButton {
@@ -281,6 +285,8 @@
     height: 100%;
 
     border-top: 2px solid rgb(248, 246, 246);
+    
+    overflow: auto;
 }
 
 @media (max-width: 900px) { /* 화면 너비가 900px 이하일 때 적용 */

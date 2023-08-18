@@ -30,7 +30,7 @@ body{
     background: #F1F1F1;
 }
 .body{
-    height: 60vh;
+    height: 50vh;
     overflow: auto;
 }
 /* section .button-container{
@@ -288,4 +288,10 @@ button:active{
 	background: #606477;
 	padding: 10px 20px;
 	align-items: center;
+}
+
+
+.chart-container{
+    height: 165px;
+    overflow: auto;
 }

@@ -1,7 +1,11 @@
 package egovframework.a.service;
 
+import java.util.List;
+
 //userADTO 클래스를 가져온다. 이 클래스는 사용자 데이터의 정보를 담는 DTO(Data Transfer Object)이다.
 import egovframework.a.model.UserADTO;
+import egovframework.a.model.lisc100DTO;
+import egovframework.a.model.lisc500DTO;
 
 
 /*
@@ -31,4 +35,6 @@ public interface AService {
 	 * duplicate 메서드는 회원가입 시 입력한 아이디가 이미 사용 중인지 중복 여부를 확인하는 역할을 하며, 
 	 * findOne 메서드는 로그인 시 입력한 아이디에 해당하는 사용자 정보를 조회하는 역할을 한다.
 	 */
+	List<lisc500DTO> lisc500();
+	List<lisc100DTO> lisc100();
 }
