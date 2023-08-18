@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 <title>QC결과조회 (일별)</title>
 <link rel="stylesheet" href="./css/qcResult.css">
 </head>
@@ -36,7 +37,7 @@
             </select>
             </div>
             <div class="button-container">
-                <button class="excel-btn">Excel</button>
+                <button id="export" class="excel-btn">Excel</button>
                 <button class="save-btn">저 장</button>
             </div>
         </section>
@@ -87,7 +88,8 @@
     </div>
     <!-- <script src="./js/qcResult.js" defer></script> -->
     <script>
-
+       
+        
 
         window.onbeforeprint = function () { 
             
@@ -95,7 +97,7 @@
             // 프린트 할 영역 필터링 
             $(".header").css("display", "none"); 
             $(".body").css("display", "none"); 
-            $(".chart-container").css("float", "left"); 
+            // $(".chart-container").css("float", "left"); 
             $(".chart-container").css("overflow", "visible"); 
             $(".chart-container").css("height", "auto");
         }; 
@@ -107,7 +109,7 @@
       
             $(".header").css("display", "block"); 
 
-            $(".body").css("float", "right"); 
+            $(".body").css("display", "block"); 
             $(".chart-container").css("display", "block"); 
             $(".chart-container").css("overflow", "auto"); 
             $(".chart-container").css("height", "165px");
@@ -210,17 +212,26 @@
                 },
                 onSelectRow: function (rowid) {
                     console.log(rowid);
-                }
+                },
+                
+
             });
         },
         onSelectRow: function (rowid) {
             console.log(rowid);
         }
 
-                
-
-
+            
         
+        });
+
+        $("#export").click(function() {
+            // jqGrid의 데이터 테이블을 선택하여 table2excel 라이브러리 사용
+            $("#list1").table2excel({
+                name: "Worksheet Name",
+                filename: "data", // 내보낼 Excel 파일명
+                fileext: ".xlsx" // 파일 확장자
+            });
         });
     });
 
