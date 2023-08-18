@@ -4,6 +4,8 @@ import java.util.List;
 
 import egovframework.c.model.UserCDTO;
 import egovframework.c.model.lisc001DTO;
+import egovframework.c.model.lisc002DTO;
+import egovframework.c.model.lisc003DTO;
 
 public interface CService {  // 매퍼에서 가져온 다음에 가공 주로 여기에 작성
 	int joinUserC(UserCDTO dto);
@@ -11,4 +13,7 @@ public interface CService {  // 매퍼에서 가져온 다음에 가공 주로 �
 	int userID(UserCDTO dto); // 
 	UserCDTO loginID(UserCDTO dto);
 	List<lisc001DTO> lisc001list();
+	List<lisc002DTO> lisc002list();
+	List<lisc002DTO> codetype(String type);
+	List<lisc003DTO> code(String type);
 }

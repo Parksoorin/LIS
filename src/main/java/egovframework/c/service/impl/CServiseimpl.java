@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import egovframework.c.mapper.CMapper;
 import egovframework.c.model.UserCDTO;
 import egovframework.c.model.lisc001DTO;
+import egovframework.c.model.lisc002DTO;
+import egovframework.c.model.lisc003DTO;
 import egovframework.c.service.CService;
 @Service("CService")
 
@@ -33,5 +35,17 @@ public class CServiseimpl implements CService{
 	@Override
 	public List<lisc001DTO> lisc001list() {
 		return cMapper.lisc001list();
+	}
+	@Override
+	public List<lisc002DTO> lisc002list() {
+		return cMapper.lisc002list();
+	}
+	@Override
+	public List<lisc002DTO> codetype(String type) {
+		return cMapper.codetype(type);
+	}
+	@Override
+	public List<lisc003DTO> code(String type) {
+		return cMapper.code(type);
 	}
 }
