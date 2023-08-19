@@ -10,6 +10,7 @@ import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 import egovframework.a.model.UserADTO;
 import egovframework.a.model.lisc100DTO;
 import egovframework.a.model.lisc500DTO;
+import egovframework.a.model.lisc501DTO;
 
 /*
  * 데이터베이스와의 상호작용을 처리하는 매퍼 인터페이스로, 
@@ -37,6 +38,6 @@ public interface AMapper {
 	UserADTO loginA(UserADTO dto);
 	
 	List<lisc500DTO> lisc500();
-	
 	List<lisc100DTO> lisc100();
+	List<lisc501DTO> lisc501(String data);
 }

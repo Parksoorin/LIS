@@ -40,8 +40,15 @@
 	
 	<select id="lisc100" resultType="egovframework.a.model.lisc100DTO">
 		select TEST_CODE, GUMSA_NAME1 
-		from lisc100mod
+		from lisc100
 		order by TEST_CODE, GUMSA_NAME1;
 	</select>
 
+	<select id="lisc501" parameterType="String" resultType="egovframework.a.model.lisc501DTO">
+		select lisc501.TEST_CODE, lisc100.GUMSA_NAME1 
+		from lisc501
+		left join lisc500 on lisc500.TEST_CODE = lisc501.INV_CODE
+		left join lisc100 on lisc100.TEST_CODE = lisc501.TEST_CODE
+		where lisc501.INV_CODE = #{listData};
+	</select>
 </mapper>
