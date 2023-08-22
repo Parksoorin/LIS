@@ -26,9 +26,9 @@
 				<button class="btn" id="btn_delete_row"><img src="/images/delete.png" class="icon-x">삭제</button>
 			</div>
 			<div class="down-left-text">
-				<input type="text" id="left-select"></input>
-				<button class="FC-btn" id="find"><img src="/images/search.png" class="icon">Find</button>
-				<button class="FC-btn"><img src="/images/clear.png" class="icon">Clear</button>
+				<input type="text" id="search"></input>
+				<button class="FC-btn" id="btn_search"><img src="/images/search.png" class="icon">Find</button>
+				<button class="FC-btn" id=""><img src="/images/clear.png" class="icon">Clear</button>
 			</div>
 			<div style="height: auto; overflow: auto;"><table id="lisc001DTO"></table></div>
 		</div>
