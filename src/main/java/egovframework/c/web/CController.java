@@ -90,11 +90,16 @@ public class CController {
 	@ResponseBody
 	public JSONObject lisc001DTO(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
 	HttpServletResponse response, Model model) throws Exception {
-
+		
+		// search input 시 화면
+		
+		
+		
+		// 기본 화면
 		System.out.println(map);
 		JSONObject json = new JSONObject();
 		try {
-		    List<lisc001DTO> data = cService.lisc001list();
+			List<lisc001DTO> data = cService.lisc001list();
 		    System.out.println(data);
 		    JSONArray rowsArray = new JSONArray();
 		    for (lisc001DTO item : data) {

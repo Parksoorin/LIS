@@ -48,9 +48,4 @@ public class CServiseimpl implements CService{
 	public List<lisc003DTO> code(String type) {
 		return cMapper.code(type);
 	}
-	@Override
-	public List<lisc001DTO> searchlist(String type) {
-		return cMapper.searchlist(type);
-	}
-	
 }

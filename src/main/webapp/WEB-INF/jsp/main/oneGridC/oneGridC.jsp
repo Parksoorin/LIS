@@ -205,16 +205,59 @@
 	  	
 	})
 
+	// search
+	$("#btn_search").on("click",function(){
+		var params = {}
+        params.isSearch = "true"; // 검색여부를 true로 세팅
+		var searchlist = $('#search').val(); // 검색어 
+        console.log(JSON.stringify(searchlist));
+         
+        
+        function searchlist(){ // isFirst : 함수호출시 전달될값, 첫번째 검색인지 여부를 나타냄
+
+        	//그리드1의 파라미터 설정 & 그리드1 재로드
+        	$("#lisc001DTO").setGridParam({ 
+           		datatype : "json",
+           		postData : searchlist ,
+           		loadComplete: function(postData){
+        	   		$("#lisc001DTO").trigger("reloadGrid");
+           		} // 그리드 재조회 
+        	}).trigger("reloadGrid");	
+        }
+	})
+	
+	/* // search
+	$("#btn_search").on("click",function(){
+		searchlist();
+	});
+        
+    function searchlist(){ // isFirst : 함수호출시 전달될값, 첫번째 검색인지 여부를 나타냄
+    	var params = {}
+        params.isSearch = "true"; // 검색여부를 true로 세팅
+        params.searchInput = $('#searchInput').val(); // 검색어 
+        console.log(JSON.stringify(searchlist));
+        
+        $("#lisc001DTO").clearGridData(); //그리드1 데이터 초기화
+        
+    	//그리드1의 파라미터 설정 & 그리드1 재로드
+    	$("#lisc001DTO").setGridParam({ 
+       		datatype : "json",
+       		postData : searchlist ,
+       		loadComplete: function(postData){
+    	   		$("#lisc001DTO").trigger("reloadGrid");
+       		} // 그리드 재조회 
+    	}).trigger("reloadGrid");	
+    }
+	  */
+	 
 
 	// addrow, deleterow
-
     $("#btn_add_row").click(function(){
         var newRowData = {};
         var grid = $("#lisc001DTO");
         var newRowId = grid.jqGrid("getGridParam", "reccount") + 1;
         grid.jqGrid("addRowData", newRowId, newRowData, "first");
     })  
-    
 	const btnDeleteRow = document.getElementById('btn_delete_row');
 	btnDeleteRow.addEventListener('click', function() {
     	var grid = $("#lisc001DTO");
@@ -231,7 +274,6 @@
         var newRowId = grid.jqGrid("getGridParam", "reccount") + 1;
         grid.jqGrid("addRowData", newRowId, newRowData, "first");
     })  
-    
   	const btnDeleteRow2 = document.getElementById('btn_delete_row2');
 	btnDeleteRow2.addEventListener('click', function() {
     	var grid = $("#lisc002DTO");
@@ -247,7 +289,6 @@
          var newRowId = grid.jqGrid("getGridParam", "reccount") + 1;
          grid.jqGrid("addRowData", newRowId, newRowData, "first");
     })  
-	
 	const btnDeleteRow3 = document.getElementById('btn_delete_row3');
 	btnDeleteRow3.addEventListener('click', function() {
     	var grid = $("#lisc003DTO");
