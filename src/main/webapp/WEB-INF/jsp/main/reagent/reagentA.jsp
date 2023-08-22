@@ -13,6 +13,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>로그인</title>
 <link rel="stylesheet" type="text/css" href="/css/reagent.css" />
+<!-- 아래 스크립트는 SheetJS 라이브러리를 로드합니다 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.3/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -44,16 +46,16 @@
 				<button class="btn-sec check">
 					<img src="/images/icons/searchsearch.png" class="img"> 조 회
 				</button>
-				<button class="btn-sec input">
+				<button class="btn-sec input" onclick="addListData()">
 					<img src="/images/icons/printer.png" class="img">입 력
 				</button>
 				<button class="btn-sec save">
 					<img src="/images/icons/save.png" class="img"> 저 장
 				</button>
-				<button class="btn-sec delete">
+				<button class="btn-sec delete" onclick="deleteListData()">
 					<img src="/images/icons/delete.png" class="img2">삭 제
 				</button>
-				<button class="btn-sec excel">
+				<button class="btn-sec excel" onclick="saveExcel()">
 					<img src="/images/icons/excel.png" class="img">EXCEL
 				</button>
 			</div>
@@ -84,7 +86,7 @@
 						<button class="btn-thr" onclick="saveListData()">
 							<img src="/images/icons/up.png" class="img1">등 록
 						</button>
-						<button class="btn-thr">
+						<button class="btn-thr" onclick="deleteListData2()">
 							<img src="/images/icons/down.png" class="img1">제 외
 						</button>
 					</div>
@@ -271,7 +273,7 @@
 						var listData =  $('#list1').jqGrid('getRowData', rowid).testCode;
 						
 						console.log(listData) 
-						console.log(rowid) // 현재 선택된 행의 ID를 콘솔에 출력하고 있다.
+// 						console.log(rowid) // 현재 선택된 행의 ID를 콘솔에 출력하고 있다.
 						
 						$("#list2").jqGrid("GridUnload"); // 첫 번째 조회했던 그 값으로만 조회될 때 초기화
 						grid2(listData);
@@ -324,7 +326,7 @@
 				console.log(data);
 			}, // loadComplete END   
 			onSelectRow : function(rowid) { // 행이 선택될 때 실행될 함수를 설정한다.
-				console.log(rowid) // 현재 선택된 행의 ID를 콘솔에 출력하고 있다.
+// 				console.log(rowid) // 현재 선택된 행의 ID를 콘솔에 출력하고 있다.
 			}
 
 		})
@@ -370,21 +372,102 @@
 			rownumbers : true, // 각 행의 번호를 표시할지 여부를 설정한다.    
 			gridview : true, // 그리드를 선표시할지 여부를 설정한다. true/false         
 			loadComplete : function(data) { // 데이터 로드가 완료되었을 때 실행될 함수를 설정한다. 
-				console.log(data);
+// 				console.log(data);
 			}, // loadComplete END   
 			onSelectRow : function(rowid) { // 행이 선택될 때 실행될 함수를 설정한다.
 				console.log(rowid) // 현재 선택된 행의 ID를 콘솔에 출력하고 있다.
 			}
 
 		})
+		
+		
+		
+		// addListData() 함수 정의, list1 열 추가	
+		function addListData() {
+			
+			// jqGrid에 데이터 추가
+			var grid = $('#list1');
+			
+			// 새로운 행의 ID 계산
+			var newRowId = grid.jqGrid('getGridParam', 'records') + 1; 
+			
+			// 빈 객체로 시작
+			var newData = {};
+			
+// 			console.log(newRowId);
+			
+			// jqGrid에 빈 데이터로 행 추가
+			grid.jqGrid('addRowData', newRowId, newData);
+			
+			// 행을 편집 모드로 변경
+			grid.jqGrid('editRow', newRowId, true);
+			
+			// 새로운 행 선택
+			grid.setSelection(newRowId, true);
+			
+// 			console.log("New row added", newData);
+		}	
+			
 
-		// saveListData()함수 정의
+		// deleteListData() 함수 정의, list1 열 삭제
+		function deleteListData() {
+			var grid = $('#list1');
+			var selectedRowId = grid.jqGrid('getGridParam', 'selrow');
+			
+			if (selectedRowId) {
+				// 선택된 행이 있다면 해당 행을 삭제
+				grid.jqGrid('delRowData', selectedRowId);
+				console.log("Row deleted: ", selectedRowId);
+			} else {
+				console.log("No row selected for deletion.");
+			}
+		}
+		
+		
+		// list1 EXCEL 파일
+		function saveExcel() {
+			var grid = $('#list1');
+		    var rowDataArray = [];
+
+		 // 모든 데이터의 row ID 가져오기
+		    var rowIds = grid.jqGrid('getDataIDs'); 
+		 
+		    for (var i = 0; i < rowIds.length; i++) {
+		        var rowId = rowIds[i];
+		        
+		     	// 특정 row의 데이터 가져오기
+		        var rowData = grid.jqGrid('getRowData', rowId); 
+		        rowDataArray.push(rowData);
+		    }
+
+		 	// JSON 데이터를 엑셀 시트로 변환
+		    var worksheet = XLSX.utils.json_to_sheet(rowDataArray); 
+
+		 	// 엑셀 워크북 생성
+		    var wb = XLSX.utils.book_new(); 
+		 	// 시트를 워크북에 추가
+		    XLSX.utils.book_append_sheet(wb, worksheet, 'Sheet1'); 
+
+		    // 엑셀 파일 생성
+		    var excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+		    var blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+		    // 엑셀 파일 다운로드 링크 생성
+		    var fileName = "list1.xlsx";
+		    var downloadLink = document.createElement("a");
+		    downloadLink.href = URL.createObjectURL(blob);
+		    downloadLink.download = fileName;
+		    downloadLink.click();
+		}
+		
+
+		// saveListData() 함수 정의
 		function saveListData() {
 
 			// list3에서 체크된 행의 ID(인덱스) 배열을 가져온다.
 			var selectedRows = $('#list3').jqGrid('getGridParam', 'selarrrow');
 
-			console.log(selectedRows);
+// 			console.log(selectedRows);
 			
 			// 가져온 행 데이터를 list2 jqGrid에 추가
 			for (var i = 0; i < selectedRows.length; i++) {
@@ -394,15 +477,27 @@
 				
 				// list3에서 해당 행의 데이터를 가져온다. 가져온 데이터는 'rowData' 변수에 저장된다.
 				var rowData = $('#list3').jqGrid('getRowData', rowId);
-				console.log(rowData);
+// 				console.log(rowData);
 				// list2에 가져온 데이터를 추가한다.
 				// 'addRowData'함수는 새로운 행을 그리드에 추가하는 함수
 				// rowData의 내용이 새로운 행으로 추가된다.
 				$('#list2').jqGrid('addRowData', undefined, rowData);
-				
-			
 			}
+		}
+		
+		// deleteListData2() 함수 정의, list2,3 내용 삭제
+		function deleteListData2() {
+			// list2 에서 체크된 행의 ID(인덱스) 배열을 가져온다.
+			var selectedRows = $('#list2').jqGrid('getGridParam', 'selarrrow');
 			
+			// 가져온 행 데이터를 list2 jqGrid에서 삭제
+			for (var i = 0; i < selectedRows.length; i++) {
+				// selectedRows[i] => 현재 선택된 행의 ID를 가져온다.
+				var rowId = selectedRows[i];
+				
+ 				// list2 에서 해당 행을 삭제한다.
+				$('#list2').jqGrid('delRowData', rowId);
+			}
 		}
 	</script>
 </body>
