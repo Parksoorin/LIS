@@ -204,26 +204,9 @@
 	  	}
 	  	
 	})
-	
-	/* const btnAddRow = document.getElementById('btn_add_row');
-	  	
-	  	btnAddRow.addEventListener('click', function() {
-	  		
-	  		console.log('버튼 눌림');
-	  	    var newRowData = {
-	  	        CODE_TYPE: "CodeType",
-	  	        CODE_TYPE_NAME: "CodeTypeName",
-	  	        COMMENTS: "Comments"
-	  	    };
-	  	    
-	  	    var grid = $("#lisc001DTO");
 
-	  	    var newRowId = grid.jqGrid("getGridParam", "reccount") + 1;
 
-	  	    grid.jqGrid("addRowData", newRowId, newRowData, "first");
-	  	}); */
-
-	// addrow
+	// addrow, deleterow
 
     $("#btn_add_row").click(function(){
         var newRowData = {};
@@ -231,7 +214,16 @@
         var newRowId = grid.jqGrid("getGridParam", "reccount") + 1;
         grid.jqGrid("addRowData", newRowId, newRowData, "first");
     })  
-   
+    
+	const btnDeleteRow = document.getElementById('btn_delete_row');
+	btnDeleteRow.addEventListener('click', function() {
+    	var grid = $("#lisc001DTO");
+    	var selectedRowId = grid.jqGrid('getGridParam', 'selrow');
+    	if (selectedRowId) {grid.jqGrid('delRowData', selectedRowId);
+    	} else {alert('Please select a row to delete.');}
+	});
+    
+    
 
     $("#btn_add_row2").click(function(){
         var newRowData = {};
@@ -239,7 +231,15 @@
         var newRowId = grid.jqGrid("getGridParam", "reccount") + 1;
         grid.jqGrid("addRowData", newRowId, newRowData, "first");
     })  
-   
+    
+  	const btnDeleteRow2 = document.getElementById('btn_delete_row2');
+	btnDeleteRow2.addEventListener('click', function() {
+    	var grid = $("#lisc002DTO");
+    	var selectedRowId = grid.jqGrid('getGridParam', 'selrow');
+    	if (selectedRowId) {grid.jqGrid('delRowData', selectedRowId);
+    	} else {alert('Please select a row to delete.');}
+	});
+    
  
     $("#btn_add_row3").click(function(){
          var newRowData = {};
@@ -248,7 +248,17 @@
          grid.jqGrid("addRowData", newRowId, newRowData, "first");
     })  
 	
-
+	const btnDeleteRow3 = document.getElementById('btn_delete_row3');
+	btnDeleteRow3.addEventListener('click', function() {
+    	var grid = $("#lisc003DTO");
+    	var selectedRowId = grid.jqGrid('getGridParam', 'selrow');
+    	if (selectedRowId) {grid.jqGrid('delRowData', selectedRowId);
+    	} else {alert('Please select a row to delete.');}
+	});
+	
+	
+	
+	
 	</script>
 </body>
 </html>
