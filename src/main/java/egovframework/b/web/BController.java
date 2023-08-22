@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.b.model.QcResultDTO;
 import egovframework.b.model.UserBDTO;
+import egovframework.b.model.QcCodeDTO;
 import egovframework.b.service.BService;
 import egovframework.util.Sha256;
 
@@ -34,11 +35,26 @@ public class BController {
 	
 	@RequestMapping(value = "/loginB.do")
 	public String startPage(Model model) throws Exception {
+		
 		return ".login/loginB";
 	}
 	
 	@RequestMapping(value = "/qcResult.do")
 	public String qcResultPage(Model model) throws Exception {
+		List<String> gumsapartList = bService.gumsapartList();
+		List<String> jangbiList = bService.jangbiFindAll();
+		List<String> levelList = bService.levelList();
+		List<QcCodeDTO> qcCodeList = bService.qcCodeList();
+		
+		
+//		for(QcCodeDTO test : qcCodeList) {
+//			System.out.println(test.getItem1() + " " + test.getCode());
+//		}
+		
+		model.addAttribute("gumsapartList", gumsapartList);
+		model.addAttribute("jangbiList", jangbiList);
+		model.addAttribute("levelList", levelList);
+		model.addAttribute("qcCodeList", qcCodeList);
 		return ".main/qcresultfind/qcResult";
 	}
 	
@@ -65,7 +81,7 @@ public class BController {
 			Map<String,Object> map = new LinkedHashMap<String,Object>();
 			
 			for(String key : listMap.keySet()) {
-				System.out.println(key);
+//				System.out.println(key);
 				map.put(key, listMap.get(key));
 			}
 			dataList.add(map);

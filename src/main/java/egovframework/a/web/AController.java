@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import egovframework.a.model.UserADTO;
 import egovframework.a.model.lisc100DTO;
 import egovframework.a.model.lisc500DTO;
+import egovframework.a.model.lisc501DTO;
 import egovframework.a.service.AService;
 import egovframework.util.Sha256;
 
@@ -204,6 +205,37 @@ public class AController {
 	}
 	
 	
+	// jqGrid list2
+	@RequestMapping(value = "/reagentA2.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject reagentA2(@RequestParam Map<String, Object> map, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws Exception {
+		
+		JSONObject json = new JSONObject();
+		
+		String data = map.get("listData").toString();
+		
+		System.out.println(data);
+		
+		List<lisc501DTO> data2 = aService.lisc501(data);
+		System.out.println(data2);
+		
+		List<Map> dataList2 = new ArrayList();
+		
+		for(int i=0;i<data2.size();i++) {
+			Map<String,Object> map2 = new HashMap<String,Object>();
+			map2.put("testCode", data2.get(i).getTestCode());
+			map2.put("gumsaName", data2.get(i).getGumsaName1());
+			
+			dataList2.add(map2);
+		}
+		json.put("rows", dataList2);
+		
+		return json;
+	}
+	
+	
+	
 	// jqGrid list3
 		@RequestMapping(value = "/reagentA3.do", method = RequestMethod.POST)
 		@ResponseBody
@@ -228,5 +260,8 @@ public class AController {
 			
 			return json;
 		}
+		
+		
+		
 			
 }

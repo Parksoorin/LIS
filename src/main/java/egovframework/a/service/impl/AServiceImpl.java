@@ -14,6 +14,7 @@ import egovframework.a.mapper.AMapper;
 import egovframework.a.model.UserADTO;
 import egovframework.a.model.lisc100DTO;
 import egovframework.a.model.lisc500DTO;
+import egovframework.a.model.lisc501DTO;
 // AService 인터페이스를 가져온다. 이 인터페이스는 서비스 계층의 역할을 정의한 것이다.
 import egovframework.a.service.AService;
 
@@ -70,4 +71,8 @@ public class AServiceImpl implements AService{
 			return aMapper.lisc100();
 		}
 		
+		@Override
+		public List<lisc501DTO> lisc501(String data) {
+			return aMapper.lisc501(data);
+		}
 	}

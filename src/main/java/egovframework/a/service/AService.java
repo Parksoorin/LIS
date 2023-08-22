@@ -6,6 +6,7 @@ import java.util.List;
 import egovframework.a.model.UserADTO;
 import egovframework.a.model.lisc100DTO;
 import egovframework.a.model.lisc500DTO;
+import egovframework.a.model.lisc501DTO;
 
 
 /*
@@ -37,4 +38,5 @@ public interface AService {
 	 */
 	List<lisc500DTO> lisc500();
 	List<lisc100DTO> lisc100();
+	List<lisc501DTO> lisc501(String data);
 }
