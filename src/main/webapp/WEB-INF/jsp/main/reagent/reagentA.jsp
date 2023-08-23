@@ -25,23 +25,23 @@
 				<label class="topButton" for="part">파트</label> 
 				<select id="part" name="reagentPart">
 					<option value="">전체</option>
-					<option value="reagentPart1">창고</option>
-					<option value="reagentPart2">테스트</option>
-					<option value="reagentPart3">일반혈액</option>
-					<option value="reagentPart4">생화학</option>
+					<option value="220">창고</option>
+					<option value="230">테스트</option>
+					<option value="240">일반혈액</option>
+					<option value="250">생화학</option>
 					<option value="210">임상화학부(주간)</option>
-					<option value="reagentPart6">임상화학부(야간)</option>
+					<option value="260">임상화학부(야간)</option>
 				</select> 
 				
 				<label class="topButton" for="acc">거래처</label> 
 				<select id="acc" name="account">
-					<option value="지지메디텍">전체</option>
+					<option value="">전체</option>
 					<option value="account1">20971</option>
 				</select> 
 				
 				<label class="topButton" for="manu">제조사</label> 
 				<select id="manu" name="manufacturer">
-					<option value="Roche">전체</option>
+					<option value="">전체</option>
 				</select>
 				
 			</div>
@@ -70,7 +70,7 @@
 					<input type="text" name="search_name" class="optionSearch"
 						placeholder="Enter text to search"></input>
 					<button class="btn-pir" onclick="wantSearch1()">검 색</button>
-					<button class="btn-pir">클리어</button>
+					<button class="btn-pir" onclick="clearInput1()">클리어</button>
 				</div>
 				<div class="divDownLeftList" style="">
 					<table id="list1"></table>
@@ -97,18 +97,17 @@
 
 				<div class="divDownRightDown">
 					<div class="divDownRightDownButton">
-						<input type="text" name="search_name" class="optionSearchRight"
+						<input type="text" name="search_name1" class="optionSearchRight"
 							placeholder="Enter text to search"></input>
-
-						<button class="btn-pir">검 색</button>
-						<button class="btn-pir">클리어</button>
+						<button class="btn-pir" onclick="wantSearch2()">검 색</button>
+						<button class="btn-pir" onclick="clearInput3()">클리어</button>
 					</div>
 					<div class="divDownRightDownList">
 						<table id="list3"></table>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> 
 
 	</div>
 	<script src="/js/reagentA.js"></script>
