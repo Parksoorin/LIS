@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import egovframework.b.mapper.BMapper;
 import egovframework.b.model.QcResultDTO;
+import egovframework.b.model.QcResultDateDTO;
+import egovframework.b.model.QcResultRequestDTO;
 import egovframework.b.model.UserBDTO;
 import egovframework.b.model.QcCodeDTO;
 import egovframework.b.service.BService;
@@ -42,13 +44,14 @@ public class BServiceImpl implements BService {
 
 	
 	@Override
-	public List<String> qcResultDate() {
-		return bMapper.qcResultDate();
+	public List<String> qcResultDate(QcResultDateDTO qcResultDateDTO) {
+		List<String> list = bMapper.qcResultDate(qcResultDateDTO);
+		return list;
 	}
 
 	@Override
-	public List<Map<String, Object>> qcResultFindHashMap(List<String> dateList) {
-		return bMapper.qcResultFindHashMap(dateList);
+	public List<Map<String, Object>> qcResultFindHashMap(QcResultRequestDTO qcResultDTO) {
+		return bMapper.qcResultFindHashMap(qcResultDTO);
 	}
 
 	@Override

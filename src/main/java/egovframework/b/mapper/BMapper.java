@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Param;
 import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 
 import egovframework.b.model.QcResultDTO;
+import egovframework.b.model.QcResultDateDTO;
+import egovframework.b.model.QcResultRequestDTO;
 import egovframework.b.model.UserBDTO;
 import egovframework.b.model.QcCodeDTO;
 
@@ -20,8 +22,8 @@ public interface BMapper {
 	
 	UserBDTO findOne(String id);
 	
-	List<Map<String, Object>> qcResultFindHashMap(@Param("dateList") List<String> dateList);
-	List<String>qcResultDate();
+	List<Map<String, Object>> qcResultFindHashMap(QcResultRequestDTO qcResultDTO);
+	List<String> qcResultDate(QcResultDateDTO qcResultDateDTO);
 
 	List<String> gumsapartFindAll();
 

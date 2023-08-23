@@ -16,12 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.b.model.QcResultDTO;
+import egovframework.b.model.QcResultDateDTO;
+import egovframework.b.model.QcResultRequestDTO;
 import egovframework.b.model.UserBDTO;
 import egovframework.b.model.QcCodeDTO;
 import egovframework.b.service.BService;
@@ -61,19 +64,42 @@ public class BController {
 	
 	@RequestMapping(value= "/qcResultFindAll.do", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject qcResultfindAll(String type, HttpSession session, HttpServletRequest request,
+	public JSONObject qcResultfindAll(@RequestBody Map<String, Object> requestMap, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response, Model model) throws Exception{	
-//		System.out.println(type);
+		
+	
+		
+		String fromDate = String.valueOf(requestMap.get("fromDate"));
+		String toDate = String.valueOf(requestMap.get("toDate"));
+		
+		System.out.println(fromDate);
+		System.out.println(toDate);
+		QcResultDateDTO qcResultDateDTO = new QcResultDateDTO(fromDate, toDate); 
+		
 		JSONObject json = new JSONObject();
 		
-		List<String> dateList = bService.qcResultDate();
+		List<String> dateList = bService.qcResultDate(qcResultDateDTO);
 		
 //		for(String date : dateList ) {
 //			System.out.println(date);
 //		}
+		System.out.println("mmmmmmmmmmmmmmmm");
+		QcResultRequestDTO qcResultDTO = QcResultRequestDTO.builder()
+				.lotNo(String.valueOf(requestMap.get("lotNo")))
+				.qcInOut(String.valueOf(requestMap.get("qcInOut")))
+				.ruleResult(String.valueOf(requestMap.get("ruleResult")))
+				.jundalPart(String.valueOf(requestMap.get("jundalPart")))
+				.jangbi(String.valueOf(requestMap.get("장비명")))
+				.level(String.valueOf(requestMap.get("level")))
+				.dateList(dateList)
+				.build();
+				
 		
+		
+		System.out.println(qcResultDTO);
 
-		List<Map<String, Object>> list = bService.qcResultFindHashMap(dateList);
+		List<Map<String, Object>> list = bService.qcResultFindHashMap(qcResultDTO);
+		System.out.println("kkkkkkkkkkkkkkk");
 		List<Map> dataList = new ArrayList();
 		
 		for(Map<String, Object> listMap : list) {
