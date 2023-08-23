@@ -78,4 +78,44 @@ public class BServiceImpl implements BService {
 		return bMapper.qcCodeFindAll();
 	}
 
+	@Override
+	public int save(List<Map<String, Object>> list) {
+		int result = 0;
+		int updateRow = 0, deleteRow = 0;
+		System.out.println(list);
+		System.out.println(list.size());
+		
+		 // 데이터 처리 로직
+		System.out.println("=======================");
+        for (Map<String, Object> map : list) {
+        	 
+        	String qcCode = bMapper.findQcCode(map.get("QC물질명").toString());
+        	List<String> testCode = bMapper.findTestCode(String.valueOf(map.get("검사명")));
+        	System.out.println(testCode);
+        	map.put("qcCode", qcCode);
+        	map.put("testCode", testCode);
+  
+        	System.out.println("=======================");
+        	for (String key : map.keySet()) {
+            	System.out.println(key + " : " + map.get(key));    
+            }
+        	System.out.println("=======================");
+        	switch((String)map.get("flag")) {
+	        	case "U":
+	        		updateRow = bMapper.update(map);
+	        		break;
+	        	case "D":
+	        		deleteRow = bMapper.delete(map);
+	        		break;
+	        	default :
+	        }
+        	result = result + updateRow + deleteRow;
+        	
+        	
+        	
+        }
+		
+		return result;
+	}
+
 }

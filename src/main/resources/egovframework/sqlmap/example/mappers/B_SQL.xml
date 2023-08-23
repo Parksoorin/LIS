@@ -142,4 +142,53 @@
 			#{password}
 		)
 	</insert>
+	
+	<select id="findTestCode" parameterType="String" resultType="String">
+		select a.test_code
+        from lisc100 a
+        left join lisq200 b 
+        on a.test_code = b.test_code
+        and a.start_date = b.fk_start_date
+        and a.specimen_code = b.specimen_ser
+        where gumsa_name1 = #{gumsaName};
+	</select>
+	<select id="findQcCode" parameterType="String" resultType="String">
+		select MAX(a.qc_code)
+        from lisq100 a
+        left join lisq200 b
+        on a.qc_code = b.qc_code
+        and a.qc_level = b.qc_level
+        and a.lot_no = b.lot_no
+        and a.start_date = b.fk_start_date
+        where qc_name = #{qcName};
+	</select>
+	
+	
+	<update id="update" parameterType="hashMap">
+		UPDATE lisq200 
+		SET 
+			MEAN_VALUE = #{FixedMean},
+			SD_VALUE = #{FixedSD},
+			CV_VALUE = SD_VALUE / MEAN_VALUE * 100	 
+		WHERE 1=1
+		AND QC_CODE = #{qcCode}
+		AND QC_LEVEL = #{Level}
+		AND LOT_NO = #{LotNo}
+		AND TEST_CODE IN
+        <foreach collection="testCode" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+	</update>
+	<delete id="delete" parameterType="hashMap">
+		delete
+		from lisq200
+		where 1=1
+		AND QC_CODE = #{qcCode}
+		AND QC_LEVEL = #{Level}
+		AND LOT_NO = #{LotNo}
+		AND TEST_CODE IN
+        <foreach collection="testCode" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+	</delete>
 </mapper>

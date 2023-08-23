@@ -26,4 +26,8 @@ public interface BService {
 	List<String> levelList();
 
 	List<QcCodeDTO> qcCodeList();
+
+	int save(List<Map<String, Object>> list);
+	
+	
 }

@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,6 +41,29 @@ public class BController {
 	public String startPage(Model model) throws Exception {
 		
 		return ".login/loginB";
+	}
+	
+	
+	@RequestMapping(value= "/qcResultSave.do", method= RequestMethod.POST)
+	@ResponseBody
+	public JSONObject qcResultSave(@RequestBody List<Map<String, Object>> list, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws Exception {
+		System.out.println("서버 저장");
+		JSONObject json = new JSONObject();
+		  try {
+		        bService.save(list);
+
+		        // 응답 데이터 추가
+		        json.put("status", "success");
+		        json.put("message", "Data successfully processed.");
+
+		    } catch (Exception e) {
+		        json.put("status", "error");
+		        json.put("message", "An error occurred during data processing.");
+		    }
+
+		
+		return json;	
 	}
 	
 	@RequestMapping(value = "/qcResult.do")

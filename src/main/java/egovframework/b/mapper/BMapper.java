@@ -32,5 +32,12 @@ public interface BMapper {
 	List<String> levelListFindAll();
 
 	List<QcCodeDTO> qcCodeFindAll();
+
+	int delete(Map<String, Object> map);
+
+	int update(Map<String, Object> map);
+	
+	List<String> findTestCode(@Param("gumsaName") String gumsaName);
+	String findQcCode(@Param("qcName") String qcName);
 	
 }

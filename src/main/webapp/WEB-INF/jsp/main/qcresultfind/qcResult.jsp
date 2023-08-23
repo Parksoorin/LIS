@@ -100,7 +100,7 @@
     </div>
     <!-- <script src="./js/qcResult.js" defer></script> -->
     <script>
-        const serverData = [];
+        let serverData = [];
         
         $("input[name='check-item']").change(function() {
             object.ruleResult = $(this).val(); // 선택된 라디오 버튼의 값을 갱신
@@ -114,6 +114,24 @@
         $('.save-btn').click(function(){
             console.log('저장버튼 눌렀습니다.');
             console.log(serverData);
+
+            if(!confirm("저장하시겠습니까?" + serverData.length + '행이 삭제/변경 됩니다.')) return;
+
+
+            $.ajax({
+                type: 'POST',
+                contentType : "application/json; charset=utf-8",
+                url: 'http://localhost:8888/qcResultSave.do',
+                data: JSON.stringify(serverData),
+                success: function(res){ 
+
+                },
+                error: function(err){
+
+                }
+            })
+
+
         })
 
         // 삭제 처리 로직, 8-22 작업중
@@ -230,9 +248,18 @@
         $checkInputbox2.value = dateConvert(today);   
      }
 
+     function isDateValid(dateString) {
+        // Date 객체 생성 시 유효한 날짜인지 확인
+        const date = new Date(dateString);
+        return !isNaN(date) && date instanceof Date;
+    }
+
+
 
      $('.find-btn').click(function(){
+        
         drawJqgrid();
+        serverData = [];
      });
 
 
@@ -289,6 +316,9 @@
             // 동적 컬럼을 컬럼 모델에 추가
             for (var i = 0; i < dynamicColumns.length; i++) {
                 var columnWidth = getTextWidth(dynamicColumns[i]) + 10; 
+                
+
+
                 colModel.push({
                     name: dynamicColumns[i],
                     index: dynamicColumns[i],
@@ -320,7 +350,7 @@
                 autowidth: false,
                 shrinkToFit: false,
                 height: 'auto',
-                loadtext: '자료 조회중입니다. 잠시만 기다리세요...',
+                // loadtext: '자료 조회중입니다. 잠시만 기다리세요...',
                 emptyrecords: 'Nothing to display',
                 rowNum: 10000,
                 rownumbers: true,
@@ -344,18 +374,32 @@
                 const colName = colModels[iCol].name;
                 
                 /* prog_id(PK), chkbox 수정불가 */
-                if(!(colName=='prog_id'||colName=='chkbox')){
+                if(!(colName=='prog_id'||colName=='chkbox'
+                ||colName==='QC물질명' || colName === '검사명' || colName === 'Level' || colName === 'LotNo' 
+                ||colName==='CumSD' || colName==='FixedCV' || colName === 'CumMean' ||colName === 'CumCV'
+                || isDateValid(colName) ||colName === '장비명'
+                )){ 
                     $(this).setColProp(colName, {editable : true}); //gridColModel의 name값을 수정가능하게 해줌 
                     $(this).editCell(iRow, iCol, true); 
                 }
                 },
 
                 afterSaveCell : function(rowid, cellname, value, iRow, iCol){
-                       $('#list1').jqGrid('saveRow', rowid, true, 'clientArray');
+
                         console.log(value);
                         var selRowData = $("#list1").getRowData(rowid);
                         selRowData[cellname] = value;
                         selRowData.no = +rowid;
+
+                        if(cellname === 'FixedMean'){
+                            selRowData.FixedCV = selRowData.FixedSD / value * 100;
+                        } else if(cellname === 'FixedSD') {
+                            selRowData.FixedCV = value / selRowData.FixedMean * 100; 
+                        }                       
+                        const roundedNumber = selRowData.FixedCV.toFixed(2);
+                        $('#list1').jqGrid('setCell', rowid, 'FixedCV', roundedNumber);
+                        $('#list1').jqGrid('saveRow', rowid, true, 'clientArray');
+                        $("#list1").trigger("reloadGrid");
                         console.log('------------');
                         console.log(selRowData);
                         if (serverData.some(m => m.no === selRowData.no)) {
