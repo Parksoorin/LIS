@@ -445,8 +445,14 @@ const printGridlisq110 = function(qcCode) {
 	$("#list3").on("change", "input[type=checkbox]", function() {
 		const rowId = $(this).closest("tr.jqgrow").attr("id"); // 체크된 셀의 rowId 가져오기
 		const newValue = $(this).prop("checked") ? "Y" : "N"; // 체크되면 Y, 안되면 N
+		const rowData = $("#list3").getRowData(rowId);
+
+		if (rowData.flag === '') {
+			rowData.flag = 'U';
+		}
 		
 		updateCellValue(rowId, newValue);
+		$('#list3').setRowData(rowId, rowData);
 	});
 	
 	$("#lowHighMeanSDCheck").on("change", function() {
@@ -520,6 +526,11 @@ $("#addBtn").on("click", function() {
 			danui: selectedRowData.resultDanui,
 			startDate: lisq100SelectedRowData.startDate,
 			endDate: lisq100SelectedRowData.endDate,
+			meanValue: 0,
+			sdValue: 0,
+			cvValue: 0,
+			lowValue: 0,
+			highValue: 0,
 			rule12S: "N",
 			gubun12S:"Reject",
 			rule13S: "N",
@@ -532,12 +543,11 @@ $("#addBtn").on("click", function() {
 			gubun41S: "Reject",
 			rule10X: "N",
 			gubun10X:"Reject",
+			testCodeSeq: 0,
 			graphYN:"N",
-			qcCode: selectedRowData.qcCode,
-			qcLevel: selectedRowData.qcLevel,
-			lotNo: selectedRowData.lotNo,
-			fkStartDate: selectedRowData.fkStartDate,
-			fkQcStartDate: selectedRowData.fkQcStartDate
+			qcCode: lisq100SelectedRowData.qcCode,
+			qcLevel: lisq100SelectedRowData.qcLevel,
+			lotNo: lisq100SelectedRowData.lotNo
 		};
 		
 		console.log(newRowData);
@@ -672,6 +682,7 @@ const printGridlisq100 = function() {
 			$("#qcName").val(selectRow.qcName);
 			$("#startDate").val(selectRow.startDate);
 			
+			printGridlisc100();
 			printGridlisq110(selectRow.qcCode);
 		}
 	});
