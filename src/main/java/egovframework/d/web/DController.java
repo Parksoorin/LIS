@@ -49,13 +49,12 @@ public class DController {
 		String id = map.get("id").toString();
 		int check = dService.checkUser(id);
 		
-		// System.out.println(check);
-		
 		if (check != 1) {
 			String pw = Sha256.encrypt(map.get("password").toString());
 			dto.setId(id);
 			dto.setPassword(pw);
-			// 서비스의 조인유저를 실행하라
+			
+			// 서비스의 조인유저를 실행
 			int join = dService.joinUser(dto);
 			json.put("result", "success");
 		} else {
@@ -190,7 +189,17 @@ public class DController {
 			HttpServletResponse response, Model model) throws Exception {
 		JSONObject json = new JSONObject();
 		
-		List<lisq110DTO> data = dService.lisq110(map.get("qcCode"));
+		String endDate = map.get("endDate").toString();
+        String lotNo = map.get("lotNo").toString();
+        String qcCode = map.get("qcCode").toString();
+        
+        Map<String, String> paramMap = new HashMap<>();
+        
+        paramMap.put("endDate", endDate);
+        paramMap.put("lotNo", lotNo);
+        paramMap.put("qcCode", qcCode);
+		
+        List<lisq110DTO> data = dService.lisq110(paramMap);
 		List<Map> dataList = new ArrayList();
 		
 		for(int i=0; i<data.size(); i++) {
@@ -268,11 +277,8 @@ public class DController {
 			HttpServletResponse response, Model model) throws Exception {		
 		JSONObject json = new JSONObject();
 		
-//		System.out.println(map);
-		
 		for (int i=0; i<map.size(); i++) {
 			Map<String, String> data = new HashMap<>(map.get(i));
-			System.out.println(data);
 			
 			lisq110DTO dto = new lisq110DTO();
 			
@@ -349,10 +355,46 @@ public class DController {
 					return json;
 				}
 			} else if ("A".equals(data.get("flag"))) {
-				System.out.println("-----A-----");
-				System.out.println(dto);
 				int result = dService.addData(dto);
-				System.out.println(result);
+				
+				if (result != 1) {
+					json.put("result", "error");
+					
+					return json;
+				}
+			}
+		}
+		
+		json.put("result", "success");
+		
+		return json;
+	}
+	
+	@RequestMapping(value = "/delData.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject delData(@RequestBody List<Map<String,String>> map, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws Exception {
+		JSONObject json = new JSONObject();
+		
+		for (int i=0; i<map.size(); i++) {
+			Map<String, String> data = new HashMap<>(map.get(i));
+			
+			lisq100DTO dto = new lisq100DTO();
+			
+			String startDate = data.get("startDate").toString();
+			String endDate = data.get("endDate").toString();
+			String qcCode = data.get("qcCode").toString();
+			String qcLevel = data.get("qcLevel").toString();
+			String lotNo = data.get("lotNo").toString();
+			
+			dto.setStartDate(startDate);
+			dto.setEndDate(endDate);
+			dto.setQcCode(qcCode);
+			dto.setQcLevel(qcLevel);
+			dto.setLotNo(lotNo);
+			
+			if ("D".equals(data.get("flag"))) {
+				int result = dService.delData(dto);
 				
 				if (result != 1) {
 					json.put("result", "error");
