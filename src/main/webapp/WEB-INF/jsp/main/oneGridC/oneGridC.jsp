@@ -15,7 +15,6 @@
 			<button class="btn"><img src="/images/save.png" class="icon">저장</button>
 		</div>
 	</div>
-
 	<!-- 아래 -->
 	<div class="down">
 		<div class="down-left">
@@ -26,13 +25,12 @@
 				<button class="btn" id="btn_delete_row"><img src="/images/delete.png" class="icon-x">삭제</button>
 			</div>
 			<div class="down-left-text">
-				<input type="text" id="search"  placeholder="Enter text to search..."></input>
+				<input type="text" id="search" placeholder="Enter text to search..."></input>
 				<button class="FC-btn" id="btn_search"><img src="/images/search.png" class="icon">Find</button>
 				<button class="FC-btn" id="clear"><img src="/images/clear.png" class="icon">Clear</button>
 			</div>
 			<div style="height: auto; overflow: auto;" onclick="handleClose(modal2)" class="gridbox"><table id="lisc001DTO"></table></div>
 		</div>
-
 		<div class="down-right">
 			<!-- 아래.오른쪽 -->
 			<div class="down-right-up">
@@ -46,20 +44,19 @@
 						<!-- Modal  -->
 						<div class="modal" id="myModal1">
 							<div class="box">
-								<div class="modalText">코드 (30자리) <input type="text" name="" class="modalInput" id="code" ></div>
-								<div class="modalText">항목 1 (80자리) <input type="text" name="" class="modalInput" id="item1" ></div>
-								<div class="modalText">항목 2 (80자리) <input type="text" name="" class="modalInput" id="item2" ></div>
-								<div class="modalText">항목 3 (80자리) <input type="text" name="" class="modalInput" id="item3" ></div>
-								<div class="modalText">항목 4 (80자리) <input type="text" name="" class="modalInput" id="item4" ></div>
-								<div class="modalText">항목 5 (80자리) <input type="text" name="" class="modalInput" id="item5" ></div>
-								<div class="modalText">서술형 1 (4000자리) <input type="text" name="" class="modalInput" id="remark1" ></div>
-								<div class="modalText">서술형 2 (4000자리) <input type="text" name="" class="modalInput" id="remark2" ></div>
+								<div class="modalText">코드 (30자리) <input type="text" name="" class="modalInput" id="code"></div>
+								<div class="modalText">항목 1 (80자리) <input type="text" name="" class="modalInput" id="item1"></div>
+								<div class="modalText">항목 2 (80자리) <input type="text" name="" class="modalInput" id="item2"></div>
+								<div class="modalText">항목 3 (80자리) <input type="text" name="" class="modalInput" id="item3"></div>
+								<div class="modalText">항목 4 (80자리) <input type="text" name="" class="modalInput" id="item4"></div>
+								<div class="modalText">항목 5 (80자리) <input type="text" name="" class="modalInput" id="item5"></div>
+								<div class="modalText">서술형 1 (4000자리) <input type="text" name="" class="modalInput" id="remark1"></div>
+								<div class="modalText">서술형 2 (4000자리) <input type="text" name="" class="modalInput" id="remark2"></div>
 							</div>
 						</div>
 					</div>
-					
 				</div>
-				<div style="height: 30vh; overflow: auto;" onclick="handleClose(modal2)" class="gridbox"> <table id="lisc002DTO"></table></div>
+				<div style="height: 30vh; overflow: auto;" onclick="handleClose(modal2)" class="gridbox"><table id="lisc002DTO"></table></div>
 			</div>
 			<div class="down-right-down">
 				<!-- 아래.오른쪽.아래 -->
@@ -72,25 +69,24 @@
 						<!-- Modal  -->
 						<div class="modal" id="myModal2">
 							<div class="box">
-								<div class="modalText">코드 (30자리) <input type="text" name="" class="modalInput" id="code" ></div>
-								<div class="modalText">항목 1 (80자리) <input type="text" name="" class="modalInput" id="item1" ></div>
-								<div class="modalText">항목 2 (80자리) <input type="text" name="" class="modalInput" id="item2" ></div>
-								<div class="modalText">항목 3 (80자리) <input type="text" name="" class="modalInput" id="item3" ></div>
-								<div class="modalText">항목 4 (80자리) <input type="text" name="" class="modalInput" id="item4" ></div>
-								<div class="modalText">항목 5 (80자리) <input type="text" name="" class="modalInput" id="item5" ></div>
-								<div class="modalText">서술형 1 (4000자리) <input type="text" name="" class="modalInput" id="remark1" ></div>
-								<div class="modalText">서술형 2 (4000자리) <input type="text" name="" class="modalInput" id="remark2" ></div>
+								<div class="modalText">코드 (30자리) <input type="text" name="" class="modalInput" id="code"></div>
+								<div class="modalText">항목 1 (80자리) <input type="text" name="" class="modalInput" id="item1"></div>
+								<div class="modalText">항목 2 (80자리) <input type="text" name="" class="modalInput" id="item2"></div>
+								<div class="modalText">항목 3 (80자리) <input type="text" name="" class="modalInput" id="item3"></div>
+								<div class="modalText">항목 4 (80자리) <input type="text" name="" class="modalInput" id="item4"></div>
+								<div class="modalText">항목 5 (80자리) <input type="text" name="" class="modalInput" id="item5"></div>
+								<div class="modalText">서술형 1 (4000자리) <input type="text" name="" class="modalInput" id="remark1"></div>
+								<div class="modalText">서술형 2 (4000자리) <input type="text" name="" class="modalInput" id="remark2"></div>
 							</div>
 						</div>
 					</div>
-
 				</div>
 				<div style="height: 37vh; overflow: auto;" onclick="handleClose(modal2)" class="gridbox"><table id="lisc003DTO"></table></div>
 			</div>
 		</div>
 	</div>
 
-	
+
 	<script>
 	// Grid --------------------------------------------------------------------------------------------------
 	// Grid1
@@ -105,8 +101,19 @@
 		    colNames:['코드','코드명', '비고', 'ITEM1', 'ITEM2'],	//컬럼명
 		    colModel:
 		    [
-		   	 	 { name: 'CODE_TYPE', index: 'CODE_TYPE', width: '40', align:"center"},
-			     { name: 'CODE_TYPE_NAME', index: 'CODE_TYPE_NAME', width: '40', align:"center"},
+		   	 	{ name: 'CODE_TYPE', index: 'CODE_TYPE', width: '40', align:"center"},
+		   	 	{
+		            name: 'CODE_TYPE_NAME',
+		            index: 'CODE_TYPE_NAME',
+		            width: '40',
+		            align: 'center',
+		            editable: true, // 편집 가능한 상태로 설정
+		            edittype: 'text', // 편집 타입을 text로 설정
+		            editoptions: {
+		               size: 30, // 입력 상자의 너비 설정 (문자 수)
+		               maxlength: 100 // 최대 입력 길이 설정
+		            }
+		         },
 			     {
 			         name: 'COMMENTS',
 			         index: 'COMMENTS',
@@ -189,14 +196,14 @@
     	    colNames:item1Array,	//컬럼명 item1Array로 바꾸기
     	    colModel:
     	    [	
-    		     { name: item1Array[0], index: item1Array[0], width: '10', align:"center"},
-    		     { name: item1Array[1], index: item1Array[1], width: '10', align: "center" },
-    		     { name: item1Array[2], index: item1Array[2], width: '10', align: "center" },
-    		     { name: item1Array[3], index: item1Array[3], width: '10', align: "center" },
-    		     { name: item1Array[4], index: item1Array[4], width: '10', align: "center" },
-    		     { name: item1Array[5], index: item1Array[5], width: '10', align: "center" },
-    		     { name: item1Array[6], index: item1Array[6], width: '10', align: "center" },
-    		     { name: item1Array[7], index: item1Array[7], width: '10', align: "center" },
+    		     { name: item1Array[0], index: item1Array[0], width: '10', align:"center", hidden: item1Array[0] === ""},
+    		     { name: item1Array[1], index: item1Array[1], width: '10', align: "center", hidden: item1Array[1] === ""},
+    		     { name: item1Array[2], index: item1Array[2], width: '10', align: "center", hidden: item1Array[2] === "" },
+    		     { name: item1Array[3], index: item1Array[3], width: '10', align: "center", hidden: item1Array[3] === ""},
+    		     { name: item1Array[4], index: item1Array[4], width: '10', align: "center", hidden: item1Array[4] === ""},
+    		     { name: item1Array[5], index: item1Array[5], width: '10', align: "center", hidden: item1Array[5] === ""},
+    		     { name: item1Array[6], index: item1Array[6], width: '10', align: "center", hidden: item1Array[6] === ""},
+    		     { name: item1Array[7], index: item1Array[7], width: '10', align: "center", hidden: item1Array[7] === ""},
     		     { name: "lisc002code", index: "lisc002code", hidden : true},
     		], //서버에서 받은 데이터 설정
     	    jsonReader: 
@@ -276,20 +283,20 @@
     	    colNames:item2Array,	//컬럼명
     	    colModel:
     	    [
-       		     { name: item2Array[0], index: item2Array[0], width: '10', align:"center"},
-       		     { name: item2Array[1], index: item2Array[1], width: '10', align: "center" },
-       		     { name: item2Array[2], index: item2Array[2], width: '10', align: "center" },
-       		     { name: item2Array[3], index: item2Array[3], width: '10', align: "center" },
-       		     { name: item2Array[4], index: item2Array[4], width: '10', align: "center" },
-       		     { name: item2Array[5], index: item2Array[5], width: '10', align: "center" },
-       		     { name: item2Array[6], index: item2Array[6], width: '10', align: "center" },
-       		     { name: item2Array[7], index: item2Array[7], width: '10', align: "center" }
+       		   	{ name: item2Array[0], index: item2Array[0], width: '10', align:"center", hidden: item2Array[0] === ""},
+       		    { name: item2Array[1], index: item2Array[1], width: '10', align: "center", hidden: item2Array[1] === ""},
+       		    { name: item2Array[2], index: item2Array[2], width: '10', align: "center", hidden: item2Array[2] === ""},
+       		    { name: item2Array[3], index: item2Array[3], width: '10', align: "center", hidden: item2Array[3] === ""},
+       		    { name: item2Array[4], index: item2Array[4], width: '10', align: "center", hidden: item2Array[4] === ""},
+       		    { name: item2Array[5], index: item2Array[5], width: '10', align: "center", hidden: item2Array[5] === ""},
+       		    { name: item2Array[6], index: item2Array[6], width: '10', align: "center", hidden: item2Array[6] === ""},
+       		    { name: item2Array[7], index: item2Array[7], width: '10', align: "center", hidden: item2Array[7] === ""}
        		], //서버에서 받은 데이터 설정
     	    jsonReader: 
     	    {
-    		     repeatitems: false, //서버에서 받은 data와 Grid 상의 column 순서를 맞출것인지?
-    		     root:'rows', //서버의 결과 내용에서 데이터를 읽어오는 기준점
-    		     records:'records'  // 보여지는 데이터 갯수(레코드) totalRecord 
+    		    repeatitems: false, //서버에서 받은 data와 Grid 상의 column 순서를 맞출것인지?
+    		    root:'rows', //서버의 결과 내용에서 데이터를 읽어오는 기준점
+    		    records:'records'  // 보여지는 데이터 갯수(레코드) totalRecord 
     	    },
     	    autowidth: true,
     	  	rownumbers: true,         
@@ -412,9 +419,7 @@
 		handleClose(modal1);
 		handleClose(modal2);
 	})
-	
 
-	
 	</script>
 </body>
 </html>
