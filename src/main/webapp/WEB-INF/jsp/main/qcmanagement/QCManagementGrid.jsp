@@ -147,7 +147,7 @@ pageEncoding="UTF-8"%>
             <label class="result-label" for="qcCode">QC코드</label>
             <input
               class="result-input qcCode-input"
-              id="qcCode"
+              id="qcCodeSelectInput"
               type="text"
               disabled
             />
@@ -155,7 +155,7 @@ pageEncoding="UTF-8"%>
             <label class="result-label" for="qcMaterialName">QC물질명</label>
             <input
               class="result-input qcMaterial-input"
-              id="qcName"
+              id="qcNameSelectInput"
               type="text"
               disabled
             />
@@ -163,7 +163,7 @@ pageEncoding="UTF-8"%>
             <label class="result-label" for="startDate">시작일</label>
             <input
               class="result-input date"
-              id="startDate"
+              id="startDateSelectInput"
               type="text"
               disabled
             />
@@ -714,6 +714,11 @@ const printGridlisq100 = function() {
 		},
 		onSelectRow: function(rowid) {
 			console.log($("#list1").getRowData(rowid));
+			var selectRowData = $("#list1").getRowData(rowid);
+			
+			$("#qcCodeSelectInput").val(selectRowData.qcCode);
+			$("#qcNameSelectInput").val(selectRowData.qcName);
+			$("#startDateSelectInput").val(selectRowData.startDate);
 			
 			printGridlisc100();
 			printGridlisq110();
@@ -765,11 +770,15 @@ const printGridlisc100 = function() {
 	});
 };
 
+
+// 첫 페이지 로드
 $(document).ready(function() {
 	printGridlisq100();
 	printGridlisc100();
 });
 
+
+// 조회 버튼 클릭
 $("#searchBtn").on("click", function() {
 	printGridlisq100();
 	printGridlisc100();
