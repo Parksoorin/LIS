@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,18 +101,18 @@
     <div class="modal__background">
         <div class="gumsa-modal">
             <div class="flex gumsa-modal-title">
-                <div>검사 코드</div>
-                <div>검사 항목</div>
+                <div class="ml">검사 코드</div>
+                <div class="ml">검사 항목</div>
             </div>
-            <div class="overflow-A gumsa-modal-display">
+            <div class="overflow-A gumsa-modal-display" id="gumsaContainer">
                 <c:forEach var="item" items="${gumsaList}">
                     <div class="flex cell modal-row">
-                        <div class="code">${item.code}</div>
-                        <div class="item">${item.item1}</div>
+                        <div class="code ml">${item.code}</div>
+                        <div class="item ml">${item.item1}</div>
                     </div>
                 </c:forEach>
             </div>
-            <div class="gumsa-modal-btn flex">
+            <div class="gumsa-modal-btn flex space-around">
                 <button id="confirmBtn">확인</button>
                 <button id="closeBtn">닫기</button>
             </div>
@@ -124,5 +125,6 @@
     <script src="./js/qcResult/qcInit.js" defer></script>
     <script src="./js/qcResult/qcJqgrid.js" defer></script>
     <script src="./js/qcResult/qcPrint.js" defer></script>
+    
 </body>
 </html>
