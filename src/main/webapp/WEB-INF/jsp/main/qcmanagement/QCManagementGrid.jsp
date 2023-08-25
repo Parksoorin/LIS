@@ -106,8 +106,8 @@ pageEncoding="UTF-8"%>
               placeholder="Enter text to search..."
             />
 
-            <button class="btn btn-small search-btn">검색</button>
-            <button class="btn btn-small clear-btn">Clear</button>
+            <button id="qcQualitySearchBtn" class="btn btn-small search-btn">검색</button>
+            <button id="qcQualityClearBtn" class="btn btn-small clear-btn">Clear</button>
           </div>
         </div>
         
@@ -128,8 +128,8 @@ pageEncoding="UTF-8"%>
               placeholder="Enter text to search..."
             />
 
-            <button class="btn btn-small search-btn">검색</button>
-            <button class="btn btn-small clear-btn">Clear</button>
+            <button id="inspectionListSearchBtn" class="btn btn-small search-btn">검색</button>
+            <button id="inspectionListClearBtn" class="btn btn-small clear-btn">Clear</button>
           </div>
         </div>
         
@@ -621,7 +621,7 @@ $("#saveBtn").on("click", function () {
 	
 	printGridlisq100();
 	$("#list3").jqGrid("clearGridData", true);
-})
+});
 
 
 // 항목삭제 버튼
@@ -705,7 +705,6 @@ const printGridlisq100 = function() {
 		rownumbers: false,  
 		gridview : true,  // 선 표시 true/false
 		sortable: true,
-		loadonce: true,
 		loadComplete: function(data){  
 			console.log(data);
 		},	// loadComplete END   
@@ -757,7 +756,6 @@ const printGridlisc100 = function() {
 		multiselectWidth: 30, // 체크 박스 크기
 		gridview : true,  // 선 표시 true/false      
 		sortable: true,
-		loadonce: true,
 		loadComplete: function(data){  
 			console.log(data);
 		},	// loadComplete END   
@@ -770,13 +768,92 @@ const printGridlisc100 = function() {
 $(document).ready(function() {
 	printGridlisq100();
 	printGridlisc100();
-	
-	$("#list1").jqGrid("filterToolbar", { defaultSearch: "cn", stringResult: true, searchOnEnter: false, multipleSearch: true });
 });
 
 $("#searchBtn").on("click", function() {
 	printGridlisq100();
 	printGridlisc100();
+});
+
+
+// 검색 함수
+function searchInGrid(value, grid) {
+	$("#" + grid).jqGrid("setGridParam", {
+        datatype: "json", // 데이터 유형을 변경하여 새 데이터로 다시 로드
+        page: 1 // 페이지를 처음부터 로드
+    }).trigger("reloadGrid");
+	
+	$("#" + grid).jqGrid("setGridParam", {
+	    beforeProcessing: function(data) {
+            // inputValue가 빈 값인 경우 모든 행 보존
+	        if (value === "") {
+	            return;
+	        }
+	 	    
+	        var filteredData = []; // 필터된 데이터
+	        
+	        for (var i = 0; i < data.rows.length; i++) {
+	            var rowData = data.rows[i];
+	            var matched = false;
+	            
+	            // rowData의 모든 value 값과 inputValue 비교
+	            for (var key in rowData) {
+                    var cellValue = rowData[key];
+                    if (cellValue && cellValue.toString().replace(/\s+/g, "").toLowerCase().includes(value)) {
+                        matched = true;
+                        break; // 일치하는 컬럼이 하나라도 있으면 검색 중단
+                    }
+	            }
+	
+	            if (matched) {
+	                filteredData.push(rowData);
+	            }
+	        }
+	        data.rows = filteredData;
+	    }
+	});
+};
+
+// QC품질 검사항목관리 검색
+$("#qcQualityItem").on("input", function() {
+	var inputValue = $(this).val().replace(/\s+/g, "").toLowerCase();
+	
+	searchInGrid(inputValue, "list1");
+});
+
+// 검사항목 리스트 검색
+$("#inspectionList").on("input", function() {
+	var inputValue = $(this).val().replace(/\s+/g, "").toLowerCase();
+	
+	searchInGrid(inputValue, "list2");
+});
+
+// QC품질 검사항목관리 검색 버튼
+$("#qcQualitySearchBtn").on("click", function() {
+	var inputValue = $("#qcQualityItem").val().replace(/\s+/g, "").toLowerCase();
+	
+	searchInGrid(inputValue, "list1");
+});
+
+// 검사항목 리스트 검색 버튼
+$("#inspectionListSearchBtn").on("click", function() {
+	var inputValue = $("#inspectionList").val().replace(/\s+/g, "").toLowerCase();
+	
+	searchInGrid(inputValue, "list2");
+});
+
+// QC품질 검사항목관리 Clear 버튼
+$("#qcQualityClearBtn").on("click", function() {
+	$("#qcQualityItem").val("");
+	
+	searchInGrid("", "list1");
+});
+
+// 검사항목 리스트 Clear 버튼
+$("#inspectionListClearBtn").on("click", function() {
+	$("#inspectionList").val("");
+	
+	searchInGrid("", "list2");
 });
 
 </script>
