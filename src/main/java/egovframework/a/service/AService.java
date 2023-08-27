@@ -39,4 +39,5 @@ public interface AService {
 	List<lisc500DTO> lisc500();
 	List<lisc100DTO> lisc100();
 	List<lisc501DTO> lisc501(String data);
+	Object lisc501SaveData(String testCode, String invCode);
 }

@@ -32,7 +32,7 @@
 		select TEST_CODE, TEST_NAME, JUNDAL_PART, TEST_GUBUN, KUKUK,
 		IN_DANUI, OUT_DANUI, CHANGE_QTY, BARCODE_IN_YN, BARCODE_DIV, BARCODE_STORE_YN,
 		STORE_DANUI, BARCODE_OUT_YN, EXP_DAY, EXP_OPEN_DAY, KEEP_NAME,
-		KEEP_OPEN_NAME, SUPPLIER_NAME, JEJO_NAME, BARCODE, DANGA, LOT_NO,
+		KEEP_OPEN_NAME, SUPPLIER_NAME, JEJO_CODE, BARCODE, DANGA, LOT_NO,
 		START_DATE, END_DATE, HOSPITAL_CODE
 		from lisc500
 		order by TEST_CODE, TEST_NAME;
@@ -51,4 +51,26 @@
 		left join lisc100 on lisc100.TEST_CODE = lisc501.TEST_CODE
 		where lisc501.INV_CODE = #{listData};
 	</select>
+	
+	<insert id="lisc501SaveData" parameterType="egovframework.a.model.Lisc501updateDTO">
+        INSERT INTO lisc501 (SYS_DATE, USER_ID, UPD_DATE, INV_CODE, TEST_CODE)
+        VALUES (
+            CONCAT(
+                DATE_FORMAT(NOW(), '%Y-%m-%d '),
+                CASE WHEN HOUR(NOW()) >= 12 THEN CONCAT('오후 ', IF(HOUR(NOW()) > 12, HOUR(NOW()) - 12, HOUR(NOW()))) ELSE CONCAT('오전 ', HOUR(NOW())) END,
+                DATE_FORMAT(NOW(), ':%i:%s')
+            ),
+            'hict',
+            CONCAT(
+                DATE_FORMAT(NOW(), '%Y-%m-%d '),
+                CASE WHEN HOUR(NOW()) >= 12 THEN CONCAT('오후 ', IF(HOUR(NOW()) > 12, HOUR(NOW()) - 12, HOUR(NOW()))) ELSE CONCAT('오전 ', HOUR(NOW())) END,
+                DATE_FORMAT(NOW(), ':%i:%s')
+            ),
+            #{invCode},
+            #{testCode}
+        );
+    </insert>
+	
+	
+	
 </mapper>
