@@ -8,7 +8,7 @@ function addListData() {
 	var newRowId = grid.jqGrid('getGridParam', 'records') + 1; 
 	
 	// 빈 객체로 시작
-	var newData = {};
+	var newData = { statusV: "I" };  // I 플래그로 설정
 	
 	// jqGrid에 빈 데이터로 행 추가
 	grid.jqGrid('addRowData', newRowId, newData);
@@ -21,6 +21,40 @@ function addListData() {
 	
 }	
 
+
+// list1DataSave() 함수 정의
+function list1DataSave() {
+	var grid = $('#list1');
+    var rowDataArray = grid.jqGrid('getRowData');
+    
+    var modifiedData = [];
+    rowDataArray.forEach(function(rowData) {
+        if (rowData.statusV === "I" || rowData.statusV === "U") {
+            modifiedData.push(rowData);
+        }
+    });
+    
+    // modifiedData 배열에는 추가 및 수정된 데이터가 들어 있음
+    console.log("Modified Data:", modifiedData);
+    
+    // 여기에서 modifiedData를 서버로 보내는 로직을 추가할 수 있습니다.
+    // 서버로 데이터를 보내는 로직을 추가하는 부분입니다.
+     $.ajax({
+         type: "POST",
+         url: "reagentA.do",
+         data: JSON.stringify(modifiedData),
+		 contentType: "application/json; charset=utf-8", // 데이터 전송 형식 지정
+         dataType: "json",
+         success: function(response) {
+            console.log("Data sent successfully:", response);
+			 // 성공적으로 서버로 전송된 후의 동작을 정의할 수 있습니다.
+         },
+         error: function(error) {
+            console.error("Error sending data:", error);
+			// 서버로 전송 중 에러 발생 시의 동작을 정의할 수 있습니다.
+         }
+     });
+}
 
 // deleteListData() 함수 정의, list1 열 삭제
 function deleteListData() {
@@ -306,6 +340,11 @@ function saveListData() {
 	// list3에서 체크된 행의 ID(인덱스) 배열을 가져온다.
 	var selectedRows = $('#list3').jqGrid('getGridParam', 'selarrrow');
 	
+	var listData = [];
+	
+	var invRowId = $("#list1").getGridParam("selrow");
+	var invRowData = $("#list1").getRowData(invRowId);
+	
 	// 가져온 행 데이터를 list2 jqGrid에 추가
 	for (var i = 0; i < selectedRows.length; i++) {
 		
@@ -314,13 +353,44 @@ function saveListData() {
 		
 		// list3에서 해당 행의 데이터를 가져온다. 가져온 데이터는 'rowData' 변수에 저장된다.
 		var rowData = $('#list3').jqGrid('getRowData', rowId);
-
+		
 		// list2에 가져온 데이터를 추가한다.
 		// 'addRowData'함수는 새로운 행을 그리드에 추가하는 함수
 		// rowData의 내용이 새로운 행으로 추가된다.
 		$('#list2').jqGrid('addRowData', undefined, rowData);
+		
+		console.log(invRowData);
+		console.log(invRowData.testCode);
+		
+		rowData = {"testCode": rowData.testCode, "invCode": invRowData.testCode};
+		console.log(rowData);
+		listData.push(rowData);
 	}
+	
+	// lisc501InvCode와 lisc501SaveData를 합쳐서 하나의 배열로 만듦
+    /*var lisc501SaveData = listData.map(function(item, index) {
+        return Object.assign(item, lisc501InvCode[index]);
+    });*/
+	
+	
+	console.log(listData);
+		
+	$.ajax({
+		type: 'POST',
+		url: '/reagentA2Data.do',
+		data: JSON.stringify(listData),
+		contentType: 'application/json', // 데이터 타입 설정
+        success: function(response) {
+            console.log('Data sent successfully:', response);
+            // 성공 시 처리할 로직 추가
+        },
+        error: function(error) {
+            console.error('Error sending data:', error);
+            // 에러 시 처리할 로직 추가
+    	}
+	});
 }
+
 
 // deleteListData2() 함수 정의, list2,3 내용 삭제
 function deleteListData2() {
