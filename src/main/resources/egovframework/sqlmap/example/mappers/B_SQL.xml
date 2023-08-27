@@ -103,8 +103,9 @@
 		parameterType="egovframework.b.model.QcResultRequestDTO"
 		resultType="java.util.LinkedHashMap">
 
-		select c.qc_name as 'QC물질명', gumsa_name1 as '검사명', a.qc_level as
-		'Level', a.lot_no as 'LotNo', max(a.mean_value) as 'FixedMean',
+		select c.qc_name as 'QC물질명'
+		     , gumsa_name1 as '검사명'
+		     , a.qc_level as 'Level', a.lot_no as 'LotNo', max(a.mean_value) as 'FixedMean',
 		max(a.sd_value) as 'FixedSD', max(a.cv_value) as 'FixedCV',
 		ROUND(AVG(test_result), 2) as 'CumMean', ROUND(STDDEV(test_result), 2)
 		AS 'CumSD', ROUND(STDDEV(test_result)/AVG(test_result)*100, 2) as
@@ -114,13 +115,13 @@
 			,
 			<foreach collection="dateList" item="i" separator=","
 				index="index">
-				MAX(CASE WHEN final_date = #{i} THEN test_result ELSE null END) AS '${i}'
+				MAX(CASE WHEN final_date = #{i} THEN test_result ELSE null END) AS '#{i}'
 			</foreach>
 		</if>
 		from lisq200 a
 		left join lisc100 b
-		on a.test_code = b.test_code
-		and a.fk_start_date = b.start_date
+		  on a.test_code = b.test_code
+		 and a.fk_start_date = b.start_date
 		left join lisq100 c
 		on a.qc_code = c.qc_code
 		and a.qc_level = c.qc_level
