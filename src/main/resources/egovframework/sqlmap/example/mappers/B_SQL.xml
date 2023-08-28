@@ -117,8 +117,7 @@
 		<if test="dateList != null and dateList.size() > 0">
 			 ,
 			<foreach collection="dateList" item="i" separator="," index="index">
-				MAX(CASE WHEN final_date = #{i} 
-				THEN test_result ELSE null END) AS '#{i}'
+				MAX(CASE WHEN final_date = #{i} THEN test_result ELSE null END) AS #{i}
 			</foreach>
 		</if>
 		from lisq200 a
