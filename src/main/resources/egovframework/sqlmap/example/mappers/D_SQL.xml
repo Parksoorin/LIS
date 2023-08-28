@@ -122,7 +122,7 @@
 				'PM', '오후'
 			),
 			#{testCode},
-            #{item1},
+            #{jundalPart},
             #{meanValue},
             #{sdValue},
             #{cvValue}, 
@@ -164,7 +164,7 @@
 				'PM', '오후'
 			),
         	TEST_CODE = #{testCode},
-            JUNDAL_PART = #{item1},
+            JUNDAL_PART = #{jundalPart},
             MEAN_VALUE = #{meanValue},
             SD_VALUE = #{sdValue},
             CV_VALUE = #{cvValue}, 
@@ -188,7 +188,7 @@
             GUBUN_10X = #{gubun10X}, 
             TEST_CODE_SEQ = #{testCodeSeq}, 
             GRAPH_YN = #{graphYN}
-        WHERE QC_CODE = #{qcCode} AND QC_LEVEL = #{qcLevel} AND LOT_NO = #{lotNo} AND TEST_CODE = #{testCode} AND FK_START_DATE = #{fkStartDate} AND FK_QC_START_DATE = #{fkQcStartDate};
+        WHERE QC_CODE = #{qcCode} AND QC_LEVEL = #{qcLevel} AND LOT_NO = #{lotNo} AND TEST_CODE = #{testCode} AND (#{fkStartDate} = '' OR FK_START_DATE = #{fkStartDate}) AND (#{fkQcStartDate} = '' OR FK_QC_START_DATE = #{fkQcStartDate});
     </update>
     
     <update id="delData" parameterType="egovframework.d.model.lisq110DTO">
@@ -209,6 +209,6 @@
     <select id="getJundalPart" parameterType="String" resultType="String">
     	SELECT DISTINCT CODE
     	FROM lisc002
-    	WHERE ITEM1 = #{jundalPart};
+    	WHERE ITEM1 = #{item1};
     </select>
 </mapper>
