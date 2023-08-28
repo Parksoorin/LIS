@@ -217,39 +217,7 @@ pageEncoding="UTF-8"%>
     </div>
     
 <script>
-// 조회구분 전체/사용/폐기 변경
-var lisq100SelectUse = $('input:radio[name=use]:checked').val();
-
-$('input:radio[name=use]').on("change", function() {
-	lisq100SelectUse = $('input:radio[name=use]:checked').val();
-	
-	printGridlisq100();
-	$("#list3").jqGrid("clearGridData", true);
-});
-
-// 조회구분 전체/내부/외부 변경
-var lisq100SelectIO = $('input:radio[name=inOut]:checked').val();
-
-$('input:radio[name=inOut]').on("change", function() {
-	lisq100SelectIO = $('input:radio[name=inOut]:checked').val();
-	
-	printGridlisq100();
-	$("#list3").jqGrid("clearGridData", true);
-});
-
-// 검사파트 변경 시 검사항목 조회용 파트 변경
-$('#inspectionPart').on("change", function() {
-	const testPart = $('#inspectionPart').val();
-	
-	$('#inspectionItemPart').val(testPart);
-	
-	changeQCNameList(testPart);
-	
-	printGridlisq100();
-	$("#list3").jqGrid("clearGridData", true);
-});
-
-// 검사파트 변경 시 QC물질명 리스트 변경
+//검사파트 변경 시 QC물질명 리스트 변경
 const changeQCNameList = function(jundalPart) {
 	$.ajax({
 	    type : 'post',           // 타입 (get, post, put 등등)
@@ -280,19 +248,72 @@ const changeQCNameList = function(jundalPart) {
 	})
 };
 
+//lisq100 그리드 작성 함수
+const printGridlisq100 = function() {
+	const endDate = $('input:radio[name=use]:checked').val();
+	const qcInOut = $('input:radio[name=inOut]:checked').val();
+	const jundalPart = $('#inspectionPart').val();
+	const qcName = $('#qcMaterial').val();
+	
+	$("#list1").jqGrid("GridUnload"); // 첫 번째 조회했던 그 값으로만 조회될 때 초기화
+	$('#list1').jqGrid({
+	    url: "/qcManagementLisq100.do",	// 서버주소 
+	    reordercolNames:true,
+	    postData : { 
+	    	endDate: endDate,
+	        qcInOut: qcInOut,
+	        jundalPart: jundalPart,
+	        qcName: qcName
+		}, // 보낼 파라미터
+	    mtype:'POST',	// 전송 타입
+	    datatype : "json",	// 받는 데이터 형태 
+	    colNames:['플래그', 'QC 코드', 'QC물질명', 'Lot No', 'Level', '검사파트', '시작일', '종료일', '고정검체번호',],	//컬럼명
+	    colModel:[
+			{ name: 'flag',				index: 'flag',			hidden: true, },
+			{ name: 'qcCode', 			index: 'qcCode',		width: '40', 	align: "left" },
+			{ name: 'qcName', 			index: 'qcName',		width: '80', 	align: "left" },
+			{ name: 'lotNo', 			index: 'lotNo',			width: '50', 	align: "left" },
+			{ name: 'qcLevel',			index: 'qcLevel',		width: '20', 	align: "left" },
+			{ name: 'testPart',			index: 'testPart',		width: '60', 	align: "left" },
+			{ name: 'startDate',		index: 'startDate',		width: '40', 	align: "left" },
+			{ name: 'endDate',			index: 'endDate',		width: '40', 	align: "left" },
+			{ name: 'qcSpecimenSer',	index: 'qcSpecimenSer',	width: '40', 	align: "left" },
+	    ], //서버에서 startDate 데이터 설정
+	    jsonReader: {
+		     repeatitems: false, //서버에서 받은 data와 Grid 상의 column 순서를 맞출것인지?
+		     root:'rows', //서버의 결과 내용에서 데이터를 읽어오는 기준점
+		     records:'records'  // 보여지는 데이터 개수(레코드) totalRecord 
+	    },
+	    autowidth: true,
+	    autoheight: true,
+		loadtext : "자료 조회중입니다. 잠시만 기다리세요..." ,   // 데이터 로드중일때      
+		emptyrecords: "Nothing to display",  // 데이터 없을때
+		rowNum: 2000, 
+		rownumbers: false,  
+		gridview : true,  // 선 표시 true/false
+		sortable: true,
+		loadComplete: function(data){  
+			console.log(data);
+		},	// loadComplete END   
+		beforeSelectRow: function(rowid, e) {  // 하나의 행만 체크
+			$("#list1").jqGrid('resetSelection');
+			return(true);
+		},
+		onSelectRow: function(rowid) {
+			console.log($("#list1").getRowData(rowid));
+			var selectRowData = $("#list1").getRowData(rowid);
+			
+			$("#qcCodeSelectInput").val(selectRowData.qcCode);
+			$("#qcNameSelectInput").val(selectRowData.qcName);
+			$("#startDateSelectInput").val(selectRowData.startDate);
+			
+			printGridlisc100();
+			printGridlisq110();
+		}
+	});
+};
 
-//QC물질명 변경 시 그리드 다시 그리기
-$('#qcMaterial').on("change", function() {
-	printGridlisq100();
-	$("#list3").jqGrid("clearGridData", true);
-});
-
-
-// 검사항목 조회용 파트 변경시 검사항목 리스트 변경
-$('#inspectionItemPart').on("change", function() {
-	printGridlisc100();
-});
-
+//lisq110 그리드 작성 함수
 const printGridlisq110 = function() {
 	const rowid = $("#list1").getGridParam("selrow");
 	const selectRow = $("#list1").getRowData(rowid);
@@ -398,7 +419,7 @@ const printGridlisq110 = function() {
 		},	// loadComplete END   
 		onSelectRow: function(rowid) {
 			console.log($("#list3").getRowData());
-// 			$('#list3').jqGrid('editRow', rowid); // 선택하면 바로 수정모드
+//			$('#list3').jqGrid('editRow', rowid); // 선택하면 바로 수정모드
 		},
 		beforeSaveCell: function(rowid, cellname, value, iRow, iCol) {
 			var rowData = $('#list3').getRowData(rowid);
@@ -517,6 +538,140 @@ const printGridlisq110 = function() {
 	});
 };
 
+//lisc100 그리드 작성 함수
+const printGridlisc100 = function() {
+	const jundalPart = $('#inspectionItemPart').val();
+	
+	$("#list2").jqGrid("GridUnload"); // 첫 번째 조회했던 그 값으로만 조회될 때 초기화
+	$('#list2').jqGrid({
+	    url: "/qcManagementLisc100.do",	// 서버주소 
+	    reordercolNames:true,
+	    postData : { 
+	    	jundalPart: jundalPart,
+		}, // 보낼 파라미터
+	    mtype:'POST',	// 전송 타입
+	    datatype : "json",	// 받는 데이터 형태 
+	    colNames:['플래그', '검사코드', '검사명', '단위', '검사파트'],	//컬럼명
+	    colModel:[
+			{ name: 'flag',				index: 'flag',			hidden: true, },
+			{ name: 'testCode',			index: 'testCode',		width: '40', 	align: "left" },
+			{ name: 'gumsaName',		index: 'gumsaName',		width: '60', 	align: "left" },
+			{ name: 'resultDanui',		index: 'resultDanui',	width: '40', 	align: "left" },
+			{ name: 'item1',			index: 'item1',			hidden: true },
+	    ], //서버에서 startDate 데이터 설정
+	    jsonReader: {
+		     repeatitems: false, //서버에서 받은 data와 Grid 상의 column 순서를 맞출것인지?
+		     root:'rows', //서버의 결과 내용에서 데이터를 읽어오는 기준점
+		     records:'records'  // 보여지는 데이터 개수(레코드) totalRecord 
+	    },
+	    autowidth: true,
+	    autoheight: true,
+		loadtext : "자료 조회중입니다. 잠시만 기다리세요..." ,   // 데이터 로드중일때      
+		emptyrecords: "Nothing to display",  // 데이터 없을때
+		rowNum: 2000, 
+		rownumbers: false,  
+		multiselect: true,  // 체크 박스 생성
+		multiselectWidth: 30, // 체크 박스 크기
+		gridview : true,  // 선 표시 true/false      
+		sortable: true,
+		loadComplete: function(data){  
+			console.log(data);
+		},	// loadComplete END   
+		onSelectRow: function(rowId) {
+			console.log(rowId);
+		}
+	});
+};
+
+//검색 함수
+const searchInGrid = function(value, grid) {
+	$("#" + grid).jqGrid("setGridParam", {
+   datatype: "json", // 데이터 유형을 변경하여 새 데이터로 다시 로드
+   page: 1 // 페이지를 처음부터 로드
+}).trigger("reloadGrid");
+	
+	$("#" + grid).jqGrid("setGridParam", {
+	    beforeProcessing: function(data) {
+       // inputValue가 빈 값인 경우 모든 행 보존
+	        if (value === "") {
+	            return;
+	        }
+	 	    
+	        var filteredData = []; // 필터된 데이터
+	        
+	        for (var i = 0; i < data.rows.length; i++) {
+	            var rowData = data.rows[i];
+	            var matched = false;
+	            
+	            // rowData의 모든 value 값과 inputValue 비교
+	            for (var key in rowData) {
+               var cellValue = rowData[key];
+               if (cellValue && cellValue.toString().replace(/\s+/g, "").toLowerCase().includes(value)) {
+                   matched = true;
+                   break; // 일치하는 컬럼이 하나라도 있으면 검색 중단
+               }
+	            }
+	
+	            if (matched) {
+	                filteredData.push(rowData);
+	            }
+	        }
+	        data.rows = filteredData;
+	    }
+	});
+};
+
+
+//첫 페이지 로드
+$(document).ready(function() {
+	printGridlisq100();
+	printGridlisc100();
+});
+
+// 조회구분 전체/사용/폐기 변경
+var lisq100SelectUse = $('input:radio[name=use]:checked').val();
+
+$('input:radio[name=use]').on("change", function() {
+	lisq100SelectUse = $('input:radio[name=use]:checked').val();
+	
+	printGridlisq100();
+	$("#list3").jqGrid("clearGridData", true);
+});
+
+// 조회구분 전체/내부/외부 변경
+var lisq100SelectIO = $('input:radio[name=inOut]:checked').val();
+
+$('input:radio[name=inOut]').on("change", function() {
+	lisq100SelectIO = $('input:radio[name=inOut]:checked').val();
+	
+	printGridlisq100();
+	$("#list3").jqGrid("clearGridData", true);
+});
+
+// 검사파트 변경 시 검사항목 조회용 파트 변경
+$('#inspectionPart').on("change", function() {
+	const testPart = $('#inspectionPart').val();
+	
+	$('#inspectionItemPart').val(testPart);
+	
+	changeQCNameList(testPart);
+	
+	printGridlisq100();
+	$("#list3").jqGrid("clearGridData", true);
+});
+
+//QC물질명 변경 시 그리드 다시 그리기
+$('#qcMaterial').on("change", function() {
+	printGridlisq100();
+	$("#list3").jqGrid("clearGridData", true);
+});
+
+// 검사항목 조회용 파트 변경시 검사항목 리스트 변경
+$('#inspectionItemPart').on("change", function() {
+	printGridlisc100();
+});
+
+
 // 항목추가 버튼
 $("#addBtn").on("click", function() {
 	var selectedRowIds = $("#list2").getGridParam("selarrrow");
@@ -582,7 +737,6 @@ $("#addBtn").on("click", function() {
 	}
 });
 
-
 // 항목저장 버튼
 $("#saveBtn").on("click", function () {
 	// lisq100 데이터 전송
@@ -623,7 +777,6 @@ $("#saveBtn").on("click", function () {
 	$("#list3").jqGrid("clearGridData", true);
 });
 
-
 // 항목삭제 버튼
 $("#delBtn").on("click", function() {
 	// 어제 날짜 설정
@@ -661,167 +814,11 @@ $("#delBtn").on("click", function() {
 	}
 });
 
-
-const printGridlisq100 = function() {
-	const endDate = $('input:radio[name=use]:checked').val();
-	const qcInOut = $('input:radio[name=inOut]:checked').val();
-	const jundalPart = $('#inspectionPart').val();
-	const qcName = $('#qcMaterial').val();
-	
-	$("#list1").jqGrid("GridUnload"); // 첫 번째 조회했던 그 값으로만 조회될 때 초기화
-	$('#list1').jqGrid({
-	    url: "/qcManagementLisq100.do",	// 서버주소 
-	    reordercolNames:true,
-	    postData : { 
-	    	endDate: endDate,
-	        qcInOut: qcInOut,
-	        jundalPart: jundalPart,
-	        qcName: qcName
-		}, // 보낼 파라미터
-	    mtype:'POST',	// 전송 타입
-	    datatype : "json",	// 받는 데이터 형태 
-	    colNames:['플래그', 'QC 코드', 'QC물질명', 'Lot No', 'Level', '검사파트', '시작일', '종료일', '고정검체번호',],	//컬럼명
-	    colModel:[
-			{ name: 'flag',				index: 'flag',			hidden: true, },
-			{ name: 'qcCode', 			index: 'qcCode',		width: '40', 	align: "left" },
-			{ name: 'qcName', 			index: 'qcName',		width: '80', 	align: "left" },
-			{ name: 'lotNo', 			index: 'lotNo',			width: '50', 	align: "left" },
-			{ name: 'qcLevel',			index: 'qcLevel',		width: '20', 	align: "left" },
-			{ name: 'testPart',			index: 'testPart',		width: '60', 	align: "left" },
-			{ name: 'startDate',		index: 'startDate',		width: '40', 	align: "left" },
-			{ name: 'endDate',			index: 'endDate',		width: '40', 	align: "left" },
-			{ name: 'qcSpecimenSer',	index: 'qcSpecimenSer',	width: '40', 	align: "left" },
-	    ], //서버에서 startDate 데이터 설정
-	    jsonReader: {
-		     repeatitems: false, //서버에서 받은 data와 Grid 상의 column 순서를 맞출것인지?
-		     root:'rows', //서버의 결과 내용에서 데이터를 읽어오는 기준점
-		     records:'records'  // 보여지는 데이터 개수(레코드) totalRecord 
-	    },
-	    autowidth: true,
-	    autoheight: true,
-		loadtext : "자료 조회중입니다. 잠시만 기다리세요..." ,   // 데이터 로드중일때      
-		emptyrecords: "Nothing to display",  // 데이터 없을때
-		rowNum: 2000, 
-		rownumbers: false,  
-		gridview : true,  // 선 표시 true/false
-		sortable: true,
-		loadComplete: function(data){  
-			console.log(data);
-		},	// loadComplete END   
-		beforeSelectRow: function(rowid, e) {  // 하나의 행만 체크
-			$("#list1").jqGrid('resetSelection');
-			return(true);
-		},
-		onSelectRow: function(rowid) {
-			console.log($("#list1").getRowData(rowid));
-			var selectRowData = $("#list1").getRowData(rowid);
-			
-			$("#qcCodeSelectInput").val(selectRowData.qcCode);
-			$("#qcNameSelectInput").val(selectRowData.qcName);
-			$("#startDateSelectInput").val(selectRowData.startDate);
-			
-			printGridlisc100();
-			printGridlisq110();
-		}
-	});
-};
-
-const printGridlisc100 = function() {
-	const jundalPart = $('#inspectionItemPart').val();
-	
-	$("#list2").jqGrid("GridUnload"); // 첫 번째 조회했던 그 값으로만 조회될 때 초기화
-	$('#list2').jqGrid({
-	    url: "/qcManagementLisc100.do",	// 서버주소 
-	    reordercolNames:true,
-	    postData : { 
-	    	jundalPart: jundalPart,
-		}, // 보낼 파라미터
-	    mtype:'POST',	// 전송 타입
-	    datatype : "json",	// 받는 데이터 형태 
-	    colNames:['플래그', '검사코드', '검사명', '단위', '검사파트'],	//컬럼명
-	    colModel:[
-			{ name: 'flag',				index: 'flag',			hidden: true, },
-			{ name: 'testCode',			index: 'testCode',		width: '40', 	align: "left" },
-			{ name: 'gumsaName',		index: 'gumsaName',		width: '60', 	align: "left" },
-			{ name: 'resultDanui',		index: 'resultDanui',	width: '40', 	align: "left" },
-			{ name: 'item1',			index: 'item1',			hidden: true },
-	    ], //서버에서 startDate 데이터 설정
-	    jsonReader: {
-		     repeatitems: false, //서버에서 받은 data와 Grid 상의 column 순서를 맞출것인지?
-		     root:'rows', //서버의 결과 내용에서 데이터를 읽어오는 기준점
-		     records:'records'  // 보여지는 데이터 개수(레코드) totalRecord 
-	    },
-	    autowidth: true,
-	    autoheight: true,
-		loadtext : "자료 조회중입니다. 잠시만 기다리세요..." ,   // 데이터 로드중일때      
-		emptyrecords: "Nothing to display",  // 데이터 없을때
-		rowNum: 2000, 
-		rownumbers: false,  
-		multiselect: true,  // 체크 박스 생성
-		multiselectWidth: 30, // 체크 박스 크기
-		gridview : true,  // 선 표시 true/false      
-		sortable: true,
-		loadComplete: function(data){  
-			console.log(data);
-		},	// loadComplete END   
-		onSelectRow: function(rowId) {
-			console.log(rowId);
-		}
-	});
-};
-
-
-// 첫 페이지 로드
-$(document).ready(function() {
-	printGridlisq100();
-	printGridlisc100();
-});
-
-
 // 조회 버튼 클릭
 $("#searchBtn").on("click", function() {
 	printGridlisq100();
 	printGridlisc100();
 });
-
-
-// 검색 함수
-function searchInGrid(value, grid) {
-	$("#" + grid).jqGrid("setGridParam", {
-        datatype: "json", // 데이터 유형을 변경하여 새 데이터로 다시 로드
-        page: 1 // 페이지를 처음부터 로드
-    }).trigger("reloadGrid");
-	
-	$("#" + grid).jqGrid("setGridParam", {
-	    beforeProcessing: function(data) {
-            // inputValue가 빈 값인 경우 모든 행 보존
-	        if (value === "") {
-	            return;
-	        }
-	 	    
-	        var filteredData = []; // 필터된 데이터
-	        
-	        for (var i = 0; i < data.rows.length; i++) {
-	            var rowData = data.rows[i];
-	            var matched = false;
-	            
-	            // rowData의 모든 value 값과 inputValue 비교
-	            for (var key in rowData) {
-                    var cellValue = rowData[key];
-                    if (cellValue && cellValue.toString().replace(/\s+/g, "").toLowerCase().includes(value)) {
-                        matched = true;
-                        break; // 일치하는 컬럼이 하나라도 있으면 검색 중단
-                    }
-	            }
-	
-	            if (matched) {
-	                filteredData.push(rowData);
-	            }
-	        }
-	        data.rows = filteredData;
-	    }
-	});
-};
 
 // QC품질 검사항목관리 검색
 $("#qcQualityItem").on("input", function() {
