@@ -189,7 +189,7 @@ $('#list1').jqGrid(
 			loadonce: true,
 			gridview : true, // 그리드를 선표시할지 여부를 설정한다. true/false
 			cellsubmit: 'clientArray',
-		    editCell: true,
+		    /*cellEdit: true,*/
 			//더블클릭 이벤트... 더블클릭할 경우 에디트 모드로.
 			// 함수의 매개변수로 rowid, iRow, iCol, e가 전달되는데, 각각 클릭된 행의 ID, 행 인덱스, 열 인덱스 및 이벤트 객체입니다.
 			ondblClickRow: function (rowid, iRow, iCol, e) {

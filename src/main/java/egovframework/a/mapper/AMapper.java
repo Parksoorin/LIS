@@ -42,4 +42,5 @@ public interface AMapper {
 	List<lisc100DTO> lisc100();
 	List<lisc501DTO> lisc501(String data);
 	Object lisc501SaveData(@Param("testCode") String testCode, @Param("invCode") String invCode);
+	Object lisc501DeleteData(@Param("testCode") String testCode, @Param("invCode") String invCode);
 }

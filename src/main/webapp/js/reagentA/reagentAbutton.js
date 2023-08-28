@@ -214,7 +214,7 @@ function wantSearch1() {
 			rowData.keepName.includes(keyword) ||
 			rowData.KeepOpenName.includes(keyword) ||
 			rowData.supplierName.includes(keyword) ||
-			rowData.jejoName.includes(keyword) ||
+			rowData.jejoCode.includes(keyword) ||
 			rowData.barcode.includes(keyword) ||
 			rowData.danga.includes(keyword) ||
 			rowData.lotNo.includes(keyword) ||
@@ -334,8 +334,8 @@ function clearInput3() {
 }
 
 
-// saveListData() 함수 정의
-function saveListData() {
+// saveListData2() 함수 정의
+function saveListData2() {
 
 	// list3에서 체크된 행의 ID(인덱스) 배열을 가져온다.
 	var selectedRows = $('#list3').jqGrid('getGridParam', 'selarrrow');
@@ -367,11 +367,6 @@ function saveListData() {
 		listData.push(rowData);
 	}
 	
-	// lisc501InvCode와 lisc501SaveData를 합쳐서 하나의 배열로 만듦
-    /*var lisc501SaveData = listData.map(function(item, index) {
-        return Object.assign(item, lisc501InvCode[index]);
-    });*/
-	
 	
 	console.log(listData);
 		
@@ -397,12 +392,40 @@ function deleteListData2() {
 	// list2 에서 체크된 행의 ID(인덱스) 배열을 가져온다.
 	var selectedRows = $('#list2').jqGrid('getGridParam', 'selarrrow');
 	
+	var listData = [];
+
+    var invRowId = $("#list1").getGridParam("selrow");
+    var invRowData = $("#list1").getRowData(invRowId);
+	
 	// 가져온 행 데이터를 list2 jqGrid에서 삭제
 	for (var i = 0; i < selectedRows.length; i++) {
 		// selectedRows[i] => 현재 선택된 행의 ID를 가져온다.
 		var rowId = selectedRows[i];
+		var rowData = $('#list2').jqGrid('getRowData', rowId);
+		
+		// list1의 testCode를 invCode로 바꾸어서 데이터를 준비한다.
+        rowData = {"testCode": rowData.testCode, "invCode": invRowData.testCode}; // 여기서 testCode를 invCode로 변경
+        listData.push(rowData);
 		
 		// list2 에서 해당 행을 삭제한다.
 		$('#list2').jqGrid('delRowData', rowId);
 	}
+	console.log(listData);
+	
+	$.ajax({
+        type: 'POST',
+        url: '/reagentA2DataDelete.do', // 수정된 URL
+        data: JSON.stringify(listData),
+        contentType: 'application/json', // 데이터 타입 설정
+        success: function(response) {
+            console.log('Data deleted successfully:', response);
+            // 성공 시 처리할 로직 추가
+        },
+        error: function(error) {
+            console.error('Error deleting data:', error);
+            // 에러 시 처리할 로직 추가
+        }
+    });
 }
+
+

@@ -282,4 +282,20 @@ public class AController {
 	        } 
 			return new ResponseEntity<>("Data received successfully", HttpStatus.OK);
 		}
+		
+		
+		// jqGrid list2 Delete
+		@RequestMapping(value = "/reagentA2DataDelete.do", method = RequestMethod.POST)
+		public ResponseEntity<String> receiveData1(@RequestBody Lisc501updateDTO[] data) {
+			for (Lisc501updateDTO item : data) {
+				System.out.println("Test Code: " + item.getTestCode());
+				System.out.println("Inv Code: " + item.getInvCode());
+	            
+				String testCode = item.getTestCode();
+	            String invCode = item.getInvCode();
+	               
+	            aService.lisc501DeleteData(testCode, invCode);
+	        } 
+			return new ResponseEntity<>("Data received successfully", HttpStatus.OK);
+		}
 }

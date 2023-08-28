@@ -81,4 +81,10 @@ public class AServiceImpl implements AService{
 	        // 예시: Mapper를 통해 데이터베이스에 저장
 			return aMapper.lisc501SaveData(testCode, invCode);
 	    }
+		
+		@Override
+	    public Object lisc501DeleteData(String testCode, String invCode) {
+	        // 예시: Mapper를 통해 데이터베이스에 저장
+			return aMapper.lisc501DeleteData(testCode, invCode);
+	    }
 	}

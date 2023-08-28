@@ -40,4 +40,6 @@ public interface AService {
 	List<lisc100DTO> lisc100();
 	List<lisc501DTO> lisc501(String data);
 	Object lisc501SaveData(String testCode, String invCode);
+	Object lisc501DeleteData(String testCode, String invCode);
+	
 }
