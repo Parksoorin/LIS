@@ -135,8 +135,8 @@ $('#list1').jqGrid(
 				width : '100',
 				align : "center"
 			}, {
-				name : 'KeepOpenName',
-				index : 'KeepOpenName',
+				name : 'keepOpenName',
+				index : 'keepOpenName',
 				width : '100',
 				align : "center"
 			}, {

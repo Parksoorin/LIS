@@ -8,7 +8,7 @@ function addListData() {
 	var newRowId = grid.jqGrid('getGridParam', 'records') + 1; 
 	
 	// 빈 객체로 시작
-	var newData = { statusV: "I" };  // I 플래그로 설정
+	var newData = { statusV: "I" , jundalPart : 0, changeQty: 0, danga: 0 };  // I 플래그로 설정
 	
 	// jqGrid에 빈 데이터로 행 추가
 	grid.jqGrid('addRowData', newRowId, newData);
@@ -41,7 +41,7 @@ function list1DataSave() {
 
     $.ajax({
         type: "POST",
-        url: "/reagentAsav.do",
+        url: "/reagentAsave.do",
         data: JSON.stringify(modifiedData),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -74,9 +74,6 @@ function deleteListData() {
 
 		console.log("Row deleted and flagged as 'D':", selectedRowId);
         console.log(rowData);
-		
-		// modifiedData 배열에 있는 데이터를 서버로 보내는 로직 추가
-    	sendModifiedDataToServer(rowData);
 		
 	} else {
 		console.log("No row selected for deletion.");
@@ -408,6 +405,7 @@ function saveListData2() {
 		type: 'POST',
 		url: '/reagentA2Data.do',
 		data: JSON.stringify(listData),
+		dataType: "json",
 		contentType: 'application/json', // 데이터 타입 설정
         success: function(response) {
             console.log('Data sent successfully:', response);
@@ -451,6 +449,7 @@ function deleteListData2() {
         url: '/reagentA2DataDelete.do', // 수정된 URL
         data: JSON.stringify(listData),
         contentType: 'application/json', // 데이터 타입 설정
+		dataType: "json",
         success: function(response) {
             console.log('Data deleted successfully:', response);
             // 성공 시 처리할 로직 추가
