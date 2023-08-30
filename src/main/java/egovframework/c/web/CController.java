@@ -240,13 +240,15 @@ public class CController {
 		 for (lisc001DTO dto : lisc001Data) {
 			//System.out.println("001 dto.getCodeType() : " + dto.getCodeType());
 			//System.out.println("001 dto.CodeTypeName() : " + dto.getCodeTypeName());
-			
 	        String flag = dto.getFlag();
 	        //System.out.println("001 flag : " + flag);
 	        int result = 0;
 	        switch (flag) {
 	            case "U":
 	            	result = cService.update001Data(dto);
+	                break;
+	            case "I":
+	            	result = cService.add001Data(dto);
 	                break;
                 default:
                 	continue;
@@ -257,16 +259,15 @@ public class CController {
 	        }
 	    }
 		 // ------------------------------------------------------------------------002
-		 for (lisc002DTO dto : lisc002Data) {
-//			System.out.println("dto.getCodeType() : " + dto.getCodeType());
-//			System.out.println("dto.getItem1() : " + dto.getItem1());
-		        
+		 for (lisc002DTO dto : lisc002Data) {		        
 	        String flag = dto.getFlag();
-	        //System.out.println("002 flag : " + flag);
 	        int result = 0;
 	        switch (flag) {
 	            case "U":
 	                result = cService.update002Data(dto);
+	                break;
+	            case "I":
+	            	result = cService.add002Data(dto);
 	                break;
                 default:
                 	continue;
@@ -278,16 +279,15 @@ public class CController {
 	    }
 		// ------------------------------------------------------------------------003
 		 for (lisc003DTO dto : lisc003Data) {	
-			System.out.println("dto.getCode2() : " + dto.getCode2());
-			System.out.println("dto.getItem1() : " + dto.getItem1());
-			System.out.println("dto.getCodeType() : " + dto.getCodeType());
 			String flag = dto.getFlag();
-	     
-	        System.out.println("003 flag : " + flag);
+			System.out.println("003flag : " + flag);
 	        int result = 0;
 	        switch (flag) {
 	            case "U":
 	            	result = cService.update003Data(dto);
+	                break;
+	            case "I":
+	            	result = cService.add003Data(dto);
 	                break;
                 default:
                 	continue;

@@ -228,8 +228,10 @@
             beforeSubmitCell: function(rowid, celname, value, iRow, iCol) {
             	if (item1Array[iCol] !== 'flag' && item1Array[iCol] !== 'code') {
                     var rowData = $('#lisc002DTO').jqGrid('getRowData', rowid);
-                    rowData.flag = 'U';
-                    $('#lisc002DTO').jqGrid('setRowData', rowid, rowData);
+                    if (rowData.flag !== 'I') {  // 'flag'가 'I'가 아닌 경우 (삽입을 나타냄)
+	                    rowData.flag = 'U';
+	                    $('#lisc002DTO').jqGrid('setRowData', rowid, rowData);
+                    }
                 }
                 return value;
             },
@@ -297,7 +299,7 @@
     	    colNames:item2Array,	//컬럼명
     	    colModel:
     	    [
-       		   	{ name: 'code2', index: 'code2', width: '10', align:"center", hidden: item2Array[0] === "", editable : true, edittype : "text"},
+       		   	{ name: 'code2', index: 'code2', width: '10', align:"center", hidden: item2Array[0] === ""},
        		    { name: 'item1', index: 'item1', width: '10', align: "center", hidden: item2Array[1] === "", editable : true, edittype : "text"},
        		    { name: 'item2', index: 'item2', width: '10', align: "center", hidden: item2Array[2] === "", editable : true, edittype : "text"},
        		    { name: 'item3', index: 'item3', width: '10', align: "center", hidden: item2Array[3] === "", editable : true, edittype : "text"},
@@ -328,8 +330,10 @@
             beforeSubmitCell: function(rowid, celname, value, iRow, iCol) {
             	if (item2Array[iCol] !== 'flag') {
                     var rowData = $('#lisc003DTO').jqGrid('getRowData', rowid);
-                    rowData.flag = 'U';
-                    $('#lisc003DTO').jqGrid('setRowData', rowid, rowData);
+                    if (rowData.flag !== 'I') {  // 'flag'가 'I'가 아닌 경우 (삽입을 나타냄)
+                    	rowData.flag = 'U';
+                    	$('#lisc003DTO').jqGrid('setRowData', rowid, rowData);
+                    }
                 }
                 return value;
             },
@@ -442,7 +446,7 @@
 		});
 	})
 	
-	// addrow, deleterow 	
+	// addrow, deleterow----------------------------------------001 	
 	function addRow(gridId) {
 	    var newRowData = {};
 	    var grid = $(gridId);
@@ -456,19 +460,39 @@
 	    if (selectedRowId) { grid.jqGrid('delRowData', selectedRowId);
 	    } else { alert('Please select a row to delete.'); }
 	}
-	$("#btn_add_row").click(function(){ addRow('#lisc001DTO');});
-	const btnDeleteRow = document.getElementById('btn_delete_row');
-	btnDeleteRow.addEventListener('click', function(){ deleterow('#lisc001DTO'); });
-
-    $("#btn_add_row2").click(function(){ addRow('#lisc002DTO'); });
-  	const btnDeleteRow2 = document.getElementById('btn_delete_row2');
-	btnDeleteRow2.addEventListener('click', function(){ deleterow('#lisc002DTO'); });
-    
-    $("#btn_add_row3").click(function(){ addRow('#lisc003DTO'); });
-	const btnDeleteRow3 = document.getElementById('btn_delete_row3');
-	btnDeleteRow3.addEventListener('click', function(){ deleterow('#lisc003DTO'); });
+	$("#btn_add_row").click(function(){ 
+		addRow('#lisc001DTO');
+	});
+	$("#btn_delete_row").click(function(){deleterow('#lisc001DTO');});
+	// ---------------------------------------------------------002
+    $("#btn_add_row2").click(function(){ 
+    	var newRowData = {};
+	    var grid = $("#lisc001DTO");
+	    var newRowId = $("#lisc002DTO").jqGrid("getGridParam", "reccount") + 1;
+	    var selectedRowId = grid.jqGrid('getGridParam', 'selrow');
+	    var RowData = grid.jqGrid('getRowData', selectedRowId);
+	    
+	    newRowData.flag = 'I';
+	    newRowData.codeType = RowData.codeType;
+	    $("#lisc002DTO").jqGrid("addRowData", newRowId, newRowData, "first");
+    });
+    $("#btn_delete_row2").click(function(){deleterow('#lisc002DTO');});
+    //----------------------------------------------------------003
+    $("#btn_add_row3").click(function(){ 
+    	var newRowData = {};
+	    var grid = $("#lisc002DTO");
+	    var selectedRowId = grid.jqGrid('getGridParam', 'selrow'); // 그리드2의 rowid를 가져옴
+	    var RowData = grid.jqGrid('getRowData', selectedRowId);
+	    var newRowId = $("#lisc003DTO").jqGrid("getGridParam", "reccount") + 1;
+	    
+	    newRowData.flag = 'I';
+	    newRowData.codeType = RowData.codeType;  // 새로운 row의 codeType은 그리드2의 codeType
+	    newRowData.code = RowData.code;  // 새로운 row의 code는 그리드2의 code
+	    $("#lisc003DTO").jqGrid("addRowData", newRowId, newRowData, "first");
+    });
+    $("#btn_delete_row3").click(function(){deleterow('#lisc003DTO');});
 	
-	//clear
+	//clear-----------------------------------------------------
 	$("#clear").on("click", function() {
         // #search input 상자의 내용을 지움
         $("#search").val("");

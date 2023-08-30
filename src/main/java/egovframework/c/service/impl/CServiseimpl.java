@@ -54,8 +54,16 @@ public class CServiseimpl implements CService{
 		return cMapper.searchval(searchval);
 	}
 	@Override
-	public int addData(lisc002DTO dto) {
-		return cMapper.addData(dto);
+	public int add001Data(lisc001DTO dto) {
+		return cMapper.add001Data(dto);
+	}
+	@Override
+	public int add002Data(lisc002DTO dto) {
+		return cMapper.add002Data(dto);
+	}
+	@Override
+	public int add003Data(lisc003DTO dto) {
+		return cMapper.add003Data(dto);
 	}
 	@Override
 	public int update001Data(lisc001DTO dto) {

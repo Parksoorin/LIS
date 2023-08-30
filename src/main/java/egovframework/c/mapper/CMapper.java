@@ -23,4 +23,7 @@ public interface CMapper {
 	int update002Data(lisc002DTO dto);
 	int update003Data(lisc003DTO dto);
 	int update001Data(lisc001DTO dto);
+	int add001Data(lisc001DTO dto);
+	int add002Data(lisc002DTO dto);
+	int add003Data(lisc003DTO dto);
 }
