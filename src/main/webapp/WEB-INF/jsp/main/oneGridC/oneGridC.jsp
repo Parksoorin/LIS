@@ -127,7 +127,7 @@
 		  	cellEdit: true,
             cellsubmit: 'clientArray',
             beforeSubmitCell: function (rowid, celname, value, iRow, iCol) {
-                if (celname === 'CODE_TYPE_NAME' || celname === 'COMMENTS') {
+                if (celname === 'codeTypeName' || celname === 'comments') {
                     var rowData = $('#lisc001DTO').jqGrid('getRowData', rowid);
                     if (rowData.flag !== 'I') {  // 'flag'가 'I'가 아닌 경우 (삽입을 나타냄)
                         rowData.flag = 'U';  // 'flag'를 'U'로 설정하여 업데이트를 나타냄
@@ -271,7 +271,7 @@
 		        item2Array.push("");
 		    }
 		}
-		item2Array = [...item2Array, "flag", "codeType"];
+		item2Array = [...item2Array, "flag", "code", "codeType"];
         console.log("item2Array: ", item2Array); // 배열 출력
         
         $("#myModal2 input#code").val(item2Array[0] || '');
@@ -306,6 +306,7 @@
        		    { name: 'remark1', index: 'remark1', width: '10', align: "center", hidden: item2Array[6] === "", editable : true, edittype : "text"},
        		    { name: 'remark2', index: 'remark2', width: '10', align: "center", hidden: item2Array[7] === "", editable : true, edittype : "text"},
        		 	{ name: 'flag', index: 'flag', hidden: true},
+       		 	{ name: 'code', index: 'code', hidden: true},
        		 	{ name: 'codeType', index: 'codeType', hidden: true}
        		], //서버에서 받은 데이터 설정
     	    jsonReader: 
@@ -349,16 +350,16 @@
     	    reordercolNames:true,
     	    postData : { searchval: searchval, isSearch: "true" }, // 보낼 파라미터. 로그인 했던것처럼 파라미터값 가져오기
     	    mtype:'POST',	// 전송 타입
-    	    datatype : "json",	// 받는 데이터 형태 
-    	    colNames:['flag', '코드','코드명', '비고', 'ITEM1', 'ITEM2'],	//컬럼명
+		    datatype : "json",	// 받는 데이터 형태 
+		    colNames:['flag', '코드','코드명', '비고', 'ITEM1', 'ITEM2'],	//컬럼명
 		    colModel:
 		    [
 		    	{ name: 'flag', index: 'flag', hidden: true},
-		    	{ name: 'CODE_TYPE', index: 'CODE_TYPE', width: '40', align:"center"},
-		   	 	{ name: 'CODE_TYPE_NAME', index: 'CODE_TYPE_NAME', width: '40', align: "center", editable : true, edittype : "text"},
-			    { name: 'COMMENTS', index: 'COMMENTS', width: '10', align: 'center' },
-			    { name: 'ITEM1', index: 'ITEM1', width: '40', align:"center", hidden: true},
-			    { name: 'ITEM2', index: 'ITEM2', width: '40', align:"center", hidden: true}
+		    	{ name: 'codeType', index: 'codeType', width: '40', align:"center"},
+		   	 	{ name: 'codeTypeName', index: 'codeTypeName', width: '40', align: "center", editable : true, edittype : "text"},
+			    { name: 'comments', index: 'comments', width: '10', align: 'center' },
+			    { name: 'item1', index: 'item1', width: '40', align:"center", hidden: true},
+			    { name: 'item2', index: 'item2', width: '40', align:"center", hidden: true}
 			], //서버에서 받은 데이터 설정
 		    jsonReader: 
 		    {
@@ -377,7 +378,7 @@
 		  	cellEdit: true,
             cellsubmit: 'clientArray',
             beforeSubmitCell: function (rowid, celname, value, iRow, iCol) {
-                if (celname === 'CODE_TYPE_NAME' || celname === 'COMMENTS') {
+                if (celname === 'codeTypeName' || celname === 'comments') {
                     var rowData = $('#lisc001DTO').jqGrid('getRowData', rowid);
                     if (rowData.flag !== 'I') {  // 'flag'가 'I'가 아닌 경우 (삽입을 나타냄)
                         rowData.flag = 'U';  // 'flag'를 'U'로 설정하여 업데이트를 나타냄
@@ -423,7 +424,7 @@
 		console.log("front data----");
 		console.log();
 		
-		//console.log("데이터", lisc002Data);
+		console.log("003 데이터 : ", lisc003Data);
 		//console.log(JSON.stringify({"lisc001Data": lisc001Data, "lisc002Data": lisc002Data, "lisc003Data": lisc003Data}));
 		
 		$.ajax({

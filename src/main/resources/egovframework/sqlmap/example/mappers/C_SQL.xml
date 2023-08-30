@@ -86,7 +86,7 @@
 			REMARK1 = #{remark1},
 			REMARK2 = #{remark2}
 		WHERE 
-			CODE_TYPE = #{codeType} AND CODE2 = #{code2};
+			CODE_TYPE = #{codeType} AND CODE = #{code} AND CODE2 = #{code2};
 	</update>
 	
 	

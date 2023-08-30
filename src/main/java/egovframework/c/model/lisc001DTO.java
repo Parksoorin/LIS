@@ -14,9 +14,6 @@ public class lisc001DTO {
 	private String comments;  // 비고
 	private String flag;
 	
-	public void setFlag(String flag) {
-		this.flag = flag;
-	}
 	public String getSysDate() {
 		return sysDate;
 	}
@@ -66,7 +63,9 @@ public class lisc001DTO {
 		this.comments = comments;
 	}
 	public String getFlag() {
-		// TODO Auto-generated method stub
-		return null;
+		return flag;
 	}	
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
 }

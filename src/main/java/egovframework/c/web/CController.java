@@ -153,10 +153,10 @@ public class CController {
 
 		System.out.print(item1);
 		String item1Array[] = item1.substring(1, item1.length() - 1).split("&quot;,");
-		System.out.println(item1Array.length);
+		//System.out.println(item1Array.length);
 		for (int i = 0; i < item1Array.length; i++) {
 			item1Array[i] = item1Array[i].replace("&quot;", "");
-			System.out.println(i + "번째 : " + item1Array[i]);
+			//System.out.println(i + "번째 : " + item1Array[i]);
 		}
 
 		JSONObject json = new JSONObject();
@@ -193,10 +193,8 @@ public class CController {
 		System.out.println("-----------");
 		System.out.println(type);
 		String item2Array[] = item2.substring(1, item2.length() - 1).split("&quot;,");
-		System.out.println("item2Array길이: " + item2Array.length);
 		for (int i = 0; i < item2Array.length; i++) {
 			item2Array[i] = item2Array[i].replace("&quot;", "");
-			System.out.println(i + "번째 : " + item2Array[i]);
 		}
 
 		JSONObject json = new JSONObject();
@@ -214,6 +212,8 @@ public class CController {
 				row.put("item5", item.getItem5());
 				row.put("remark1", item.getRemark1());
 				row.put("remark2", item.getRemark2());
+				row.put("code", item.getCode());
+				row.put("codeType", item.getCodeType());
 				// 필요한 다른 필드 추가
 				rowsArray.add(row);
 			}
@@ -224,7 +224,7 @@ public class CController {
 		return json;
 	}
 
-
+	// ---------------------------------------------------------------------------------saveBtn
 	 @RequestMapping(value = "/saveBtn.do", method = RequestMethod.POST)
 	 @ResponseBody public JSONObject saveData( @RequestBody liscAllDTO data, HttpSession session, 
 		HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
@@ -235,13 +235,14 @@ public class CController {
 		 List<lisc002DTO> lisc002Data = data.getLisc002Data();
 		 List<lisc003DTO> lisc003Data = data.getLisc003Data();
 		 System.out.println("-----------------saveBTN");
-		 System.out.println(lisc002Data);
-		 
+		 System.out.println(lisc001Data);
+		 // ------------------------------------------------------------------------001 
 		 for (lisc001DTO dto : lisc001Data) {
-			System.out.println("dto.getCodeType() : " + dto.getCodeType());
-			System.out.println("dto.CodeTypeName() : " + dto.getCodeTypeName());
+			//System.out.println("001 dto.getCodeType() : " + dto.getCodeType());
+			//System.out.println("001 dto.CodeTypeName() : " + dto.getCodeTypeName());
+			
 	        String flag = dto.getFlag();
-	        System.out.println("flag : " + flag);
+	        //System.out.println("001 flag : " + flag);
 	        int result = 0;
 	        switch (flag) {
 	            case "U":
@@ -255,13 +256,13 @@ public class CController {
 	            return json;
 	        }
 	    }
-		 
+		 // ------------------------------------------------------------------------002
 		 for (lisc002DTO dto : lisc002Data) {
 //			System.out.println("dto.getCodeType() : " + dto.getCodeType());
 //			System.out.println("dto.getItem1() : " + dto.getItem1());
 		        
 	        String flag = dto.getFlag();
-	        System.out.println(flag);
+	        //System.out.println("002 flag : " + flag);
 	        int result = 0;
 	        switch (flag) {
 	            case "U":
@@ -275,11 +276,14 @@ public class CController {
 	            return json;
 	        }
 	    }
-		 
-		 for (lisc003DTO dto : lisc003Data) {	        
+		// ------------------------------------------------------------------------003
+		 for (lisc003DTO dto : lisc003Data) {	
+			System.out.println("dto.getCode2() : " + dto.getCode2());
+			System.out.println("dto.getItem1() : " + dto.getItem1());
+			System.out.println("dto.getCodeType() : " + dto.getCodeType());
 			String flag = dto.getFlag();
 	     
-	        System.out.println("flag : " + flag);
+	        System.out.println("003 flag : " + flag);
 	        int result = 0;
 	        switch (flag) {
 	            case "U":
