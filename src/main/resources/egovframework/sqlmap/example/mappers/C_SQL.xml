@@ -53,12 +53,41 @@
 		order by CODE_TYPE
 	</select>
 	
-
-	
-	
-	
-	
-	
+	<!-- lisc002 saveBtn -->
+	<update id="update001Data" parameterType="egovframework.c.model.lisc001DTO">
+		UPDATE lisc001
+		SET
+			CODE_TYPE_NAME = #{codeTypeName},
+			COMMENTS = #{comments}
+		WHERE 
+			CODE_TYPE = #{codeType};
+	</update>
+	<update id="update002Data" parameterType="egovframework.c.model.lisc002DTO">
+		UPDATE lisc002
+		SET
+			ITEM1 = #{item1},
+			ITEM2 = #{item2},
+			ITEM3 = #{item3},
+			ITEM4 = #{item4},
+			ITEM5 = #{item5},
+			REMARK1 = #{remark1},
+			REMARK2 = #{remark2}
+		WHERE 
+			CODE_TYPE = #{codeType} AND CODE = #{code};
+	</update>
+	<update id="update003Data" parameterType="egovframework.c.model.lisc003DTO">
+		UPDATE lisc003
+		SET
+			ITEM1 = #{item1},
+			ITEM2 = #{item2},
+			ITEM3 = #{item3},
+			ITEM4 = #{item4},
+			ITEM5 = #{item5},
+			REMARK1 = #{remark1},
+			REMARK2 = #{remark2}
+		WHERE 
+			CODE_TYPE = #{codeType} AND CODE2 = #{code2};
+	</update>
 	
 	
 </mapper>
