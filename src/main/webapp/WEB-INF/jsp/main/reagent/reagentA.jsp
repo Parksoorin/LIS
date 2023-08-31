@@ -70,7 +70,7 @@
 					<input type="text" name="search_name" class="optionSearch"
 						placeholder="Enter text to search"></input>
 					<button class="btn-pir" onclick="wantSearchlisc500()">검 색</button>
-					<button class="btn-pir" onclick="clearInput1()">클리어</button>
+					<button class="btn-pir" onclick="clearInputLisc500()">클리어</button>
 				</div>
 				<div class="divDownLeftList" style="">
 					<table id="list1"></table>
@@ -86,10 +86,10 @@
 						</div>
 					</div>
 					<div class="divDownRightUpButton">
-						<button class="btn-thr" onclick="saveListData2()">
+						<button class="btn-thr" onclick="saveListDataLisc501()">
 							<img src="/images/icons/up.png" class="img1">등 록
 						</button>
-						<button class="btn-thr" onclick="deleteListData2()">
+						<button class="btn-thr" onclick="deleteListDataLisc501()">
 							<img src="/images/icons/down.png" class="img1">제 외
 						</button>
 					</div>
