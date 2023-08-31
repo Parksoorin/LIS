@@ -170,32 +170,85 @@ function chooseSearch() {
 }
 
 
-
-
-
-
-
-
-// clearInputLisc500 클리어
-function clearInputLisc500() {
-	// 검색어를 입력한 input 요소 선택
-	var inputElement = $('input[name="search_name"]');
+// 검색 기능
+const searchGrid = function(value, grid) {
+	$("#" + grid).jqGrid("setGridParam", {
+		datatype: "json", 
+		page: 1
+	}).trigger("reloadGrid");
 	
-	// 입력한 내용을 지움
-	inputElement.val('');
-}
+	$("#" + grid).jqGrid("setGridParam", {
+		beforeProcessing: function(data) {
+			if (value === "") {
+				return;
+			}
+			
+			var filteredData = [];
+			
+			for (var i = 0; i < data.rows.length; i++) {
+				var rowData = data.rows[i];
+				var matched = false;
+				
+				for (var key in rowData) {
+					var cellValue = rowData[key];
+					
+					if (cellValue && cellValue.toString().replace(/\s+/g, "").toLowerCase().includes(value)) {
+						matched = true;
+						break;
+					}
+				}
+				
+				if (matched) {
+					filteredData.push(rowData);
+				}
+			}
+			data.rows = filteredData;
+		}
+	});	
+};
 
-// clearInput3 클리어
-          
-
-function clearInputLisc100() {
-	// 검색어를 입력한 input 요소 선택
-	var inputElement = $('input[name="search_name1"]');
+// lisc500 검색
+$("#lisc500Item").on("input", function() {
+	var inputValue = $(this).val().replace(/\s+/g, "").toLowerCase();
 	
-	// 입력한 내용을 지움
-	inputElement.val('');
-}
+	searchGrid(inputValue, "list1");
+});
 
+// lisc100 검색
+$("#lisc100Item").on("input", function() {
+	var inputValue = $(this).val().replace(/\s+/g, "").toLowerCase();
+	
+	searchGrid(inputValue, "list3");
+});
+
+// lisc500 검색 버튼
+$("#searchLisc500Btn").on("click", function() {
+	var inputValue = $("#lisc500Item").val().replace(/\s+/g, "").toLowerCase();
+	
+	searchGrid(inputValue, "list1");
+});
+
+// lisc100 검색 버튼
+$("#searchLisc100Btn").on("click", function() {
+	var inputValue = $("#lisc100Item").val().replace(/\s+/g, "").toLowerCase();
+	
+	searchGrid(inputValue, "list3");
+});
+
+
+// lisc500 Clear 버튼
+$("#clearLisc500Btn").on("click", function() {
+	$("#lisc500Item").val("");
+	
+	searchGrid("", "list1");
+});
+
+// lisc100 Clear 버튼
+$("#clearLisc100Btn").on("click", function() {
+	$("#lisc100Item").val("");
+	
+	searchGrid("", "list3");
+});
 
 // saveListDataLisc501() 함수 정의
 function saveListDataLisc501() {
@@ -235,15 +288,15 @@ function saveListDataLisc501() {
 	$.ajax({
 		type: 'POST',
 		url: '/reagentA2Data.do',
-		data: JSON.stringify(listData),
-		dataType: "json",
 		contentType: 'application/json', // 데이터 타입 설정
-        success: function(response) {
-            console.log('Data sent successfully:', response);
+		dataType: "json",
+		data: JSON.stringify(listData),
+        success: function(result) {
+            console.log('Data sent successfully:', result);
             // 성공 시 처리할 로직 추가
         },
         error: function(error) {
-            console.error('Error sending data:', error);
+            console.log('Error sending data:', error);
             // 에러 시 처리할 로직 추가
     	}
 	});
